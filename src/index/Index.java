@@ -6,6 +6,8 @@ package index;
 
 import controlador.IniciarSesionC;
 import controlador.RegistrarC;
+import javax.swing.JFrame;
+import vista.Hotel;
 import vista.IniciarSesionV;
 import vista.RegistrarV;
 
@@ -18,10 +20,18 @@ import vista.RegistrarV;
 
 public class Index {
     public static void main(String[] args) {
-        RegistrarV registrarV = new RegistrarV();
-        RegistrarC registrarC = new RegistrarC(registrarV);
+//        RegistrarV registrarV = new RegistrarV();
+//        RegistrarC registrarC = new RegistrarC(registrarV);
 
 //        IniciarSesionV iniciarSesionV = new IniciarSesionV();
 //        IniciarSesionC iniciarSesionC = new IniciarSesionC(iniciarSesionV);
+
+        Hotel hotel = new Hotel();
+       
+        hotel.setSize(400, 600);
+        hotel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         hotel.setVisible(true);
+        
+
     }
 }
