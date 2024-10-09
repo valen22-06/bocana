@@ -4,9 +4,12 @@
  */
 package vista;
 
+import java.awt.Color;
+import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -26,18 +29,19 @@ public class Fotos extends javax.swing.JFrame {
     byte[] imagen;
     FileInputStream entrada;
     FileOutputStream salida;
+    ArrayList<JLabel> fotos = new ArrayList<>();
 
     public Fotos() {
         initComponents();
     }
 
     public byte[] AbrirArchivo(File archivo) {
-        byte[] imagen = new byte[1024 * 100];
+        byte[] imagen = new byte[1024 * 1024];
         try {
             entrada = new FileInputStream(archivo);
             entrada.read(imagen);
         } catch (Exception e) {
-
+            JOptionPane.showMessageDialog(null, "Error al abrir el archivo: " + e.getMessage());            
         }
         return imagen;
     }
@@ -49,7 +53,7 @@ public class Fotos extends javax.swing.JFrame {
             salida.write(imagen);
             mensaje = "Guardado";
         } catch (Exception e) {
-
+            JOptionPane.showMessageDialog(null, "Error al abrir el archivo: " + e.getMessage());
         }
         return mensaje;
     }
@@ -64,9 +68,9 @@ public class Fotos extends javax.swing.JFrame {
     private void initComponents() {
 
         bsubir = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        titulo = new javax.swing.JLabel();
         bguardar = new javax.swing.JButton();
+        vista = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,7 +81,7 @@ public class Fotos extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Seleccionar archivo");
+        titulo.setText("Seleccionar archivo");
 
         bguardar.setText("Guardar");
         bguardar.addActionListener(new java.awt.event.ActionListener() {
@@ -90,21 +94,21 @@ public class Fotos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 106, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(257, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bguardar)
+                        .addGap(119, 119, 119))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bsubir)
-                        .addGap(218, 218, 218))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(bguardar)
-                        .addGap(119, 119, 119))))
+                        .addGap(218, 218, 218))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(145, 145, 145)
+                .addComponent(vista, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,10 +116,10 @@ public class Fotos extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bsubir)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                    .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(81, 81, 81)
+                .addComponent(vista, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61)
                 .addComponent(bguardar)
                 .addContainerGap(59, Short.MAX_VALUE))
         );
@@ -128,16 +132,13 @@ public class Fotos extends javax.swing.JFrame {
         if (seleccionar.showDialog(null, null) == JFileChooser.APPROVE_OPTION) {
             archivo = seleccionar.getSelectedFile();
             if (archivo.canRead()) {
-                if (archivo.getName().endsWith("jpg")
-                        || archivo.getName().endsWith("jpeg")
-                        || archivo.getName().endsWith("png"));
-                imagen = AbrirArchivo(archivo);
-//                jLabel2 = new JLabel();
-                jLabel2.setIcon(new ImageIcon(imagen));
-
+                
+                
+            agregarFoto(archivo);
             } else {
                 JOptionPane.showMessageDialog(null, "Archivo no compatible");
             }
+            
         }
     }//GEN-LAST:event_bsubirActionPerformed
 
@@ -147,9 +148,10 @@ public class Fotos extends javax.swing.JFrame {
             archivo = seleccionar.getSelectedFile();
             if (archivo.getName().endsWith("jpg")
                     || archivo.getName().endsWith("jpeg")
-                    || archivo.getName().endsWith("png")) {
+                    || archivo.getName().endsWith("png") 
+                    || archivo.getName().endsWith("PNG")) {
                 String respuesta = GuardarArchivo(archivo, imagen);
-                if (respuesta != null) {
+                if (respuesta != null) { 
                     JOptionPane.showMessageDialog(null, respuesta);
                 } else {
                     JOptionPane.showMessageDialog(null, "Archivo no guardado");
@@ -158,10 +160,33 @@ public class Fotos extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Archivo guardado");
             }
-
+                
         }
+        
+         
     }//GEN-LAST:event_bguardarActionPerformed
 
+    private void agregarFoto(File archivo){
+       
+            if (archivo.getName().endsWith("jpg")
+                    || archivo.getName().endsWith("jpeg")
+                    || archivo.getName().endsWith("png") 
+                    || archivo.getName().endsWith("PNG")) ;
+            
+            imagen = AbrirArchivo(archivo);
+                JLabel foto = new JLabel();
+                JLabel text = new JLabel("Hola");
+                foto.setSize(50,50);
+                               
+                ImageIcon ima= new ImageIcon(imagen);
+                Image imagenEscalada = ima.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_SMOOTH);
+                foto.setIcon(new ImageIcon(imagenEscalada));
+                
+                fotos.add(foto);
+                vista.setBackground(Color.red);
+                
+ 
+    }
     /**
      * @param args the command line arguments
      */
@@ -193,6 +218,7 @@ public class Fotos extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Fotos().setVisible(true);
+                
             }
         });
     }
@@ -200,7 +226,7 @@ public class Fotos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bguardar;
     private javax.swing.JButton bsubir;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel titulo;
+    private javax.swing.JPanel vista;
     // End of variables declaration//GEN-END:variables
 }
