@@ -37,11 +37,11 @@ public class Index {
 //         hotel.setVisible(true);
 //         hotel.setExtendedState(6);
          
-//         RegistrarHotelV registrarHotelV = new RegistrarHotelV();
-//        RegistrarHotelC registrarC = new RegistrarHotelC(registrarHotelV);
+         RegistrarHotelV registrarHotelV = new RegistrarHotelV();
+        RegistrarHotelC registrarC = new RegistrarHotelC(registrarHotelV);
         
-Fotos fotos = new Fotos();
-FotosC fotosc = new FotosC(fotos); 
+//Fotos fotos = new Fotos();
+//FotosC fotosc = new FotosC(fotos); 
 
     }
 }

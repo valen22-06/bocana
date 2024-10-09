@@ -27,11 +27,13 @@ public class FotosC implements ActionListener {
     Fotos vista = new Fotos();
     JFileChooser seleccionar = new JFileChooser();
     File archivo;
-    int x=0, num;
+    
+    int num;
     byte[] imagen;
     FileInputStream entrada;
     FileOutputStream salida;
     ArrayList<JLabel> fotos = new ArrayList<>();
+    
     
 
     public FotosC(Fotos vista) {
@@ -64,7 +66,7 @@ public class FotosC implements ActionListener {
             String respuesta = GuardarArchivo(archivo, imagen);
                 if (respuesta != null) { 
                     JOptionPane.showMessageDialog(null, respuesta);
-                    x=0;
+                    
                 } else {
                     JOptionPane.showMessageDialog(null, "Archivo no guardado");
 
@@ -74,14 +76,15 @@ public class FotosC implements ActionListener {
         if (e.getSource() == vista.eliminar) {
             try{
                  num=Integer.parseInt(JOptionPane.showInputDialog(vista,"Ingrese el numero de la imagen que desea eliminar"));
+                 if(num>0 && num<fotos.size()){
+                    eliminar(num);
+                } else {
+                    JOptionPane.showMessageDialog(vista, "El numero ingresado no coincide con la cantidad de imagenes seleccionadas");
+                }
             } catch(NumberFormatException eN){
                 JOptionPane.showMessageDialog(vista, "Ingrese un numero"+ eN.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-            if(num>0 && num<9){
-                eliminar(num);
-            } else {
-                JOptionPane.showMessageDialog(vista, "El numero ingresado no coincide con la cantidad de imagenes seleccionadas");
-            }
+            
         }
 
     }
@@ -110,12 +113,12 @@ public class FotosC implements ActionListener {
     }
 
     private void agregarFoto(File archivo) {
-
+        int x=fotos.size()+1;
         if (archivo.getName().endsWith("jpg")
                 || archivo.getName().endsWith("jpeg")
                 || archivo.getName().endsWith("png")
                 || archivo.getName().endsWith("PNG")) {
-        x++;
+        
 
         imagen = AbrirArchivo(archivo);
         JLabel foto = new JLabel();
@@ -136,9 +139,19 @@ public class FotosC implements ActionListener {
     }
     
     private void  eliminar(int num){
-        if (num == fotos.indexOf(x)){
+        System.out.println(fotos.size());
+        JLabel fotoEliminada = fotos.get(num-1);
+        vista.panelCentro.removeAll();
+        fotos.remove(num-1);
+        for(int i =0;i<fotos.size();i++){
             
+            JLabel foto = fotos.get(i);
+            foto.setText(""+(i+1));
+            vista.panelCentro.add(foto);
         }
+        vista.panelCentro.revalidate();
+        vista.panelCentro.repaint();
+
     }
 
 }

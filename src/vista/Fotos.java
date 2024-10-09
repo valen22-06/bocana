@@ -57,11 +57,12 @@ public class Fotos extends JFrame{
         gbc.insets = new Insets(30, 20,  45, 20);
         
         titulo = new JLabel("Seleccionar archivo");
+        titulo.setForeground(Color.white);
         foto= new JLabel();
         
         seleccionar= new JButton("Seleccionar");
         guardar =new JButton("Guardar");
-        eliminar = new JButton("eliminar");
+        eliminar = new JButton("Eliminar");
         
         //panel norte
         panelNorte = new JPanel();
@@ -70,6 +71,7 @@ public class Fotos extends JFrame{
         
         panelNorte.add(titulo);
         panelNorte.add(seleccionar);
+        panelNorte.setBackground(fondoColor);
         
         //panelCentro
         panelCentro = new JPanel();
@@ -80,16 +82,20 @@ public class Fotos extends JFrame{
         panelSur = new JPanel();
         migrid = new GridLayout(1,2, 10,10);
         panelSur.setLayout(migrid);
+        panelSur.setBackground(fondoColor);
         
         panelSur.add(guardar);
          panelSur.add(eliminar);
         
+         gbc.insets = new Insets(200, 20,  50, 20);
          gbc.gridy = 0;
         panel.add(panelNorte, gbc);
         
+        gbc.insets = new Insets(50, 20,  45, 20);
          gbc.gridy = 1;
         panel.add(panelCentro, gbc);
         
+        gbc.insets = new Insets(50, 20,  45, 20);
         gbc.gridy = 2;
         panel.add(panelSur, gbc);
         
