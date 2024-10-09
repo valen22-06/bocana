@@ -31,6 +31,7 @@ public class Index {
         hotel.setSize(400, 600);
         hotel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          hotel.setVisible(true);
+         hotel.setExtendedState(6);
         
 
     }

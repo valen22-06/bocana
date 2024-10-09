@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 
@@ -45,7 +46,7 @@ public class RegistrarV extends JFrame{
     public JTextField tcorreo;
     public JTextField ttelefono;
     public JTextField tdireccion;
-    public JTextField tcontrasena;
+    public JPasswordField tcontrasena;
     public JButton bregistrar;
     public JButton bcancelar;
     public JPanel panelBag;
@@ -145,7 +146,7 @@ public class RegistrarV extends JFrame{
         ttelefono.setFont(new Font("Times New Roman", 0, 25));
         tdireccion = new JTextField(10);
         tdireccion.setFont(new Font("Times New Roman", 0, 25));
-        tcontrasena = new JTextField(10);
+        tcontrasena = new JPasswordField(10);
         tcontrasena.setFont(new Font("Times New Roman", 0, 25));
         
         panelCentro.add(ldocumento);

@@ -5,21 +5,23 @@
 package vista;
 
 
-
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public class Hotel extends JFrame {
     private Container contenedor;
@@ -39,18 +41,25 @@ public class Hotel extends JFrame {
         contenedor = getContentPane();
         miflow = new FlowLayout(FlowLayout.CENTER);
         contenedor.setLayout(miflow);
+        contenedor.setBackground(Color.lightGray);
         
-        
-        
+//        contenedor.setBackground(Color.Hex);
+
+
+
         panel = new JPanel();
-        miflow = new FlowLayout();
         gridbag = new GridBagLayout();
-        panel.setLayout(miflow);
+        panel.setLayout(gridbag);
+//        panel.setAlignmentY(CENTER_ALIGNMENT);
+//        panel.setAlignmentX(CENTER_ALIGNMENT);
+        
+        Color fondoColor = new Color(99, 124, 119);
+        panel.setBackground(fondoColor);
         
         
-        info = new JLabel("<html>Alojamientos Bocana <br>Observa sin compromiso</html>");
-        info.setFont(new Font("Times New Roman", 1, 20));
-        info.setForeground(Color.gray);
+        info = new JLabel("<html><center>Alojamientos Bocana <br>Observa sin compromiso</center></html>");
+        info.setFont(new Font("Times New Roman", 2, 14));
+        info.setForeground(Color.lightGray);
         
        
          //panel norte
@@ -59,20 +68,21 @@ public class Hotel extends JFrame {
          panelnorte = new JPanel();
          miflow = new FlowLayout(FlowLayout.CENTER);
         panelnorte.setLayout(miflow);
-        
-         ImageIcon logoIcon = new ImageIcon("logoUno.png");
-        logo = new JLabel(logoIcon);
+        panelnorte.setBackground(fondoColor);
+         ImageIcon logoIcon = new ImageIcon("logoUno.PNG");
+          Image scaledImage0 = logoIcon.getImage().getScaledInstance(300, 200, Image.SCALE_SMOOTH);
+        logo = new JLabel(new ImageIcon(scaledImage0));
         
         panelnorte.add(logo);
         
          gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridwidth = 3;
+        gbc.gridwidth = 4;
         gbc.gridheight = 1;
-        gbc.insets = new Insets(20, 50, 50, 50);
+        gbc.insets = new Insets(30, 20,  45, 20);
          
-//         panel.add(panelnorte);
+         panel.add(panelnorte,gbc);
         
         
         
@@ -81,61 +91,86 @@ public class Hotel extends JFrame {
          panelcentro = new JPanel();
          miflow = new FlowLayout();
         panelcentro.setLayout(miflow);
+        panelcentro.setBackground(fondoColor);
+    
         
-         ImageIcon inicioIcon = new ImageIcon("inicio.png");
-         Image scaledImage1 = inicioIcon.getImage().getScaledInstance(100, 50, Image.SCALE_SMOOTH);
+         ImageIcon inicioIcon = new ImageIcon("inicio.PNG");
+         Image scaledImage1 = inicioIcon.getImage().getScaledInstance(170, 80, Image.SCALE_SMOOTH);
          
-         inicio = new JButton(new ImageIcon(scaledImage1));
+         inicio = new JButton("");
+         inicio.setIcon(new ImageIcon(scaledImage1));
          
-         panelcentro.add(inicio);
+
+         
+         inicio.setBorderPainted(false);
+         inicio.setContentAreaFilled(false);
+         
+//         panelcentro.add(inicio);
          
 
         gbc.gridy = 1;
 
          
-//         panel.add(panelcentro);
+         panel.add(inicio,gbc);
 
          
          //panel sur
          
          panelsur = new JPanel();
-         migrid = new GridLayout(2, 2, 8, 8);
+         migrid = new GridLayout(2, 2, 30, 0);
         panelsur.setLayout(migrid);
+        panelsur.setBackground(fondoColor);
          
-         ImageIcon iniciarIcon = new ImageIcon("iniciarSesion.png");
-         Image scaledImage2 = iniciarIcon.getImage().getScaledInstance(50, 30, Image.SCALE_SMOOTH);
+         ImageIcon iniciarIcon = new ImageIcon("iniciarSesion.PNG");
+         Image scaledImage2 = iniciarIcon.getImage().getScaledInstance(70, 40, Image.SCALE_SMOOTH);
          
-         ImageIcon registroIcon = new ImageIcon("registro.png");
-         Image scaledImage3 = registroIcon.getImage().getScaledInstance(50, 30, Image.SCALE_SMOOTH);
+         ImageIcon registroIcon = new ImageIcon("registro.PNG");
+         Image scaledImage3 = registroIcon.getImage().getScaledInstance(70, 40, Image.SCALE_SMOOTH);
          
-         liniciar = new JLabel("<html>¿Ya tienes una cuenta? <br>Inicia sesion</html>");
-         lregistrar = new JLabel("<html>¿No tienes una cuenta? <br>Registrate</html>");
+         liniciar = new JLabel("<html><center>¿Ya tienes una cuenta? <br>Inicia sesion</center></html>");
+         lregistrar = new JLabel("<html><center>¿No tienes una cuenta? <br>Registrate</center></html>");
+         liniciar.setFont(new Font("Times New Roman", 2, 14));
+         lregistrar.setFont(new Font("Times New Roman", 2, 14));
+         liniciar.setForeground(Color.LIGHT_GRAY);
+         lregistrar.setForeground(Color.LIGHT_GRAY);
          
-         iniciar = new JButton(new ImageIcon(scaledImage2));
-         registrar = new JButton(new ImageIcon(scaledImage3));
+         iniciar = new JButton("");
+         iniciar.setIcon(new ImageIcon(scaledImage2));
+         registrar = new JButton("");
+         registrar.setIcon(new ImageIcon(scaledImage3));
          
+         iniciar.setBorderPainted(false);
+        iniciar.setContentAreaFilled(false);
+        
+        registrar.setBorderPainted(false);
+        registrar.setContentAreaFilled(false);
+         
+         iniciar.setBounds(20, 20, 50, 30);
+         registrar.setBounds(20, 20, 50, 30);
          
          panelsur.add(liniciar);
-         panelsur.add(iniciar);
          panelsur.add(lregistrar);
+         panelsur.add(iniciar);         
          panelsur.add(registrar);
          
        
         gbc.gridy = 2;
        
          
-//         panel.add(panelsur);
+         panel.add(panelsur,gbc);
         
 
         gbc.gridy = 3;
 
-//         panel.add(info);
+         panel.add(info, gbc);
          
          
          
-         contenedor.add(panelnorte);
-         contenedor.add(panelcentro);
-         contenedor.add(panelsur);
+         contenedor.add(panel);
+
+         
 
     }
+
+
 }
