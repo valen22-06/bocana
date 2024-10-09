@@ -24,9 +24,7 @@ public class UsuarioDao {
     PreparedStatement ps;
     ResultSet rs;
 
-    /*
-     * WARNING - Removed try catching itself - possible behaviour change.
-     */
+    
     public List listar() {
         ArrayList<Usuario> datosUsuario = new ArrayList<Usuario>();
         String sql = "SELECT * FROM usuarios";
