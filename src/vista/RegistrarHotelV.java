@@ -4,7 +4,6 @@
  */
 package vista;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -141,48 +140,57 @@ public class RegistrarHotelV extends JFrame{
         
         bwifi = new JButton("Wifi");
         bwifi.setFont(new Font("Times New Roman", 0, 20)); 
-        bwifi.setContentAreaFilled(false);
+        bwifi.setBackground(Color.white);
         bwifi.setForeground(Color.BLACK);
+        bwifi.putClientProperty("valor", 0);
        
         bgym = new JButton("GYM");
         bgym.setFont(new Font("Times New Roman", 0, 20));
-        bgym.setContentAreaFilled(false);
+        bgym.setBackground(Color.white);
         bgym.setForeground(Color.BLACK);
+        bgym.putClientProperty("valor", 1);
         
         bpiscina = new JButton("Piscina");
         bpiscina.setFont(new Font("Times New Roman", 0, 20)); 
-        bpiscina.setContentAreaFilled(false);
+        bpiscina.setBackground(Color.white);
         bpiscina.setForeground(Color.BLACK);
+        bpiscina.putClientProperty("valor", 2);
        
         bac = new JButton("Aire acondicionado");
         bac.setFont(new Font("Times New Roman", 0, 20));
-        bac.setContentAreaFilled(false);
+        bac.setBackground(Color.white);
         bac.setForeground(Color.BLACK);
+        bac.putClientProperty("valor", 3);
         
         brestaurante = new JButton("Restaurante");
         brestaurante.setFont(new Font("Times New Roman", 0, 20)); 
-        brestaurante.setContentAreaFilled(false);
+        brestaurante.setBackground(Color.white);
         brestaurante.setForeground(Color.BLACK);
+        brestaurante.putClientProperty("valor", 4);
        
         brecepcion24horas = new JButton("Recepcion 24 horas");
         brecepcion24horas.setFont(new Font("Times New Roman", 0, 20));
-        brecepcion24horas.setContentAreaFilled(false);
+        brecepcion24horas.setBackground(Color.white);
         brecepcion24horas.setForeground(Color.BLACK);
+        brecepcion24horas.putClientProperty("valor", 5);
         
         bplaya = new JButton("Playa");
         bplaya.setFont(new Font("Times New Roman", 0, 20)); 
-        bplaya.setContentAreaFilled(false);
+        bplaya.setBackground(Color.white);
         bplaya.setForeground(Color.BLACK);
+        bplaya.putClientProperty("valor", 6);
        
         bsauna = new JButton("Sauna");
         bsauna.setFont(new Font("Times New Roman", 0, 20));
-        bsauna.setContentAreaFilled(false);
+        bsauna.setBackground(Color.white);
         bsauna.setForeground(Color.BLACK);
+        bsauna.putClientProperty("valor", 7);
         
         bbar = new JButton("Bar");
         bbar.setFont(new Font("Times New Roman", 0, 20)); 
-        bbar.setContentAreaFilled(false);
+        bbar.setBackground(Color.white);
         bbar.setForeground(Color.BLACK);
+        bbar.putClientProperty("valor", 8);
 
         
         panelServicios.add(bwifi);

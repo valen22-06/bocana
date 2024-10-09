@@ -22,7 +22,6 @@ public class RegistrarC implements ActionListener {
     UsuarioDao usuarioDao = new UsuarioDao();
     Usuario usuario = new Usuario();
     
-    int hola;
 
     public RegistrarC(RegistrarV registrarV) {
         this.registrarV = registrarV;
