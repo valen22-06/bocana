@@ -5,6 +5,7 @@
 package vista;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
@@ -144,12 +145,7 @@ public class Fotos extends javax.swing.JFrame {
 
     private void bguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bguardarActionPerformed
         // TODO add your handling code here:
-        if (seleccionar.showDialog(null, "Guardar") == JFileChooser.APPROVE_OPTION) {
-            archivo = seleccionar.getSelectedFile();
-            if (archivo.getName().endsWith("jpg")
-                    || archivo.getName().endsWith("jpeg")
-                    || archivo.getName().endsWith("png") 
-                    || archivo.getName().endsWith("PNG")) {
+        
                 String respuesta = GuardarArchivo(archivo, imagen);
                 if (respuesta != null) { 
                     JOptionPane.showMessageDialog(null, respuesta);
@@ -157,11 +153,6 @@ public class Fotos extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Archivo no guardado");
 
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Archivo guardado");
-            }
-                
-        }
         
          
     }//GEN-LAST:event_bguardarActionPerformed
@@ -176,14 +167,16 @@ public class Fotos extends javax.swing.JFrame {
             imagen = AbrirArchivo(archivo);
                 JLabel foto = new JLabel();
                 JLabel text = new JLabel("Hola");
-                foto.setSize(50,50);
+                foto.setSize(50, 50);
                                
                 ImageIcon ima= new ImageIcon(imagen);
                 Image imagenEscalada = ima.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_SMOOTH);
                 foto.setIcon(new ImageIcon(imagenEscalada));
                 
                 fotos.add(foto);
-                vista.setBackground(Color.red);
+                vista.add(foto);
+                vista.revalidate();
+                vista.repaint();
                 
  
     }
