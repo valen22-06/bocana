@@ -21,7 +21,6 @@ public class RegistrarC implements ActionListener {
     RegistrarV registrarV = new RegistrarV();
     UsuarioDao usuarioDao = new UsuarioDao();
     Usuario usuario = new Usuario();
-    
 
     public RegistrarC(RegistrarV registrarV) {
         this.registrarV = registrarV;
@@ -59,7 +58,7 @@ public class RegistrarC implements ActionListener {
 
     private static final Pattern SIMPLE_EMAIL_PATTERN = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
 
-    public static void validateEmail(String email) {
+    public static void validarEmail(String email) {
 
         if (!SIMPLE_EMAIL_PATTERN.matcher(email).matches()) {
             throw new IllegalArgumentException("El formato del correo electrónico es inválido.");
@@ -68,28 +67,29 @@ public class RegistrarC implements ActionListener {
 
     private static final Pattern SIMPLE_ADDRESS_PATTERN = Pattern.compile("^[\\d\\w\\s.,-]+$");
 
-    public static void validateDireccion(String direccion) {
+    public static void validarDireccion(String direccion) {
         if (!SIMPLE_ADDRESS_PATTERN.matcher(direccion).matches()) {
             throw new IllegalArgumentException("El formato de la direccion es inválido.");
         }
     }
 
-private static final Pattern MEDIUM_PASSWORD_PATTERN = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$");
+    private static final Pattern MEDIUM_PASSWORD_PATTERN = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$");
+
     public static void validarContrasena(String contrasena) {
         if (!MEDIUM_PASSWORD_PATTERN.matcher(contrasena).matches()) {
-         throw new IllegalArgumentException("La contraseña no cumple.");
+            throw new IllegalArgumentException("La contraseña no cumple.");
         }
     }
 
-    public static void validateEspaciosNumeros(String input) {
+    public static void validarEspaciosNumeros(String input) {
         if ((input.contains(" ") || input.matches(".\\d."))) {
-            throw new IllegalArgumentException("El formato es inválido donde "+input);
+            throw new IllegalArgumentException("El formato es inválido donde " + input);
         }
 
     }
 
     public void setAdd() {
-        int resultado= 0;
+        int resultado = 0;
         int r = 1;
         int documento = 0;
         int telefono = 0;
@@ -109,7 +109,7 @@ private static final Pattern MEDIUM_PASSWORD_PATTERN = Pattern.compile("^(?=.*[a
         String correo = "";
 
         try {
-            validateEmail(registrarV.tcorreo.getText().toString());
+            validarEmail(registrarV.tcorreo.getText().toString());
             correo = registrarV.tcorreo.getText().toString();
             JOptionPane.showMessageDialog(registrarV, "El correo electrónico es válido.");
         } catch (IllegalArgumentException e) {
@@ -127,10 +127,10 @@ private static final Pattern MEDIUM_PASSWORD_PATTERN = Pattern.compile("^(?=.*[a
             nombre2 = registrarV.tnombre2.getText().toString();
             apellido1 = registrarV.tapellido1.getText().toString();
             apellido2 = registrarV.tapellido2.getText().toString();
-            validateEspaciosNumeros(nombre1);
-            validateEspaciosNumeros(nombre2);
-            validateEspaciosNumeros(apellido1);
-            validateEspaciosNumeros(apellido2);
+            validarEspaciosNumeros(nombre1);
+            validarEspaciosNumeros(nombre2);
+            validarEspaciosNumeros(apellido1);
+            validarEspaciosNumeros(apellido2);
 
         } catch (IllegalArgumentException e) {
             r = 0;
@@ -139,7 +139,7 @@ private static final Pattern MEDIUM_PASSWORD_PATTERN = Pattern.compile("^(?=.*[a
 
         String direccion = "";
         try {
-            validateDireccion(registrarV.tdireccion.getText().toString());
+            validarDireccion(registrarV.tdireccion.getText().toString());
             direccion = registrarV.tdireccion.getText().toString();
             JOptionPane.showMessageDialog(registrarV, "La direccion es valida");
         } catch (IllegalArgumentException e) {

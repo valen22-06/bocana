@@ -10,7 +10,7 @@ import controlador.RegistrarHotelC;
 import javax.swing.JFrame;
 import vista.Fotos;
 import controlador.FotosC;
-import vista.Hotel;
+import vista.HotelV;
 import vista.IniciarSesionV;
 import vista.RegistrarHotelV;
 import vista.RegistrarV;

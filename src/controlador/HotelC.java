@@ -6,7 +6,7 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import vista.Hotel;
+import vista.HotelV;
 import vista.RegistrarV;
 
 /**
@@ -15,7 +15,7 @@ import vista.RegistrarV;
  */
 public class HotelC implements ActionListener {
    
-    public HotelC(Hotel hotel) {
+    public HotelC(HotelV hotel) {
 //        this.registrarV = registrarV;
 //        this.registrarV.bregistrar.addActionListener(this);
 //        this.registrarV.setExtendedState(6);

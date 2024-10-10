@@ -4,12 +4,16 @@
  */
 package controlador;
 
+import static controlador.RegistrarC.validarDireccion;
+import static controlador.RegistrarC.validarEspaciosNumeros;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import modelo.Hotel;
 import modelo.TipoServicio;
 import modelo.TipoServicioDao;
 import vista.RegistrarHotelV;
@@ -21,6 +25,7 @@ import vista.RegistrarHotelV;
 public class RegistrarHotelC implements ActionListener {
 
     RegistrarHotelV registrarHotelV = new RegistrarHotelV();
+    Hotel hotel = new Hotel();
     TipoServicioDao tipoServicioDao = new TipoServicioDao();
     List<TipoServicio> datosTipoServicioDao = tipoServicioDao.listar();
     ArrayList<TipoServicio> datosTipoServicio = new ArrayList<>();
@@ -142,7 +147,19 @@ public class RegistrarHotelC implements ActionListener {
 
         if (e.getSource() == registrarHotelV.bregistrar) {
 
-            System.out.println("size: " + datosTipoServicio.size());
+            if (!registrarHotelV.tnit.getText().toString().isEmpty()
+                    && !registrarHotelV.tnombreHotel.getText().toString().isEmpty()
+                    && !registrarHotelV.tdireccion.getText().toString().isEmpty()
+                    && !registrarHotelV.tnumeroHabitaciones.getText().toString().isEmpty()) {
+
+                setAdd();
+
+//                JOptionPane.showMessageDialog(vista, "Es bien");
+            } else {
+
+                JOptionPane.showMessageDialog(registrarHotelV, "Faltan datos por ingresar");
+
+            }
         }
 
     }
@@ -163,6 +180,66 @@ public class RegistrarHotelC implements ActionListener {
         }
         
         return r;
+    }
+    
+    public void setAdd() {
+        int resultado = 0;
+        int r = 1;
+        int nit = 0;
+        int numeroHabitaciones = 0;
+        int idRol = 2;
+
+        try {
+
+            nit = Integer.parseInt(registrarHotelV.tnit.getText().toString());
+
+            numeroHabitaciones = Integer.parseInt(registrarHotelV.tnumeroHabitaciones.getText().toString());
+
+        } catch (NumberFormatException eN) {
+            r = 0;
+            JOptionPane.showMessageDialog(registrarHotelV, "Error en los datos numéricos: " + eN.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+
+        String nombreHotel = "";
+
+        try {
+            nombreHotel = registrarHotelV.tnombreHotel.getText().toString();
+            validarEspaciosNumeros(nombreHotel);
+
+
+        } catch (IllegalArgumentException e) {
+            r = 0;
+            JOptionPane.showMessageDialog(registrarHotelV, "Error: " + e.getMessage());
+        }
+
+        String direccion = "";
+        try {
+            direccion = registrarHotelV.tdireccion.getText().toString();
+            validarDireccion(registrarHotelV.tdireccion.getText().toString());
+            
+            JOptionPane.showMessageDialog(registrarHotelV, "La direccion es valida");
+        } catch (IllegalArgumentException e) {
+            r = 0;
+            JOptionPane.showMessageDialog(registrarHotelV, "Error: " + e.getMessage());
+        }
+
+        hotel.setNit(nit);
+        hotel.setNombreHotel(nombreHotel);
+        hotel.setDireccion(direccion);
+        hotel.setNumeroHabitaciones(numeroHabitaciones);
+
+
+//        if (r == 1) {
+//            resultado = usuarioDao.setAgregar(usuario);
+//        }
+//
+//        if (resultado == 1) {
+//            JOptionPane.showMessageDialog(registrarHotelV, "Hotel registrado");
+//        } else {
+//            JOptionPane.showMessageDialog(registrarHotelV, "Error de insercion" + JOptionPane.ERROR_MESSAGE);
+//        }
+
     }
 
 }

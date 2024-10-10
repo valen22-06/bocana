@@ -23,7 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class Hotel extends JFrame {
+public class HotelV extends JFrame {
     private Container contenedor;
     private GridLayout migrid;
     private FlowLayout miflow;
@@ -34,7 +34,7 @@ public class Hotel extends JFrame {
     private JPanel panelsur, panelnorte, panelcentro, panel;
     private JButton iniciar, registrar, inicio;
     
-    public Hotel (){
+    public HotelV (){
         
         super("Hoteles Bocana");
         
