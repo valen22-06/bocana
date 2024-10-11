@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import modelo.Usuario;
 import modelo.UsuarioDao;
+import vista.HotelV;
 import vista.RegistrarV;
 
 public class RegistrarC implements ActionListener {
@@ -25,6 +26,7 @@ public class RegistrarC implements ActionListener {
     public RegistrarC(RegistrarV registrarV) {
         this.registrarV = registrarV;
         this.registrarV.bregistrar.addActionListener(this);
+        this.registrarV.bcancelar.addActionListener(this);
         this.registrarV.setExtendedState(6);
         this.registrarV.setVisible(true);
         this.registrarV.setDefaultCloseOperation(3);
@@ -53,6 +55,11 @@ public class RegistrarC implements ActionListener {
 
             }
 
+        }
+        
+        if(e.getSource()==registrarV.bcancelar){
+            HotelV hotel = new HotelV();
+            HotelC hot = new HotelC(hotel);
         }
     }
 

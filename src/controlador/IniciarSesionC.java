@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import modelo.Usuario;
 import modelo.UsuarioDao;
+import vista.HotelV;
 import vista.IniciarSesionV;
 
 public class IniciarSesionC
@@ -24,6 +25,7 @@ implements ActionListener {
     public IniciarSesionC(IniciarSesionV iniciarSesionV) {
         this.iniciarSesionV = iniciarSesionV;
         this.iniciarSesionV.biniciarSesion.addActionListener(this);
+        this.iniciarSesionV.bcancelar.addActionListener(this);
         this.iniciarSesionV.setExtendedState(6);
         this.iniciarSesionV.setVisible(true);
         this.iniciarSesionV.setDefaultCloseOperation(3);
@@ -38,6 +40,10 @@ implements ActionListener {
             if (this.iniciarSesion(correo, contrasena) == 1) {
                 // empty if block
             }
+        }
+                if(e.getSource()==iniciarSesionV.bcancelar){
+            HotelV hotel = new HotelV();
+            HotelC hot = new HotelC(hotel);
         }
     }
 

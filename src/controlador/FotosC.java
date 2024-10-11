@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import vista.Fotos;
+import vista.FotosV;
 import vista.IniciarSesionV;
 
 /**
@@ -24,7 +24,7 @@ import vista.IniciarSesionV;
  */
 public class FotosC implements ActionListener {
 
-    Fotos vista = new Fotos();
+    FotosV vista = new FotosV();
     JFileChooser seleccionar = new JFileChooser();
     File archivo;
     
@@ -36,7 +36,7 @@ public class FotosC implements ActionListener {
     
     
 
-    public FotosC(Fotos vista) {
+    public FotosC(FotosV vista) {
         this.vista = vista;
         this.vista.seleccionar.addActionListener(this);
         this.vista.guardar.addActionListener(this);

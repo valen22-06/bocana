@@ -7,6 +7,7 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import vista.HotelV;
+import vista.IniciarSesionV;
 import vista.RegistrarV;
 
 /**
@@ -14,17 +15,33 @@ import vista.RegistrarV;
  * @author estud
  */
 public class HotelC implements ActionListener {
-   
+          HotelV hot = new HotelV();
     public HotelC(HotelV hotel) {
-//        this.registrarV = registrarV;
-//        this.registrarV.bregistrar.addActionListener(this);
-//        this.registrarV.setExtendedState(6);
-//        this.registrarV.setVisible(true);
-//        this.registrarV.setDefaultCloseOperation(3);
+        this.hot = hotel;
+        this.hot.registrar.addActionListener(this);
+        this.hot.iniciar.addActionListener(this);
+        this.hot.inicio.addActionListener(this);
+        this.hot.setExtendedState(6);
+        this.hot.setVisible(true);
+        this.hot.setDefaultCloseOperation(3);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+if(e.getSource()==hot.registrar){
+            hot.dispose();
+            RegistrarV regisV = new RegistrarV();
+            RegistrarC regisC = new RegistrarC(regisV);
+        }
+        
+        if(e.getSource()==hot.iniciar){
+            hot.dispose();
+            IniciarSesionV iniV = new IniciarSesionV();
+            IniciarSesionC iniC = new IniciarSesionC(iniV);
+            
+        }
+        
+        if(e.getSource()==hot.inicio){
+            
+        }    }
 }
