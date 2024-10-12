@@ -18,10 +18,13 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class IniciarSesionV
@@ -31,14 +34,13 @@ extends JFrame {
     public JLabel lcorreo;
     public JLabel lcontrasena;
     public JTextField tcorreo;
-    public JTextField tcontrasena;
+    public JPasswordField tcontrasena;
     public JButton biniciarSesion;
     public JButton bcancelar;
     public JPanel panel;
     public JPanel panelNorte;
     public JPanel panelCentro;
     public JPanel panelSur;
-    public JPanel panel1;
     private GridLayout migrid;
     private FlowLayout miflow;
     private GridBagLayout gridbag;
@@ -46,9 +48,12 @@ extends JFrame {
     private GridBagConstraints gbc;
     private GridBagConstraints gbcn;
     private GridBagConstraints gbcs;
+    public JCheckBox ver;
 
     public IniciarSesionV() {
         super("iniciar Sesion");
+         ImageIcon fondo = new ImageIcon("fondo.jpg");
+          setContentPane(new JLabel(fondo));
         
         contenedor = getContentPane();
         miflow = new FlowLayout();
@@ -73,29 +78,36 @@ extends JFrame {
         gbc.gridy = 0;
         gbc.gridwidth = 3;
         gbc.gridheight = 1;
-        gbc.insets = new Insets(100, 100, 100, 100);
+        gbc.insets = new Insets(60, 100, 60, 100);
         
         panel.add(panelNorte, gbc);
         
         
         //panelCentro
         panelCentro = new JPanel();
-        migrid = new GridLayout(2, 2, 80, 8);
+        migrid = new GridLayout(5, 1, 80, 8);
         panelCentro.setLayout(migrid);
+        
+         
+        
         
         lcorreo = new JLabel("Correo");
         lcorreo.setFont(new Font("Times New Roman", 0, 30));
         lcontrasena = new JLabel("Contraseña");
         lcontrasena.setFont(new Font("Times New Roman", 0, 30));
+
+        ver = new JCheckBox("Mostrar contraseña");
         tcorreo = new JTextField(10);
         tcorreo.setFont(new Font("Times New Roman", 0, 25));
-        tcontrasena = new JTextField(10);
+        tcontrasena = new JPasswordField(10);
+        tcontrasena.setEchoChar('*');
         tcontrasena.setFont(new Font("Times New Roman", 0, 25));
         
         panelCentro.add(lcorreo);
         panelCentro.add(tcorreo);
         panelCentro.add(lcontrasena);
         panelCentro.add(tcontrasena);
+        panelCentro.add(ver);
         
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -103,8 +115,9 @@ extends JFrame {
         gbc.gridwidth = 3;
         gbc.gridheight = 1;
         gbc.insets = new Insets(10, 50, 50, 50);
+
         
-        panel.add((Component)panelCentro, gbc);
+        panel.add(panelCentro, gbc);
         
         
         
@@ -113,6 +126,8 @@ extends JFrame {
         migrid = new GridLayout(1, 2, 8, 8);
         panelSur.setLayout(migrid);
         
+        
+       
         bcancelar = new JButton("Cancelar");
         bcancelar.setFont(new Font("Times New Roman", 0, 20));
         
@@ -125,8 +140,12 @@ extends JFrame {
         biniciarSesion.setContentAreaFilled(false);
         biniciarSesion.setForeground(Color.BLACK);
         
-        panelSur.add(bcancelar);
+        biniciarSesion.setBackground(Color.LIGHT_GRAY);
+        bcancelar.setBackground(Color.LIGHT_GRAY);
+        
+        
         panelSur.add(biniciarSesion);
+        panelSur.add(bcancelar);
         
         gbc = new GridBagConstraints();
         gbc.gridx = 0;

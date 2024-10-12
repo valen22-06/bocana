@@ -11,37 +11,38 @@ import javax.swing.JFrame;
 import vista.FotosV;
 import controlador.FotosC;
 import controlador.HotelC;
+import controlador.MetodoDePagoC;
+import controlador.TarjetaC;
 import vista.HotelV;
 import vista.IniciarSesionV;
+import vista.MetodoDePagoV;
 import vista.RegistrarHotelV;
 import vista.RegistrarV;
+import vista.TarjetaV;
 
 /**
  *
  * @author Usuario
  */
-
-
-
 public class Index {
+
     public static void main(String[] args) {
 //        RegistrarV registrarV = new RegistrarV();
 //        RegistrarC registrarC = new RegistrarC(registrarV);
 
 //        IniciarSesionV iniciarSesionV = new IniciarSesionV();
 //        IniciarSesionC iniciarSesionC = new IniciarSesionC(iniciarSesionV);
+//        HotelV hotel = new HotelV();
+//        HotelC hot = new HotelC(hotel);
+//    MetodoDePagoV mp = new MetodoDePagoV();
+//    MetodoDePagoC mep = new MetodoDePagoC(mp);
+        TarjetaV tarjetaV = new TarjetaV();
+        TarjetaC tarjetaC = new TarjetaC(tarjetaV);
 
-        HotelV hotel = new HotelV();
-        HotelC hot = new HotelC(hotel);
-        
 //       
-
-         
 //         RegistrarHotelV registrarHotelV = new RegistrarHotelV();
 //        RegistrarHotelC registrarC = new RegistrarHotelC(registrarHotelV);
-        
 //Fotos fotos = new Fotos();
 //FotosC fotosc = new FotosC(fotos); 
-
     }
 }

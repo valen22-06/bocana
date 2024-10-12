@@ -13,6 +13,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -65,7 +66,8 @@ public class RegistrarV extends JFrame{
     public RegistrarV(){
         
         super("Registrar");
-        
+         ImageIcon fondo = new ImageIcon("fondo.jpg");
+          setContentPane(new JLabel(fondo));
         
         contenedor = getContentPane();
         miflow = new FlowLayout();

@@ -15,6 +15,8 @@ import modelo.Usuario;
 import modelo.UsuarioDao;
 import vista.HotelV;
 import vista.IniciarSesionV;
+import javax.swing.*;
+import java.awt.*;
 
 public class IniciarSesionC
 implements ActionListener {
@@ -25,6 +27,7 @@ implements ActionListener {
     public IniciarSesionC(IniciarSesionV iniciarSesionV) {
         this.iniciarSesionV = iniciarSesionV;
         this.iniciarSesionV.biniciarSesion.addActionListener(this);
+        this.iniciarSesionV.ver.addActionListener(this);
         this.iniciarSesionV.bcancelar.addActionListener(this);
         this.iniciarSesionV.setExtendedState(6);
         this.iniciarSesionV.setVisible(true);
@@ -45,6 +48,11 @@ implements ActionListener {
             HotelV hotel = new HotelV();
             HotelC hot = new HotelC(hotel);
         }
+                if(iniciarSesionV.ver.isSelected()){
+                    iniciarSesionV.tcontrasena.setEchoChar((char) 0);
+                } else {
+                    iniciarSesionV.tcontrasena.setEchoChar ('*');
+                }
     }
 
     public int iniciarSesion(String correo, String contrasena) {
