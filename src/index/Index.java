@@ -4,6 +4,7 @@
  */
 package index;
 
+import controlador.AlojamientosC;
 import controlador.IniciarSesionC;
 import controlador.RegistrarC;
 import controlador.RegistrarHotelC;
@@ -13,6 +14,7 @@ import controlador.FotosC;
 import controlador.HotelC;
 import controlador.MetodoDePagoC;
 import controlador.TarjetaC;
+import vista.AlojamientosV;
 import vista.HotelV;
 import vista.IniciarSesionV;
 import vista.MetodoDePagoV;
@@ -44,5 +46,7 @@ public class Index {
 //        RegistrarHotelC registrarC = new RegistrarHotelC(registrarHotelV);
 //Fotos fotos = new Fotos();
 //FotosC fotosc = new FotosC(fotos); 
+        AlojamientosV aloja = new AlojamientosV();
+        AlojamientosC al = new AlojamientosC(aloja);
     }
 }

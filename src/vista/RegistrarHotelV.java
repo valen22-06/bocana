@@ -12,7 +12,9 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -45,6 +47,8 @@ public class RegistrarHotelV extends JFrame{
     public JPanel panelCentro;
     public JPanel panelSur;
     public JPanel panelServicios;
+    private ImageIcon iconwifi, icongym, iconpiscina, iconac, iconrestaurante, iconrecepcion24horas, iconplaya, iconsauna, iconbar;
+    private Image imgwifi, imggym, imgpiscina, imgac, imgrestaurante, imgrecepcion24horas, imgplaya, imgsauna, imgbar;
     private GridLayout migrid;
     private FlowLayout miflow;
     private GridBagLayout gridbag;
@@ -138,55 +142,92 @@ public class RegistrarHotelV extends JFrame{
         ltiposervicio = new JLabel("Tipos de servicios");
         ltiposervicio.setFont(new Font("Times New Roman", 0, 30));
         
-        bwifi = new JButton("Wifi");
+        
+        iconwifi=new ImageIcon("wifi.png");
+        imgwifi = iconwifi.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        iconwifi=new ImageIcon(imgwifi);
+
+        bwifi = new JButton("Wifi",iconwifi);
         bwifi.setFont(new Font("Times New Roman", 0, 20)); 
         bwifi.setBackground(Color.white);
         bwifi.setForeground(Color.BLACK);
         bwifi.putClientProperty("valor", 0);
+        
+        icongym=new ImageIcon("gym.png");
+        imggym = icongym.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        icongym=new ImageIcon(imggym);
        
-        bgym = new JButton("GYM");
+        bgym = new JButton("GYM",icongym);
         bgym.setFont(new Font("Times New Roman", 0, 20));
         bgym.setBackground(Color.white);
         bgym.setForeground(Color.BLACK);
         bgym.putClientProperty("valor", 1);
         
-        bpiscina = new JButton("Piscina");
+        iconpiscina=new ImageIcon("piscina.png");
+        imgpiscina = iconpiscina.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        iconpiscina=new ImageIcon(imgpiscina);
+        
+        bpiscina = new JButton("Piscina", iconpiscina);
         bpiscina.setFont(new Font("Times New Roman", 0, 20)); 
         bpiscina.setBackground(Color.white);
         bpiscina.setForeground(Color.BLACK);
         bpiscina.putClientProperty("valor", 2);
+        
+        iconac=new ImageIcon("ac.png");
+        imgac = iconac.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        iconac=new ImageIcon(imgac);
        
-        bac = new JButton("Aire acondicionado");
+        bac = new JButton("Aire acondicionado", iconac);
         bac.setFont(new Font("Times New Roman", 0, 20));
         bac.setBackground(Color.white);
         bac.setForeground(Color.BLACK);
         bac.putClientProperty("valor", 3);
         
-        brestaurante = new JButton("Restaurante");
+        iconrestaurante=new ImageIcon("restaurante.png");
+        imgrestaurante = iconrestaurante.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        iconrestaurante=new ImageIcon(imgrestaurante);
+        
+        brestaurante = new JButton("Restaurante", iconrestaurante);
         brestaurante.setFont(new Font("Times New Roman", 0, 20)); 
         brestaurante.setBackground(Color.white);
         brestaurante.setForeground(Color.BLACK);
         brestaurante.putClientProperty("valor", 4);
+        
+        iconrecepcion24horas=new ImageIcon("recepcion24horas.png");
+        imgrecepcion24horas = iconrecepcion24horas.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        iconrecepcion24horas=new ImageIcon(imgrecepcion24horas);
        
-        brecepcion24horas = new JButton("Recepcion 24 horas");
+        brecepcion24horas = new JButton("Recepcion 24 horas",iconrecepcion24horas);
         brecepcion24horas.setFont(new Font("Times New Roman", 0, 20));
         brecepcion24horas.setBackground(Color.white);
         brecepcion24horas.setForeground(Color.BLACK);
         brecepcion24horas.putClientProperty("valor", 5);
         
-        bplaya = new JButton("Playa");
+        iconplaya=new ImageIcon("playa.png");
+        imgplaya = iconplaya.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        iconplaya=new ImageIcon(imgplaya);
+        
+        bplaya = new JButton("Playa",iconplaya);
         bplaya.setFont(new Font("Times New Roman", 0, 20)); 
         bplaya.setBackground(Color.white);
         bplaya.setForeground(Color.BLACK);
         bplaya.putClientProperty("valor", 6);
+        
+        iconsauna=new ImageIcon("sauna.png");
+        imgsauna = iconsauna.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        iconsauna=new ImageIcon(imgsauna);
        
-        bsauna = new JButton("Sauna");
+        bsauna = new JButton("Sauna", iconsauna);
         bsauna.setFont(new Font("Times New Roman", 0, 20));
         bsauna.setBackground(Color.white);
         bsauna.setForeground(Color.BLACK);
         bsauna.putClientProperty("valor", 7);
         
-        bbar = new JButton("Bar");
+        iconbar=new ImageIcon("bar.png");
+        imgbar = iconbar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        iconbar=new ImageIcon(imgbar);
+        
+        bbar = new JButton("Bar",iconbar);
         bbar.setFont(new Font("Times New Roman", 0, 20)); 
         bbar.setBackground(Color.white);
         bbar.setForeground(Color.BLACK);
@@ -255,7 +296,7 @@ public class RegistrarHotelV extends JFrame{
 
         JScrollPane scrollPane = new JScrollPane(panel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.setPreferredSize(new Dimension(800, 600)); // Establece un tamaño preferido para el JScrollPane
+        scrollPane.setPreferredSize(new Dimension(800, 680)); // Establece un tamaño preferido para el JScrollPane
 
         
         contenedor.add(scrollPane);

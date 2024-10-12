@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import java.util.List;
+
 /**
  *
  * @author Usuario
@@ -15,13 +17,17 @@ public class Hotel {
     public String nombreHotel;
     public String direccion;
     public int numeroHabitaciones;
+    public String descripcionBreve;
+    public List<TipoServicio> servicios;
 
-    public Hotel(int idHotel, int nit, String nombreHotel, String direccion, int numeroHabitaciones) {
+    public Hotel(int idHotel, int nit, String nombreHotel, String direccion, int numeroHabitaciones,String descripcionBreve, List<TipoServicio> servicios) {
         this.idHotel = idHotel;
         this.nit = nit;
         this.nombreHotel = nombreHotel;
         this.direccion = direccion;
         this.numeroHabitaciones = numeroHabitaciones;
+        this.servicios = servicios;
+        this.descripcionBreve=descripcionBreve;
     }
     public Hotel(){
         
@@ -65,6 +71,22 @@ public class Hotel {
 
     public void setNumeroHabitaciones(int numeroHabitaciones) {
         this.numeroHabitaciones = numeroHabitaciones;
+    }
+
+    public String getDescripcionBreve() {
+        return descripcionBreve;
+    }
+
+    public void setDescripcionBreve(String descripcionBreve) {
+        this.descripcionBreve = descripcionBreve;
+    }
+
+    public List<TipoServicio> getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(List<TipoServicio> servicios) {
+        this.servicios = servicios;
     }
     
 }

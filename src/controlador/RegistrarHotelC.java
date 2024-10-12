@@ -187,7 +187,6 @@ public class RegistrarHotelC implements ActionListener {
         int r = 1;
         int nit = 0;
         int numeroHabitaciones = 0;
-        int idRol = 2;
 
         try {
 
