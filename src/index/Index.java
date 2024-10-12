@@ -4,12 +4,14 @@
  */
 package index;
 
+import controlador.AlojamientosC;
 import controlador.IniciarSesionC;
 import controlador.RegistrarC;
 import controlador.RegistrarHotelC;
 import javax.swing.JFrame;
 import vista.Fotos;
 import controlador.FotosC;
+import vista.AlojamientosV;
 import vista.HotelV;
 import vista.IniciarSesionV;
 import vista.RegistrarHotelV;
@@ -37,11 +39,12 @@ public class Index {
 //         hotel.setVisible(true);
 //         hotel.setExtendedState(6);
          
-         RegistrarHotelV registrarHotelV = new RegistrarHotelV();
-        RegistrarHotelC registrarC = new RegistrarHotelC(registrarHotelV);
+//        RegistrarHotelV registrarHotelV = new RegistrarHotelV();
+//        RegistrarHotelC registrarC = new RegistrarHotelC(registrarHotelV);
         
 //Fotos fotos = new Fotos();
 //FotosC fotosc = new FotosC(fotos); 
-
+        AlojamientosV aloja = new AlojamientosV();
+        AlojamientosC al = new AlojamientosC(aloja);
     }
 }
