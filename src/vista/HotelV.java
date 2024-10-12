@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class HotelV extends JFrame {
-    private Container contenedor;
+     private Container contenedor;
     private GridLayout migrid;
     private FlowLayout miflow;
     private GridBagLayout gridbag;
@@ -32,16 +32,21 @@ public class HotelV extends JFrame {
     private GridBagConstraints gbcn;
     private JLabel info, logo, lregistrar, liniciar;
     private JPanel panelsur, panelnorte, panelcentro, panel;
-    private JButton iniciar, registrar, inicio;
+    public JButton iniciar, registrar, inicio;
+    private ImageIcon fondo;
     
     public HotelV (){
         
-        super("Hoteles Bocana");
+        super("Alojamientos Bocana");
+        
+        fondo = new ImageIcon("fondo.jpg");
+        setContentPane(new JLabel(fondo));
         
         contenedor = getContentPane();
         miflow = new FlowLayout(FlowLayout.CENTER);
         contenedor.setLayout(miflow);
-        contenedor.setBackground(Color.lightGray);
+        
+    
         
 //        contenedor.setBackground(Color.Hex);
 
@@ -69,7 +74,7 @@ public class HotelV extends JFrame {
          miflow = new FlowLayout(FlowLayout.CENTER);
         panelnorte.setLayout(miflow);
         panelnorte.setBackground(fondoColor);
-         ImageIcon logoIcon = new ImageIcon("logoUno.PNG");
+         ImageIcon logoIcon = new ImageIcon("logoDos.PNG");
           Image scaledImage0 = logoIcon.getImage().getScaledInstance(300, 200, Image.SCALE_SMOOTH);
         logo = new JLabel(new ImageIcon(scaledImage0));
         
@@ -80,7 +85,7 @@ public class HotelV extends JFrame {
         gbc.gridy = 0;
         gbc.gridwidth = 4;
         gbc.gridheight = 1;
-        gbc.insets = new Insets(30, 20,  45, 20);
+        gbc.insets = new Insets(30, 20,  20, 20);
          
          panel.add(panelnorte,gbc);
         
@@ -88,14 +93,14 @@ public class HotelV extends JFrame {
         
         //panel centro
         
-         panelcentro = new JPanel();
-         miflow = new FlowLayout();
-        panelcentro.setLayout(miflow);
-        panelcentro.setBackground(fondoColor);
+//         panelcentro = new JPanel();
+//         miflow = new FlowLayout();
+//        panelcentro.setLayout(miflow);
+//        panelcentro.setBackground(fondoColor);
     
         
-         ImageIcon inicioIcon = new ImageIcon("inicio.PNG");
-         Image scaledImage1 = inicioIcon.getImage().getScaledInstance(170, 80, Image.SCALE_SMOOTH);
+         ImageIcon inicioIcon = new ImageIcon("flecha-derecha.PNG");
+         Image scaledImage1 = inicioIcon.getImage().getScaledInstance(70, 50, Image.SCALE_SMOOTH);
          
          inicio = new JButton("");
          inicio.setIcon(new ImageIcon(scaledImage1));
@@ -109,6 +114,7 @@ public class HotelV extends JFrame {
          
 
         gbc.gridy = 1;
+        gbc.insets = new Insets(30, 20,  45, 20);
 
          
          panel.add(inicio,gbc);
@@ -159,17 +165,15 @@ public class HotelV extends JFrame {
          
          panel.add(panelsur,gbc);
         
+         gbc.insets = new Insets(30, 20,  20, 20);
 
         gbc.gridy = 3;
 
          panel.add(info, gbc);
          
          
-         
+         gbc.insets = new Insets(10, 20,  20, 20);
          contenedor.add(panel);
-
-         
-
     }
 
 

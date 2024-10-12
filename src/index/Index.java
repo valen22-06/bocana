@@ -9,7 +9,7 @@ import controlador.IniciarSesionC;
 import controlador.RegistrarC;
 import controlador.RegistrarHotelC;
 import javax.swing.JFrame;
-import vista.Fotos;
+import vista.FotosV;
 import controlador.FotosC;
 import vista.AlojamientosV;
 import vista.HotelV;
@@ -32,7 +32,9 @@ public class Index {
 //        IniciarSesionV iniciarSesionV = new IniciarSesionV();
 //        IniciarSesionC iniciarSesionC = new IniciarSesionC(iniciarSesionV);
 
-//        Hotel hotel = new Hotel();
+//        HotelV hotel = new HotelV();
+//        HotelC hot = new HotelC(hotel);
+        
 //       
 //        hotel.setSize(400, 600);
 //        hotel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,7 +43,7 @@ public class Index {
          
 //        RegistrarHotelV registrarHotelV = new RegistrarHotelV();
 //        RegistrarHotelC registrarC = new RegistrarHotelC(registrarHotelV);
-        
+         
 //Fotos fotos = new Fotos();
 //FotosC fotosc = new FotosC(fotos); 
         AlojamientosV aloja = new AlojamientosV();
