@@ -38,15 +38,15 @@ public class Index {
 //        HotelC hot = new HotelC(hotel);
 //    MetodoDePagoV mp = new MetodoDePagoV();
 //    MetodoDePagoC mep = new MetodoDePagoC(mp);
-        TarjetaV tarjetaV = new TarjetaV();
-        TarjetaC tarjetaC = new TarjetaC(tarjetaV);
+//        TarjetaV tarjetaV = new TarjetaV();
+//        TarjetaC tarjetaC = new TarjetaC(tarjetaV);
 
 //       
 //         RegistrarHotelV registrarHotelV = new RegistrarHotelV();
 //        RegistrarHotelC registrarC = new RegistrarHotelC(registrarHotelV);
-//Fotos fotos = new Fotos();
-//FotosC fotosc = new FotosC(fotos); 
-        AlojamientosV aloja = new AlojamientosV();
-        AlojamientosC al = new AlojamientosC(aloja);
+FotosV fotos = new FotosV();
+FotosC fotosc = new FotosC(fotos); 
+//        AlojamientosV aloja = new AlojamientosV();
+//        AlojamientosC al = new AlojamientosC(aloja);
     }
 }

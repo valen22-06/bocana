@@ -44,7 +44,7 @@ public class AlojamientosV extends JFrame{
     public JPanel panelDescripcion;
     public JPanel panelPrecio;
     public JPanel panelBoton;
-    public JLabel lhoteles;
+    public JLabel llogo;
     public JLabel ltitulo;
     public JLabel ldescripcion;
     public JLabel lprecio;
@@ -84,13 +84,13 @@ public class AlojamientosV extends JFrame{
         gridbag = new GridBagLayout();
         panelNorte.setLayout(gridbag);
         panelNorte.setPreferredSize(new Dimension(1500,100));
-        panelNorte.setBackground(Color.LIGHT_GRAY);
+        panelNorte.setBackground(new Color(99, 124, 119));
         
         
         panelBIniciarSesion = new JPanel();
         miflow = new FlowLayout();
         panelBIniciarSesion.setLayout(miflow); 
-        panelBIniciarSesion.setBackground(Color.LIGHT_GRAY);
+        panelBIniciarSesion.setBackground(new Color(99, 124, 119));
         
         ImageIcon iconac=new ImageIcon("iniciar_sesion.png");
         Image imgac = iconac.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
@@ -107,18 +107,19 @@ public class AlojamientosV extends JFrame{
         panelTitulo = new JPanel();
         miflow = new FlowLayout();
         panelTitulo.setLayout(miflow);
-        panelTitulo.setBackground(Color.LIGHT_GRAY);
+        panelTitulo.setBackground(new Color(99, 124, 119));
         
-        lhoteles = new JLabel("Hoteles");
-        lhoteles.setFont(new Font("Times New Roman", Font.BOLD, 40));
+        ImageIcon logoIcon = new ImageIcon("logoDos.PNG");
+        Image scaledImage0 = logoIcon.getImage().getScaledInstance(150, 100, Image.SCALE_SMOOTH);
+        llogo = new JLabel(new ImageIcon(scaledImage0));
         
-        panelTitulo.add(lhoteles);
+        panelTitulo.add(llogo);
         
         gbc.insets = new Insets(10, 10, 10, 10);
         panelNorte.add(panelTitulo, gbc);
         
         gbc.gridx = 1;
-        gbc.insets = new Insets(10, 1000, 10, 10);
+        gbc.insets = new Insets(10, 950, 10, 10);
         
         panelNorte.add(panelBIniciarSesion, gbc);
         

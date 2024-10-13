@@ -140,7 +140,6 @@ public class FotosC implements ActionListener {
     
     private void  eliminar(int num){
         System.out.println(fotos.size());
-        JLabel fotoEliminada = fotos.get(num-1);
         vista.panelCentro.removeAll();
         fotos.remove(num-1);
         for(int i =0;i<fotos.size();i++){

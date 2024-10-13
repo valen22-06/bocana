@@ -16,8 +16,9 @@ public class Habitacion {
     public String descripcionDetallada;
     public TipoHabitacion tipoHabitacion;
     public int idHotel;
+    public String nombreHotel;
 
-    public Habitacion(int idHabitacion, String estado, double tarifa, String descripcionBreve, String descripcionDetallada, TipoHabitacion tipoHabitacion, int idHotel) {
+    public Habitacion(int idHabitacion, String estado, double tarifa, String descripcionBreve, String descripcionDetallada, TipoHabitacion tipoHabitacion, int idHotel, String nombreHotel) {
         this.idHabitacion = idHabitacion;
         this.estado = estado;
         this.tarifa = tarifa;
@@ -25,6 +26,7 @@ public class Habitacion {
         this.descripcionDetallada = descripcionDetallada;
         this.tipoHabitacion = tipoHabitacion;
         this.idHotel = idHotel;
+        this.nombreHotel = nombreHotel;
     }
     
     public Habitacion(){
@@ -85,6 +87,14 @@ public class Habitacion {
 
     public void setIdHotel(int idHotel) {
         this.idHotel = idHotel;
+    }
+
+    public String getNombreHotel() {
+        return nombreHotel;
+    }
+
+    public void setNombreHotel(String nombreHotel) {
+        this.nombreHotel = nombreHotel;
     }
     
     

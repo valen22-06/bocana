@@ -44,7 +44,7 @@ public class AlojamientosC {
             this.alojamientosV.panelHotel = new JPanel();
             this.alojamientosV.gridbag = new GridBagLayout();
             this.alojamientosV.panelHotel.setLayout(this.alojamientosV.gridbag);
-            this.alojamientosV.panelHotel.setPreferredSize(new Dimension(1300,160));
+            this.alojamientosV.panelHotel.setPreferredSize(new Dimension(1300,170));
 
             this.alojamientosV.gbc = new GridBagConstraints();
             this.alojamientosV.gbc.gridx = 0;
@@ -70,9 +70,9 @@ public class AlojamientosC {
             this.alojamientosV.panelNombre = new JPanel();
             this.alojamientosV.miflow = new FlowLayout(FlowLayout.LEFT);
             this.alojamientosV.panelNombre.setLayout(this.alojamientosV.miflow); 
-            this.alojamientosV.panelNombre.setPreferredSize(new Dimension(900,30));
+            this.alojamientosV.panelNombre.setPreferredSize(new Dimension(900,40));
             
-            this.alojamientosV.ltitulo = new JLabel("Nombre hotel");
+            this.alojamientosV.ltitulo = new JLabel(datosHabitaciones.get(i).getNombreHotel());
             this.alojamientosV.ltitulo.setFont(new Font("Times New Roman", Font.BOLD, 28));
             
             this.alojamientosV.panelNombre.add(this.alojamientosV.ltitulo);

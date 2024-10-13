@@ -25,9 +25,10 @@ public class HabitacionDao {
     
     public List listar() {
         ArrayList<Habitacion> datosHabitaciones = new ArrayList<Habitacion>();
-        String sql = "SELECT h.idHabitacion, h.estado, h.tarifa, h.descripcionBreve, h.descripcionDetallada, h.idTipoHabitacion, tp.descripcion , h.idHotel"
+        String sql = "SELECT h.idHabitacion, h.estado, h.tarifa, h.descripcionBreve, h.descripcionDetallada, h.idTipoHabitacion, tp.descripcion , h.idHotel, ho.nombreHotel"
                 + " FROM habitaciones h "
-                + "JOIN tipos_habitaciones tp ON tp.idTipoHabitacion = h.idTipoHabitacion";
+                + "JOIN tipos_habitaciones tp ON tp.idTipoHabitacion = h.idTipoHabitacion "
+                + "JOIN hoteles ho ON ho.idHotel = h.idHotel";
         try {
             con = conectar.getConnection();
             ps = con.prepareStatement(sql);
@@ -47,6 +48,7 @@ public class HabitacionDao {
                 
                 h.setTipoHabitacion(tp);
                 h.setIdHotel(rs.getInt(8));
+                h.setNombreHotel(rs.getString(9));
 
                 datosHabitaciones.add(h);
             }
