@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 public class FotosV extends JFrame{
     public Container contenedor;
     public JLabel titulo, foto;
-    public JButton seleccionar, guardar, eliminar;
+    public JButton seleccionar, bguardar, beliminar, bcerrar;
     public JPanel panel, panelSur, panelNorte, panelCentro;
     public FlowLayout miflow;
     public GridLayout migrid;
@@ -61,8 +61,9 @@ public class FotosV extends JFrame{
         foto= new JLabel();
         
         seleccionar= new JButton("Seleccionar");
-        guardar =new JButton("Guardar");
-        eliminar = new JButton("Eliminar");
+        bguardar =new JButton("Guardar");
+        beliminar = new JButton("Eliminar");
+        bcerrar = new JButton("Cerrar");
         
         //panel norte
         panelNorte = new JPanel();
@@ -77,15 +78,18 @@ public class FotosV extends JFrame{
         panelCentro = new JPanel();
         migrid = new GridLayout(2,4,5,5);
         panelCentro.setLayout(migrid);
+        panelCentro.setBackground(fondoColor);
         
         //panel sur
         panelSur = new JPanel();
-        migrid = new GridLayout(1,2, 10,10);
+        migrid = new GridLayout(1,3, 10,10);
         panelSur.setLayout(migrid);
         panelSur.setBackground(fondoColor);
         
-        panelSur.add(guardar);
-         panelSur.add(eliminar);
+        panelSur.add(bcerrar);
+         panelSur.add(beliminar);
+        panelSur.add(bguardar);
+        
         
          gbc.insets = new Insets(200, 20,  50, 20);
          gbc.gridy = 0;

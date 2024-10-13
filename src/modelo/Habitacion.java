@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import java.util.List;
+
 /**
  *
  * @author Usuario
@@ -17,6 +19,7 @@ public class Habitacion {
     public TipoHabitacion tipoHabitacion;
     public int idHotel;
     public String nombreHotel;
+    public List<byte[]> imagenes;
 
     public Habitacion(int idHabitacion, String estado, double tarifa, String descripcionBreve, String descripcionDetallada, TipoHabitacion tipoHabitacion, int idHotel, String nombreHotel) {
         this.idHabitacion = idHabitacion;
@@ -96,7 +99,15 @@ public class Habitacion {
     public void setNombreHotel(String nombreHotel) {
         this.nombreHotel = nombreHotel;
     }
-    
+
+    public List<byte[]> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(List<byte[]> imagenes) {
+        this.imagenes = imagenes;
+    }
+        
     
     
 }

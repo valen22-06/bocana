@@ -11,12 +11,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 import vista.FotosV;
 import vista.IniciarSesionV;
+import vista.RegistrarHabitacionV;
 
 /**
  *
@@ -25,22 +28,29 @@ import vista.IniciarSesionV;
 public class FotosC implements ActionListener {
 
     FotosV vista = new FotosV();
+    
+    
     JFileChooser seleccionar = new JFileChooser();
     File archivo;
     
+    public boolean terminar = false;
     int num;
     byte[] imagen;
     FileInputStream entrada;
     FileOutputStream salida;
     ArrayList<JLabel> fotos = new ArrayList<>();
+    ArrayList<byte[]> imagenes = new ArrayList<>();
     
     
 
     public FotosC(FotosV vista) {
         this.vista = vista;
+        
+        
         this.vista.seleccionar.addActionListener(this);
-        this.vista.guardar.addActionListener(this);
-        this.vista.eliminar.addActionListener(this);
+        this.vista.bguardar.addActionListener(this);
+        this.vista.beliminar.addActionListener(this);
+        this.vista.bcerrar.addActionListener(this);
         this.vista.setExtendedState(6);
         this.vista.setVisible(true);
         this.vista.setDefaultCloseOperation(3);
@@ -62,18 +72,9 @@ public class FotosC implements ActionListener {
             }
         }
 
-        if (e.getSource() == vista.guardar) {
-            String respuesta = GuardarArchivo(archivo, imagen);
-                if (respuesta != null) { 
-                    JOptionPane.showMessageDialog(null, respuesta);
-                    
-                } else {
-                    JOptionPane.showMessageDialog(null, "Archivo no guardado");
+        
 
-                }
-        }
-
-        if (e.getSource() == vista.eliminar) {
+        if (e.getSource() == vista.beliminar) {
             try{
                  num=Integer.parseInt(JOptionPane.showInputDialog(vista,"Ingrese el numero de la imagen que desea eliminar"));
                  if(num>0 && num<fotos.size()){
@@ -86,10 +87,17 @@ public class FotosC implements ActionListener {
             }
             
         }
-
+        
+        if(e.getSource()==vista.bcerrar){
+            vista.setVisible(false);
+        }
+        
+        if(e.getSource()==vista.bguardar){
+            
+        }
     }
 
-    public byte[] AbrirArchivo(File archivo) {
+    public byte[] abrirArchivo(File archivo) {
         byte[] imagen = new byte[1024 * 1024];
         try {
             entrada = new FileInputStream(archivo);
@@ -100,40 +108,48 @@ public class FotosC implements ActionListener {
         return imagen;
     }
 
-    public String GuardarArchivo(File archivo, byte[] imagen) {
-        String mensaje = null;
+    public int validarArchivo(File archivo, byte[] imagen) {
+        int r = 0;
         try {
             salida = new FileOutputStream(archivo);
             salida.write(imagen);
-            mensaje = "Guardado";
+            System.out.println("Se valido");
+            r=1;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al abrir el archivo: " + e.getMessage());
+            r=0;
         }
-        return mensaje;
+        return r;
     }
 
     private void agregarFoto(File archivo) {
         int x=fotos.size()+1;
         if (archivo.getName().endsWith("jpg")
-                || archivo.getName().endsWith("jpeg")
-                || archivo.getName().endsWith("png")
-                || archivo.getName().endsWith("PNG")) {
+            || archivo.getName().endsWith("jpeg")
+            || archivo.getName().endsWith("png")
+            || archivo.getName().endsWith("PNG")) {
         
 
-        imagen = AbrirArchivo(archivo);
-        JLabel foto = new JLabel();
-        JLabel text = new JLabel("Hola");
-        foto.setSize(100, 100);
+            imagen = abrirArchivo(archivo);
+            if(validarArchivo(archivo,imagen)==1){
+                JLabel foto = new JLabel();
+                foto.setSize(100, 100);
 
-        ImageIcon ima = new ImageIcon(imagen);
-        Image imagenEscalada = ima.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_SMOOTH);
-        foto.setText(""+x);
-        foto.setIcon(new ImageIcon(imagenEscalada));
+                ImageIcon ima = new ImageIcon(imagen);
+                Image imagenEscalada = ima.getImage().getScaledInstance(foto.getWidth(), foto.getHeight(), Image.SCALE_SMOOTH);
+                foto.setText(""+x);
+                foto.setHorizontalTextPosition(SwingConstants.LEFT);
+                foto.setIcon(new ImageIcon(imagenEscalada));
 
-        fotos.add(foto);
-        vista.panelCentro.add(foto);
-        vista.panelCentro.revalidate();
-        vista.panelCentro.repaint();
+                fotos.add(foto);
+                imagenes.add(imagen);
+                vista.panelCentro.add(foto);
+                vista.panelCentro.revalidate();
+                vista.panelCentro.repaint();
+            }else{
+                System.out.println("error en la validacion de la imagen");
+            }
+            
 
         }
     }
@@ -142,6 +158,8 @@ public class FotosC implements ActionListener {
         System.out.println(fotos.size());
         vista.panelCentro.removeAll();
         fotos.remove(num-1);
+        imagenes.remove(num-1);
+        
         for(int i =0;i<fotos.size();i++){
             
             JLabel foto = fotos.get(i);
@@ -151,6 +169,14 @@ public class FotosC implements ActionListener {
         vista.panelCentro.revalidate();
         vista.panelCentro.repaint();
 
+    }
+    
+    public List<JLabel> getFotos() {
+        return fotos;
+    }
+
+    public List<byte[]> getImagenes() {
+        return imagenes;
     }
 
 }

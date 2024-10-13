@@ -52,7 +52,7 @@ public class RegistrarHotelC implements ActionListener {
         this.registrarHotelV.bplaya.addActionListener(this);
         this.registrarHotelV.bsauna.addActionListener(this);
         this.registrarHotelV.bbar.addActionListener(this);
-        this.registrarHotelV.bregistrar.addActionListener(this);
+        this.registrarHotelV.bcancelar.addActionListener(this);
 
         this.registrarHotelV.bregistrar.addActionListener(this);
         this.registrarHotelV.setExtendedState(6);
@@ -147,10 +147,19 @@ public class RegistrarHotelC implements ActionListener {
 
         if (e.getSource() == registrarHotelV.bregistrar) {
 
-            if (!registrarHotelV.tnit.getText().toString().isEmpty()
-                    && !registrarHotelV.tnombreHotel.getText().toString().isEmpty()
-                    && !registrarHotelV.tdireccion.getText().toString().isEmpty()
-                    && !registrarHotelV.tnumeroHabitaciones.getText().toString().isEmpty()) {
+            if (!registrarHotelV.tnit.getText().toString().isBlank()
+                    && !registrarHotelV.tnombreHotel.getText().toString().isBlank()
+                    && !registrarHotelV.tdireccion.getText().toString().isBlank()
+                    && !registrarHotelV.tnumeroHabitaciones.getText().toString().isBlank()
+                    && !flagwifi == true
+                    || !flaggym == true
+                    || !flagpiscina == true
+                    || !flagac == true
+                    || !flagrecepcion24horas == true
+                    || !flagrestaurante == true
+                    || !flagplaya == true
+                    || !flagsauna == true
+                    || !flagbar == true) {
 
                 setAdd();
 
@@ -227,6 +236,7 @@ public class RegistrarHotelC implements ActionListener {
         hotel.setNombreHotel(nombreHotel);
         hotel.setDireccion(direccion);
         hotel.setNumeroHabitaciones(numeroHabitaciones);
+        hotel.setServicios(datosTipoServicioDao);
 
 
 //        if (r == 1) {

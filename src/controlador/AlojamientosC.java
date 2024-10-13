@@ -36,11 +36,14 @@ public class AlojamientosC {
     HabitacionDao habitacionDao = new HabitacionDao();
     List<Habitacion> datosHabitaciones = habitacionDao.listar();
     
+    
     public AlojamientosC(AlojamientosV alojamientosV) {
         this.alojamientosV = alojamientosV;
         
         
         for(int i =0;i<datosHabitaciones.size();i++){
+            List<JLabel> fotos = habitacionDao.listarImagenes(i+1);
+            
             this.alojamientosV.panelHotel = new JPanel();
             this.alojamientosV.gridbag = new GridBagLayout();
             this.alojamientosV.panelHotel.setLayout(this.alojamientosV.gridbag);
@@ -52,15 +55,17 @@ public class AlojamientosC {
             this.alojamientosV.gbc.gridwidth = 1;
             this.alojamientosV.gbc.gridheight = 3;
             
-            ImageIcon img=new ImageIcon("hotel.jpeg");
-            JLabel imgLabel1 = new JLabel(img);
+            
+            JLabel foto = new JLabel();
+            foto = fotos.getFirst();
+            
 
             this.alojamientosV.panelImg = new JPanel();
             this.alojamientosV.miflow = new FlowLayout();
             this.alojamientosV.panelImg.setLayout(this.alojamientosV.miflow); 
             this.alojamientosV.panelImg.setPreferredSize(new Dimension(180,110));
             
-            this.alojamientosV.panelImg.add(imgLabel1);
+            this.alojamientosV.panelImg.add(foto);
 
 
             this.alojamientosV.gbc.insets = new Insets(20, 20, 20, 20);

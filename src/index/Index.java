@@ -13,11 +13,16 @@ import vista.FotosV;
 import controlador.FotosC;
 import controlador.HotelC;
 import controlador.MetodoDePagoC;
+import controlador.RegistrarHabitacionC;
 import controlador.TarjetaC;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JLabel;
 import vista.AlojamientosV;
 import vista.HotelV;
 import vista.IniciarSesionV;
 import vista.MetodoDePagoV;
+import vista.RegistrarHabitacionV;
 import vista.RegistrarHotelV;
 import vista.RegistrarV;
 import vista.TarjetaV;
@@ -34,19 +39,26 @@ public class Index {
 
 //        IniciarSesionV iniciarSesionV = new IniciarSesionV();
 //        IniciarSesionC iniciarSesionC = new IniciarSesionC(iniciarSesionV);
+
 //        HotelV hotel = new HotelV();
 //        HotelC hot = new HotelC(hotel);
-//    MetodoDePagoV mp = new MetodoDePagoV();
-//    MetodoDePagoC mep = new MetodoDePagoC(mp);
+
+        //    MetodoDePagoV mp = new MetodoDePagoV();
+        //    MetodoDePagoC mep = new MetodoDePagoC(mp);
+
 //        TarjetaV tarjetaV = new TarjetaV();
 //        TarjetaC tarjetaC = new TarjetaC(tarjetaV);
-
-//       
+       
 //         RegistrarHotelV registrarHotelV = new RegistrarHotelV();
 //        RegistrarHotelC registrarC = new RegistrarHotelC(registrarHotelV);
-FotosV fotos = new FotosV();
-FotosC fotosc = new FotosC(fotos); 
-//        AlojamientosV aloja = new AlojamientosV();
-//        AlojamientosC al = new AlojamientosC(aloja);
+
+        //FotosV fotos = new FotosV();
+        //FotosC fotosc = new FotosC(fotos); 
+
+        AlojamientosV aloja = new AlojamientosV();
+        AlojamientosC al = new AlojamientosC(aloja);
+
+//        RegistrarHabitacionV registrarV = new RegistrarHabitacionV();
+//        RegistrarHabitacionC registrarC = new RegistrarHabitacionC(registrarV,5);
     }
 }
