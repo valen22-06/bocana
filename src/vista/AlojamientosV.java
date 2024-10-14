@@ -92,6 +92,7 @@ public class AlojamientosV extends JFrame{
         panelBIniciarSesion.setLayout(miflow); 
         panelBIniciarSesion.setBackground(new Color(99, 124, 119));
         
+        
         ImageIcon iconac=new ImageIcon("iniciar_sesion.png");
         Image imgac = iconac.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         iconac=new ImageIcon(imgac);
@@ -100,6 +101,8 @@ public class AlojamientosV extends JFrame{
         biniciarSesion.setFont(new Font("Times New Roman", 0, 20));
         biniciarSesion.setBackground(Color.white);
         biniciarSesion.setForeground(Color.BLACK);
+        biniciarSesion.setContentAreaFilled(false);
+        biniciarSesion.setBorderPainted(false);
             
         
         panelBIniciarSesion.add(biniciarSesion);

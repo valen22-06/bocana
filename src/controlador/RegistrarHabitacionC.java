@@ -99,10 +99,10 @@ public class RegistrarHabitacionC implements ActionListener{
         
         if (e.getSource() == registrarHabitacionV.bregistrar) {
 
-            if (!registrarHabitacionV.tdescripcionBreve.getText().isBlank()
-                    && !registrarHabitacionV.tdescripcionDetallada.getText().isBlank()
-                    && !registrarHabitacionV.ttarifa.getText().isBlank()
-                    && !registrarHabitacionV.lista.getSelectedItem().toString().isBlank()
+            if (!registrarHabitacionV.tdescripcionBreve.getText().isEmpty()
+                    && !registrarHabitacionV.tdescripcionDetallada.getText().isEmpty()
+                    && !registrarHabitacionV.ttarifa.getText().isEmpty()
+                    && !registrarHabitacionV.lista.getSelectedItem().toString().isEmpty()
                     && !fotos.isEmpty()
                     ) {
 

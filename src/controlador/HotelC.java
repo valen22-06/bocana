@@ -6,6 +6,7 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import vista.AlojamientosV;
 import vista.HotelV;
 import vista.IniciarSesionV;
 import vista.RegistrarV;
@@ -15,7 +16,9 @@ import vista.RegistrarV;
  * @author estud
  */
 public class HotelC implements ActionListener {
-          HotelV hot = new HotelV();
+
+    HotelV hot = new HotelV();
+
     public HotelC(HotelV hotel) {
         this.hot = hotel;
         this.hot.registrar.addActionListener(this);
@@ -28,20 +31,22 @@ public class HotelC implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-if(e.getSource()==hot.registrar){
+        if (e.getSource() == hot.registrar) {
             hot.dispose();
             RegistrarV regisV = new RegistrarV();
             RegistrarC regisC = new RegistrarC(regisV);
         }
-        
-        if(e.getSource()==hot.iniciar){
+
+        if (e.getSource() == hot.iniciar) {
             hot.dispose();
             IniciarSesionV iniV = new IniciarSesionV();
             IniciarSesionC iniC = new IniciarSesionC(iniV);
-            
+
         }
-        
-        if(e.getSource()==hot.inicio){
-            
-        }    }
+
+        if (e.getSource() == hot.inicio) {
+            AlojamientosV aloja = new AlojamientosV();
+            AlojamientosC al = new AlojamientosC(aloja);
+        }
+    }
 }

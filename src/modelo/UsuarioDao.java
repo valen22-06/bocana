@@ -100,5 +100,15 @@ public class UsuarioDao {
            }
        }
    }
+   
+   public int buscarTarjeta(){
+       String sql = "";
+       
+       con = conectar.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            
+   }
     
 }
