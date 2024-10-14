@@ -45,8 +45,9 @@ implements ActionListener {
             }
         }
                 if(e.getSource()==iniciarSesionV.bcancelar){
-            HotelV hotel = new HotelV();
-            HotelC hot = new HotelC(hotel);
+//            HotelV hotel = new HotelV();
+//            HotelC hot = new HotelC(hotel);
+            usuarioDao.buscarTarjeta(2);
         }
                 if(iniciarSesionV.ver.isSelected()){
                     iniciarSesionV.tcontrasena.setEchoChar((char) 0);

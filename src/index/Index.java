@@ -41,8 +41,8 @@ public class Index {
 //        RegistrarV registrarV = new RegistrarV();
 //        RegistrarC registrarC = new RegistrarC(registrarV);
 
-//        IniciarSesionV iniciarSesionV = new IniciarSesionV();
-//        IniciarSesionC iniciarSesionC = new IniciarSesionC(iniciarSesionV);
+        IniciarSesionV iniciarSesionV = new IniciarSesionV();
+        IniciarSesionC iniciarSesionC = new IniciarSesionC(iniciarSesionV);
 
 //        HotelV hotel = new HotelV();
 //        HotelC hot = new HotelC(hotel);
@@ -59,11 +59,11 @@ public class Index {
         //FotosV fotos = new FotosV();
         //FotosC fotosc = new FotosC(fotos); 
 
-        Usuario usuario = new Usuario();
-        UsuarioDao usuarioDao = new UsuarioDao();
-        usuario = (Usuario) usuarioDao.listar().getFirst();
-        AlojamientosV aloja = new AlojamientosV();
-        AlojamientosC al = new AlojamientosC(aloja, usuario);
+//        Usuario usuario = new Usuario();
+//        UsuarioDao usuarioDao = new UsuarioDao();
+//        usuario = (Usuario) usuarioDao.listar().getFirst();
+//        AlojamientosV aloja = new AlojamientosV();
+//        AlojamientosC al = new AlojamientosC(aloja, usuario);
 
 //        RegistrarHabitacionV registrarV = new RegistrarHabitacionV();
 //        RegistrarHabitacionC registrarC = new RegistrarHabitacionC(registrarV,5);
