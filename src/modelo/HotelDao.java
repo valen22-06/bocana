@@ -25,7 +25,9 @@ public class HotelDao {
     
     public List listar() {
         ArrayList<Hotel> datosHotel = new ArrayList<Hotel>();
-        String sql = "SELECT * FROM hoteles";
+        String sql = "SELECT h.idHotel, h.nit, h.nombreHotel, h.direccion, h.numeroHabitaciones, h.idOfertaEspecial, h.idUsuario "
+                + "u.documento, u.nombre1, u.nombre2, u.apellido1 , u.apellido2, u.correo, u.telefono, u.direccion, u.contrasena, u.idRol FROM hoteles h"
+                + " JOIN usuarios u ON h.idUsuario = u.idUsuario";
 
         try {
             con = conectar.getConnection();
@@ -34,14 +36,28 @@ public class HotelDao {
             
             while (rs.next()) {
                 Hotel h = new Hotel();
+                Usuario u = new Usuario();
                 h.setIdHotel(rs.getInt(1));
                 h.setNit(rs.getInt(2));
                 h.setNombreHotel(rs.getString(3));
                 h.setDireccion(rs.getString(4));
                 h.setNumeroHabitaciones(rs.getInt(5));
                 h.setOfertaEspecial(rs.getInt(6));
-                h.setIdUsuario(rs.getInt(7));
                 
+                
+                u.setIdUsuario(rs.getInt(7));
+                u.setDocumento(rs.getInt(8));
+                u.setNombre1(rs.getString(9));
+                u.setNombre2(rs.getString(10));
+                u.setApellido1(rs.getString(11));
+                u.setApellido2(rs.getString(12));
+                u.setCorreo(rs.getString(13));
+                u.setTelefono(rs.getInt(14));
+                u.setDireccion(rs.getString(15));
+                u.setContrasena(rs.getString(16));
+                u.setIdRol(rs.getInt(17));
+                
+                h.setUsuario(u);
                 
                 
                 ArrayList<TipoServicio> servicios = new ArrayList<TipoServicio>();
@@ -104,7 +120,7 @@ public class HotelDao {
             ps.setString(4, h.getDireccion());
             ps.setInt(5, h.getNumeroHabitaciones());
             ps.setInt(6, 1);
-            ps.setInt(7, h.getIdUsuario());
+            ps.setInt(7, h.getUsuario().getIdUsuario());
            
            ps.executeUpdate();
            return 1;

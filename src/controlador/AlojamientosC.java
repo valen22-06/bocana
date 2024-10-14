@@ -12,6 +12,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -25,21 +27,23 @@ import modelo.Habitacion;
 import modelo.HabitacionDao;
 import modelo.Hotel;
 import modelo.HotelDao;
+import modelo.Usuario;
 import vista.AlojamientosV;
+import vista.ResenaV;
 
 /**
  *
  * @author Usuario
  */
-public class AlojamientosC {
+public class AlojamientosC implements ActionListener{
     AlojamientosV alojamientosV = new AlojamientosV();
     HabitacionDao habitacionDao = new HabitacionDao();
     List<Habitacion> datosHabitaciones = habitacionDao.listar();
+    Usuario usuario = new Usuario();
     
-    
-    public AlojamientosC(AlojamientosV alojamientosV) {
+    public AlojamientosC(AlojamientosV alojamientosV, Usuario usuario) {
         this.alojamientosV = alojamientosV;
-        
+        this.usuario=usuario;
         
         for(int i =0;i<datosHabitaciones.size();i++){
             List<JLabel> fotos = habitacionDao.listarImagenes(i+1);
@@ -77,7 +81,7 @@ public class AlojamientosC {
             this.alojamientosV.panelNombre.setLayout(this.alojamientosV.miflow); 
             this.alojamientosV.panelNombre.setPreferredSize(new Dimension(900,40));
             
-            this.alojamientosV.ltitulo = new JLabel(datosHabitaciones.get(i).getNombreHotel());
+            this.alojamientosV.ltitulo = new JLabel(datosHabitaciones.get(i).getHotel().getNombreHotel());
             this.alojamientosV.ltitulo.setFont(new Font("Times New Roman", Font.BOLD, 28));
             
             this.alojamientosV.panelNombre.add(this.alojamientosV.ltitulo);
@@ -134,6 +138,7 @@ public class AlojamientosC {
             this.alojamientosV.bvermas.setFont(new Font("Times New Roman", 0, 20));
             this.alojamientosV.bvermas.setBackground(Color.white);
             this.alojamientosV.bvermas.setForeground(Color.BLACK);
+            this.alojamientosV.bvermas.addActionListener(this);
             this.alojamientosV.bvermas.putClientProperty("valor", datosHabitaciones.get(i).getIdHabitacion());
             
             this.alojamientosV.panelBoton.add(this.alojamientosV.bvermas);
@@ -167,6 +172,28 @@ public class AlojamientosC {
         this.alojamientosV.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+            if(e.getSource() instanceof JButton) {//verifica si el evento es una instacia de JButton
+                JButton boton = (JButton) e.getSource();
+
+                Integer idHabitacion = (Integer) boton.getClientProperty("valor");
+                Habitacion habitacion = new Habitacion();
+                
+                for(int i = 0; i<datosHabitaciones.size();i++){
+                    if(datosHabitaciones.get(i).getIdHabitacion() == idHabitacion){
+                        habitacion=datosHabitaciones.get(i);
+                    }
+                }
+                
+                ResenaV resenaV = new ResenaV();
+                ResenaC resenaC = new ResenaC(resenaV, usuario, habitacion);
+            }
+        
+    }
+    
+    
     public static String insertarSaltosDeLinea(String texto, int maxCaracteres) {
         StringBuilder resultado = new StringBuilder(texto.length());
         int contador = 0;
@@ -183,6 +210,8 @@ public class AlojamientosC {
         
         return resultado.toString();
     }
+
+    
 }
 
 

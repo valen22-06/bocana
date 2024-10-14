@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import modelo.Habitacion;
 import modelo.HabitacionDao;
+import modelo.Hotel;
 import modelo.TipoHabitacionDao;
 import modelo.TipoHabitacion;
 import modelo.TipoServicioDao;
@@ -39,7 +40,7 @@ public class RegistrarHabitacionC implements ActionListener{
     FotosV fotosV;
     FotosC fotosC;
     
-    int idHotel;
+    Hotel hotel = new Hotel();
     public boolean flag = false;
     
     List<byte[]> imagenes = new ArrayList<>();
@@ -51,9 +52,9 @@ public class RegistrarHabitacionC implements ActionListener{
     List<TipoHabitacion> datosTipoHabitacionDao = tipoHabitacionDao.listar();
     TipoHabitacion tipoHabitacion = new TipoHabitacion();
     
-    public RegistrarHabitacionC(RegistrarHabitacionV registrarHabitacionV, int idHotel) {
+    public RegistrarHabitacionC(RegistrarHabitacionV registrarHabitacionV, Hotel hotel) {
         this.registrarHabitacionV = registrarHabitacionV;
-        this.idHotel=idHotel;
+        this.hotel=hotel;
         this.fotosV = new FotosV();
         this.registrarHabitacionV.imagenes = imagenes;
         this.registrarHabitacionV.fotos = fotos;
@@ -169,7 +170,7 @@ public class RegistrarHabitacionC implements ActionListener{
         habitacion.setDescripcionBreve(descripcionBreve);
         habitacion.setDescripcionDetallada(descripcionDetallada);
         habitacion.setTipoHabitacion(tipoHabitacion);
-        habitacion.setIdHotel(idHotel);
+        habitacion.setHotel(hotel);
         habitacion.setImagenes(imagenes);
         habitacion.setFotos(fotos);
         

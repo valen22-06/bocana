@@ -18,11 +18,11 @@ public class Hotel {
     public String direccion;
     public int numeroHabitaciones;
     public int ofertaEspecial;
-    public int idUsuario;
+    public Usuario usuario;
     public List<TipoServicio> servicios;
     public List<Habitacion> habitaciones;
 
-    public Hotel(int idHotel, int nit, String nombreHotel, String direccion, int numeroHabitaciones, List<TipoServicio> servicios, int ofertaEspecial, int idUsuario, List<Habitacion> habitaciones) {
+    public Hotel(int idHotel, int nit, String nombreHotel, String direccion, int numeroHabitaciones, List<TipoServicio> servicios, int ofertaEspecial, Usuario usuario, List<Habitacion> habitaciones) {
         this.idHotel = idHotel;
         this.nit = nit;
         this.nombreHotel = nombreHotel;
@@ -31,7 +31,7 @@ public class Hotel {
         this.servicios = servicios;
         this.habitaciones=habitaciones;
         this.ofertaEspecial=ofertaEspecial;
-        this.idUsuario=idUsuario;
+        this.usuario=usuario;
     }
     public Hotel(){
         
@@ -103,12 +103,12 @@ public class Hotel {
         this.servicios = servicios;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
     
 }

@@ -14,10 +14,13 @@ import controlador.FotosC;
 import controlador.HotelC;
 import controlador.MetodoDePagoC;
 import controlador.RegistrarHabitacionC;
+import controlador.ResenaC;
 import controlador.TarjetaC;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
+import modelo.Usuario;
+import modelo.UsuarioDao;
 import vista.AlojamientosV;
 import vista.HotelV;
 import vista.IniciarSesionV;
@@ -25,6 +28,7 @@ import vista.MetodoDePagoV;
 import vista.RegistrarHabitacionV;
 import vista.RegistrarHotelV;
 import vista.RegistrarV;
+import vista.ResenaV;
 import vista.TarjetaV;
 
 /**
@@ -55,10 +59,16 @@ public class Index {
         //FotosV fotos = new FotosV();
         //FotosC fotosc = new FotosC(fotos); 
 
+        Usuario usuario = new Usuario();
+        UsuarioDao usuarioDao = new UsuarioDao();
+        usuario = (Usuario) usuarioDao.listar().getFirst();
         AlojamientosV aloja = new AlojamientosV();
-        AlojamientosC al = new AlojamientosC(aloja);
+        AlojamientosC al = new AlojamientosC(aloja, usuario);
 
 //        RegistrarHabitacionV registrarV = new RegistrarHabitacionV();
 //        RegistrarHabitacionC registrarC = new RegistrarHabitacionC(registrarV,5);
+
+//        ResenaV resenaV = new ResenaV();
+//        ResenaC resenaC = new ResenaC(resenaV);
     }
 }

@@ -18,20 +18,19 @@ public class Habitacion {
     public String descripcionBreve;
     public String descripcionDetallada;
     public TipoHabitacion tipoHabitacion;
-    public int idHotel;
-    public String nombreHotel;
+    public Hotel hotel;
     public List<byte[]> imagenes;
     public List<JLabel> fotos;
 
-    public Habitacion(int idHabitacion, String estado, double tarifa, String descripcionBreve, String descripcionDetallada, TipoHabitacion tipoHabitacion, int idHotel, String nombreHotel) {
+    public Habitacion(int idHabitacion, String estado, double tarifa, String descripcionBreve, String descripcionDetallada, TipoHabitacion tipoHabitacion, Hotel hotel) {
         this.idHabitacion = idHabitacion;
         this.estado = estado;
         this.tarifa = tarifa;
         this.descripcionBreve = descripcionBreve;
         this.descripcionDetallada = descripcionDetallada;
         this.tipoHabitacion = tipoHabitacion;
-        this.idHotel = idHotel;
-        this.nombreHotel = nombreHotel;
+        this.hotel = hotel;
+        
     }
     
     public Habitacion(){
@@ -86,20 +85,12 @@ public class Habitacion {
         this.tipoHabitacion = tipoHabitacion;
     }
 
-    public int getIdHotel() {
-        return idHotel;
+    public Hotel getHotel() {
+        return hotel;
     }
 
-    public void setIdHotel(int idHotel) {
-        this.idHotel = idHotel;
-    }
-
-    public String getNombreHotel() {
-        return nombreHotel;
-    }
-
-    public void setNombreHotel(String nombreHotel) {
-        this.nombreHotel = nombreHotel;
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 
     public List<byte[]> getImagenes() {

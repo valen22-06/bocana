@@ -28,6 +28,7 @@ import modelo.Hotel;
 import modelo.HotelDao;
 import modelo.TipoServicio;
 import modelo.TipoServicioDao;
+import modelo.Usuario;
 import vista.RegistrarHabitacionV;
 import vista.RegistrarHotelV;
 
@@ -172,7 +173,7 @@ public class RegistrarHotelC implements ActionListener {
 
         if(e.getSource() == registrarHotelV.bagregar){
             
-             registrarHabitacionC = new RegistrarHabitacionC(registrarHabitacionV,idHotel);
+             registrarHabitacionC = new RegistrarHabitacionC(registrarHabitacionV,hotel);
         
         }
         
@@ -296,7 +297,9 @@ public class RegistrarHotelC implements ActionListener {
         hotel.setHabitaciones(habitaciones);
         hotel.setNumeroHabitaciones(hotel.getHabitaciones().size());
         hotel.setServicios(servicios);
-        hotel.setIdUsuario(2);
+        Usuario u = new Usuario();
+        u.setIdUsuario(2);
+        hotel.setUsuario(u);
         
 
 

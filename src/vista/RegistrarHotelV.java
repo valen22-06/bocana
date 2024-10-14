@@ -193,7 +193,7 @@ public class RegistrarHotelV extends JFrame{
         brestaurante.setForeground(Color.BLACK);
         brestaurante.putClientProperty("valor", 4);
         
-        iconrecepcion24horas=new ImageIcon("recepcion24horas.png");
+        iconrecepcion24horas=new ImageIcon("recepcion 24 horas.png");
         imgrecepcion24horas = iconrecepcion24horas.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         iconrecepcion24horas=new ImageIcon(imgrecepcion24horas);
        

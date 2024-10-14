@@ -31,7 +31,8 @@ public class HabitacionDao {
     
     public List listar() {
         ArrayList<Habitacion> datosHabitaciones = new ArrayList<Habitacion>();
-        String sql = "SELECT h.idHabitacion, h.estado, h.tarifa, h.descripcionBreve, h.descripcionDetallada, h.idTipoHabitacion, tp.descripcion , h.idHotel, ho.nombreHotel"
+        String sql = "SELECT h.idHabitacion, h.estado, h.tarifa, h.descripcionBreve, h.descripcionDetallada, h.idTipoHabitacion, tp.descripcion , h.idHotel,"
+                + " ho.nit, ho.nombreHotel, ho.direccion, ho.numeroHabitaciones, ho.idOfertaEspecial"
                 + " FROM habitaciones h "
                 + "JOIN tipos_habitaciones tp ON tp.idTipoHabitacion = h.idTipoHabitacion "
                 + "JOIN hoteles ho ON ho.idHotel = h.idHotel";
@@ -42,6 +43,7 @@ public class HabitacionDao {
             
             while (rs.next()) {
                 Habitacion h = new Habitacion();
+                Hotel ho = new Hotel();
                 h.setIdHabitacion(rs.getInt(1));
                 h.setEstado(rs.getString(2));
                 h.setTarifa(rs.getDouble(3));
@@ -53,8 +55,36 @@ public class HabitacionDao {
                 tp.setDescripcion(rs.getString(7));
                 
                 h.setTipoHabitacion(tp);
-                h.setIdHotel(rs.getInt(8));
-                h.setNombreHotel(rs.getString(9));
+                
+                ho.setIdHotel(rs.getInt(8));
+                ho.setNit(rs.getInt(9));
+                ho.setNombreHotel(rs.getString(10));
+                ho.setDireccion(rs.getString(11));
+                ho.setNumeroHabitaciones(rs.getInt(12));
+                ho.setOfertaEspecial(rs.getInt(13));
+                
+                ArrayList<TipoServicio> servicios = new ArrayList<TipoServicio>();
+                
+                String sqlS = "SELECT ts.idTipoServicio, ts.descripcion FROM tipos_servicios ts " +
+                              "JOIN hoteles_tipos_servicios hts ON ts.idTipoServicio = hts.idTipoServicio " +
+                              "WHERE hts.idHotel = " + ho.getIdHotel();
+                
+                PreparedStatement psS = con.prepareStatement(sqlS);
+                ResultSet rsS = psS.executeQuery();
+
+                while (rsS.next()) {
+                    TipoServicio tps = new TipoServicio();
+                    tps.setIdTipoServicio(rsS.getInt(1));
+                    tps.setDescripcion(rsS.getString(2));
+                    servicios.add(tps);
+                }
+                
+                ho.setServicios(servicios);
+                
+                
+                h.setHotel(ho);
+                
+                
 
                 datosHabitaciones.add(h);
             }
@@ -128,7 +158,7 @@ public class HabitacionDao {
            ps.setString(4,h.getDescripcionBreve());
            ps.setString(5, h.getDescripcionDetallada());
            ps.setInt(6, h.getTipoHabitacion().getIdTipoHabitacion());
-           ps.setInt(7, h.getIdHotel());
+           ps.setInt(7, h.getHotel().getIdHotel());
            
            
            
