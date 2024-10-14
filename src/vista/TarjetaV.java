@@ -21,6 +21,7 @@ import java.awt.Insets;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.border.Border;
 
@@ -29,7 +30,7 @@ import javax.swing.border.Border;
  * @author estud
  */
 public class TarjetaV extends JFrame{
-    public JLabel lnumTarjeta, lcvv, lvencimiento, lnombrePropietario, lapellidoPropietario, titulo, ltipo, lbanco;
+    public JLabel lnumTarjeta, lcvv, lvencimiento, lnombrePropietario, lapellidoPropietario, titulo, ltipo, lbanco,ltipoDebito;
     public JTextField tnumTarjeta, tnombrePropietario,tapellidoPropietario, tvencimiento;
     public JPasswordField cvv;
     public JButton cancelar, continuar;
@@ -39,9 +40,11 @@ public class TarjetaV extends JFrame{
     public GridLayout migrid;
     public String tipo[] = {"","Debito","Credito"};
     public String bancos[] = {"","Bancolombia", "BBVA","Banco de Bogotá", "Banco Agrario de Colombia", "Citibank", "Banco AV Villas"};
-    public JComboBox listaTipo, listaBanco;
+    public String tipoDebito[]={"Ninguno","Ahorros", "Corriente"};
+    public JComboBox listaTipo, listaBanco, listaTipoDebito;
     public GridBagLayout gridBag;
     public GridBagConstraints gbc;
+    public JCheckBox guardar;
     private JPanel panel1, panel2, panel3, panel4;
     
     public TarjetaV() {
@@ -79,18 +82,23 @@ public class TarjetaV extends JFrame{
           tapellidoPropietario.setBorder(border);
           tvencimiento.setBorder(border);
           
-        
+        guardar = new JCheckBox("Recordar tarjeta");
           
           ltipo = new JLabel("Selecciona el tipo de tarjeta");
           lbanco = new JLabel("Selecciona tu banco");
+          ltipoDebito = new JLabel("Selecciona tipo *(Si la tarjeta es debito)");
           ltipo.setFont(new Font("Times New Roman", 1, 16));
           lbanco.setFont(new Font("Times New Roman", 1, 16));
+          ltipoDebito.setFont(new Font("Times New Roman", 1, 16));
           
           listaTipo = new JComboBox(tipo);
           listaTipo.setBorder(border);
          
           listaBanco= new JComboBox(bancos);
           listaBanco.setBorder(border);
+          
+          listaTipoDebito= new JComboBox(tipoDebito);
+          listaTipoDebito.setBorder(border);
           
          Color fondoText = new Color(209, 217, 227);
          
@@ -101,6 +109,8 @@ public class TarjetaV extends JFrame{
          tvencimiento.setBackground(fondoText);
          listaTipo.setBackground(fondoText);
          listaBanco.setBackground(fondoText);
+         listaTipoDebito.setBackground(fondoText);
+         
          
          
           titulo = new JLabel("Agregar tarjeta");
@@ -112,7 +122,7 @@ public class TarjetaV extends JFrame{
             gbc = new GridBagConstraints();
             gbc.gridx = 0;
             gbc.gridy = 0;
-            gbc.gridwidth = 3;
+            gbc.gridwidth = 4;
             gbc.gridheight = 1;
             gbc.insets = new Insets(100, 100, 20, 100);
           
@@ -136,7 +146,7 @@ public class TarjetaV extends JFrame{
          panelSur.setLayout(migrid);
          
          panel1= new JPanel();
-         migrid = new GridLayout(2,2,3,3);
+         migrid = new GridLayout(3,2,3,3);
          panel1.setLayout(migrid);
          
          panel2 = new JPanel();
@@ -167,6 +177,8 @@ public class TarjetaV extends JFrame{
          panel1.add(listaTipo);
          panel1.add(lbanco);
          panel1.add(listaBanco);
+         panel1.add(ltipoDebito);
+         panel1.add(listaTipoDebito);
          
          panelCentro.add(panel1);
          
@@ -197,11 +209,16 @@ public class TarjetaV extends JFrame{
          panel.add(panelNorte,gbc);
          
          gbc.gridy = 1;
-         gbc.insets = new Insets(10, 50, 50, 50);
+         gbc.insets = new Insets(10, 50, 20, 50);
          
          panel.add(panelCentro,gbc);
          
          gbc.gridy = 2;
+         gbc.insets = new Insets(10, 50, 10, 50);
+         
+         panel.add(guardar, gbc);
+         
+          gbc.gridy = 3;
          gbc.insets = new Insets(10, 50, 100, 50);
          
          panel.add(panelSur, gbc);

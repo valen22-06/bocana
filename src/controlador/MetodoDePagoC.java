@@ -6,7 +6,9 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import vista.AlojamientosV;
 import vista.MetodoDePagoV;
+import vista.TarjetaV;
 
 /**
  *
@@ -30,14 +32,22 @@ public class MetodoDePagoC implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (metodoDePago.lista.getSelectedItem().toString() != "") {
             if (e.getSource() == metodoDePago.continuar) {
-                metodo = metodoDePago.lista.getSelectedItem().toString();
-                // 'metodo' va en el controlador de pago
-                System.out.print(metodo);
-            }
+                
+                    if(metodoDePago.lista.getSelectedItem().toString().equals("Tarjeta")){
+                        TarjetaV tarjetaV = new TarjetaV();
+                        TarjetaC tarjetaC = new TarjetaC(tarjetaV);
+                    } else {
+                        metodo = metodoDePago.lista.getSelectedItem().toString();
+                    }
+            } 
+             
         }
 
         if (e.getSource() == metodoDePago.cancelar) {
-            //inicio
+            
+                        AlojamientosV aloja = new AlojamientosV();
+                        AlojamientosC al = new AlojamientosC(aloja);
+                        
         }
     }
 }
