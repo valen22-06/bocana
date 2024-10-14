@@ -49,7 +49,7 @@ public class RegistrarHabitacionV extends JFrame{
     public JPanel panelFotos;
     private ImageIcon iconsuite, iconestandar, iconfamiliar, icondeluxe, iconeconomica, iconpresidencial;
     private Image imgsuite, imgestandar, imgfamiliar, imgdeluxe, imgeconomica, imgpresidencial;
-    private GridLayout migrid;
+    public GridLayout migrid;
     private FlowLayout miflow;
     private GridBagLayout gridbag;
     private GridBagConstraints gbc;
@@ -262,8 +262,7 @@ public class RegistrarHabitacionV extends JFrame{
         
         
         panelFotos = new JPanel();
-        migrid = new GridLayout(2,4,5,5);
-        panelFotos.setLayout(migrid);
+        
         
         gbc.gridy = 4;
         gbc.gridwidth = 3;

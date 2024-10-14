@@ -7,15 +7,28 @@ package controlador;
 import static controlador.RegistrarC.validarDireccion;
 import static controlador.RegistrarC.validarEspaciosNumeros;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import modelo.Habitacion;
+import modelo.HabitacionDao;
 import modelo.Hotel;
+import modelo.HotelDao;
 import modelo.TipoServicio;
 import modelo.TipoServicioDao;
+import vista.RegistrarHabitacionV;
 import vista.RegistrarHotelV;
 
 /**
@@ -26,9 +39,18 @@ public class RegistrarHotelC implements ActionListener {
 
     RegistrarHotelV registrarHotelV = new RegistrarHotelV();
     Hotel hotel = new Hotel();
+    HotelDao hotelDao = new HotelDao();
+    HabitacionDao habitacionDao =  new HabitacionDao();
     TipoServicioDao tipoServicioDao = new TipoServicioDao();
     List<TipoServicio> datosTipoServicioDao = tipoServicioDao.listar();
-    ArrayList<TipoServicio> datosTipoServicio = new ArrayList<>();
+    List<TipoServicio> servicios = new ArrayList<TipoServicio>();
+    List<Habitacion> habitaciones = new ArrayList<Habitacion>();
+    
+    int idHotel = hotelDao.ultimoId()+1;
+    int num;
+    
+    RegistrarHabitacionV registrarHabitacionV;
+    RegistrarHabitacionC registrarHabitacionC;
 
     boolean flagwifi = true;
     boolean flaggym = true;
@@ -42,7 +64,7 @@ public class RegistrarHotelC implements ActionListener {
 
     public RegistrarHotelC(RegistrarHotelV registrarHotelV) {
         this.registrarHotelV = registrarHotelV;
-
+        this.registrarHabitacionV= new RegistrarHabitacionV();
         this.registrarHotelV.bwifi.addActionListener(this);
         this.registrarHotelV.bgym.addActionListener(this);
         this.registrarHotelV.bpiscina.addActionListener(this);
@@ -53,8 +75,11 @@ public class RegistrarHotelC implements ActionListener {
         this.registrarHotelV.bsauna.addActionListener(this);
         this.registrarHotelV.bbar.addActionListener(this);
         this.registrarHotelV.bcancelar.addActionListener(this);
-
+        this.registrarHotelV.bagregar.addActionListener(this);
+        this.registrarHotelV.beliminar.addActionListener(this);
         this.registrarHotelV.bregistrar.addActionListener(this);
+        this.registrarHabitacionV.bregistrar.addActionListener(this);
+        
         this.registrarHotelV.setExtendedState(6);
         this.registrarHotelV.setVisible(true);
         this.registrarHotelV.setDefaultCloseOperation(3);
@@ -145,12 +170,45 @@ public class RegistrarHotelC implements ActionListener {
             }
         }
 
+        if(e.getSource() == registrarHotelV.bagregar){
+            
+             registrarHabitacionC = new RegistrarHabitacionC(registrarHabitacionV,idHotel);
+        
+        }
+        
+        if (e.getSource() == registrarHotelV.beliminar) {
+            try{
+                 num=Integer.parseInt(JOptionPane.showInputDialog(registrarHotelV,"Ingrese el numero de la habitacion que desea eliminar"));
+                 if(num>0 && num<=habitaciones.size()){
+                    eliminar(num);
+                } else {
+                    JOptionPane.showMessageDialog(registrarHotelV, "El numero ingresado no coincide con la cantidad de habitaciones registradas");
+                }
+            } catch(NumberFormatException eN){
+                JOptionPane.showMessageDialog(registrarHotelV, "Ingrese un numero"+ eN.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+        }
+        
+        if(e.getSource() == registrarHabitacionV.bregistrar){
+            if(registrarHabitacionC.flag){
+                Habitacion habitacion = registrarHabitacionC.getHabitacion();
+                habitaciones.add(habitacion);
+                System.out.println("size: " + habitaciones.size());
+
+                mostrarHabitaciones();
+                registrarHabitacionV.dispose();
+                registrarHabitacionV = new RegistrarHabitacionV();
+                registrarHabitacionV.bregistrar.addActionListener(this);
+
+            }
+        }
+        
         if (e.getSource() == registrarHotelV.bregistrar) {
 
-            if (!registrarHotelV.tnit.getText().toString().isBlank()
+            if (!registrarHotelV.tnit.getText().isBlank()
                     && !registrarHotelV.tnombreHotel.getText().toString().isBlank()
-                    && !registrarHotelV.tdireccion.getText().toString().isBlank()
-                    && !registrarHotelV.tnumeroHabitaciones.getText().toString().isBlank()
+                    && !registrarHotelV.tdireccion.getText().isBlank()
                     && !flagwifi == true
                     || !flaggym == true
                     || !flagpiscina == true
@@ -180,11 +238,11 @@ public class RegistrarHotelC implements ActionListener {
         if (flag) {
 
             boton.setBackground(Color.lightGray);
-            datosTipoServicio.add(datosTipoServicioDao.get(i));
+            servicios.add(datosTipoServicioDao.get(i));
             r=1;
         } else {
             boton.setBackground(Color.white);
-            datosTipoServicio.remove(datosTipoServicioDao.get(i));
+            servicios.remove(datosTipoServicioDao.get(i));
             r=0;
         }
         
@@ -201,7 +259,6 @@ public class RegistrarHotelC implements ActionListener {
 
             nit = Integer.parseInt(registrarHotelV.tnit.getText().toString());
 
-            numeroHabitaciones = Integer.parseInt(registrarHotelV.tnumeroHabitaciones.getText().toString());
 
         } catch (NumberFormatException eN) {
             r = 0;
@@ -213,7 +270,7 @@ public class RegistrarHotelC implements ActionListener {
 
         try {
             nombreHotel = registrarHotelV.tnombreHotel.getText().toString();
-            validarEspaciosNumeros(nombreHotel);
+            
 
 
         } catch (IllegalArgumentException e) {
@@ -232,23 +289,101 @@ public class RegistrarHotelC implements ActionListener {
             JOptionPane.showMessageDialog(registrarHotelV, "Error: " + e.getMessage());
         }
 
+        hotel.setIdHotel(idHotel);
         hotel.setNit(nit);
         hotel.setNombreHotel(nombreHotel);
         hotel.setDireccion(direccion);
-        hotel.setNumeroHabitaciones(numeroHabitaciones);
-        hotel.setServicios(datosTipoServicioDao);
+        hotel.setHabitaciones(habitaciones);
+        hotel.setNumeroHabitaciones(hotel.getHabitaciones().size());
+        hotel.setServicios(servicios);
+        hotel.setIdUsuario(2);
+        
 
 
-//        if (r == 1) {
-//            resultado = usuarioDao.setAgregar(usuario);
-//        }
-//
-//        if (resultado == 1) {
-//            JOptionPane.showMessageDialog(registrarHotelV, "Hotel registrado");
-//        } else {
-//            JOptionPane.showMessageDialog(registrarHotelV, "Error de insercion" + JOptionPane.ERROR_MESSAGE);
-//        }
+        if (r == 1) {
+            if(hotelDao.setAgregar(hotel)==1){
+                for(Habitacion habitacion : habitaciones){
+                    int idHabitacion = habitacionDao.ultimoId()+1;
+                    habitacion.setIdHabitacion(idHabitacion);
+                    if(habitacionDao.setAgregar(habitacion)==1){
+                        habitacionDao.setAgregarImagenes(idHabitacion, habitacion.getImagenes());
+                    }
+                }
+                for(TipoServicio servicio : servicios){
+                    hotelDao.setAgregarServicios(hotelDao.ultimoId(),servicio.getIdTipoServicio());
+                }
+            }
+            
+            
+        }
+
+        
 
     }
+    
+    public void mostrarHabitaciones() {
+        registrarHotelV.panelHabitaciones.removeAll();
+        for (int i = 0; i < habitaciones.size(); i++) {
+            int c = i + 1;
+
+            registrarHotelV.migrid = new GridLayout(c,1,10,10);
+            registrarHotelV.panelHabitaciones.setLayout(registrarHotelV.migrid);
+            
+            JPanel panelHabitacion = new JPanel();
+            FlowLayout miflow = new FlowLayout(FlowLayout.LEFT);
+            panelHabitacion.setLayout(miflow); 
+            panelHabitacion.setPreferredSize(new Dimension(400, 110));
+
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.gridwidth = 1;
+            gbc.gridheight = 1;
+
+            
+            JLabel foto = habitaciones.get(i).getFotos().getFirst();
+
+            JPanel panelImg = new JPanel();
+            panelImg.setLayout(new FlowLayout());
+            panelImg.setPreferredSize(new Dimension(100, 80));
+            panelImg.add(foto);
+
+            gbc.insets = new Insets(20, 20, 20, 30);
+            panelHabitacion.add(panelImg, gbc);
+
+            
+            JPanel panelNombre = new JPanel();
+            panelNombre.setLayout(new FlowLayout());
+            panelNombre.setPreferredSize(new Dimension(200, 30));
+
+            JLabel ltitulo = new JLabel("Habitación " + c); // Nueva instancia de JLabel
+            ltitulo.setFont(new Font("Times New Roman", Font.BOLD, 18));
+            panelNombre.add(ltitulo);
+
+            gbc.gridx = 1;
+            panelHabitacion.add(panelNombre, gbc);
+
+            
+            
+            registrarHotelV.panelHabitaciones.add(panelHabitacion);
+
+            
+            
+        }
+
+        
+        registrarHotelV.panelHabitaciones.revalidate();
+        registrarHotelV.panelHabitaciones.repaint();
+    }
+    
+    private void  eliminar(int num){
+        
+        registrarHotelV.panelHabitaciones.removeAll();
+        habitaciones.remove(num-1);
+        mostrarHabitaciones();
+        
+
+    }
+
 
 }

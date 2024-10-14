@@ -8,11 +8,13 @@ import static controlador.RegistrarC.validarDireccion;
 import static controlador.RegistrarC.validarEspaciosNumeros;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -34,17 +36,11 @@ public class RegistrarHabitacionC implements ActionListener{
     RegistrarHabitacionV registrarHabitacionV = new RegistrarHabitacionV();
     
     
-    FotosV fotosV ;
-    FotosC fotosC ;
-    
-    boolean flagsuite = true;
-    boolean flagestandar = true;
-    boolean flagfamiliar = true;
-    boolean flagdeluxe = true;
-    boolean flageconomica = true;
-    boolean flagpresidencial = true;
+    FotosV fotosV;
+    FotosC fotosC;
     
     int idHotel;
+    public boolean flag = false;
     
     List<byte[]> imagenes = new ArrayList<>();
     List<JLabel> fotos = new ArrayList<>();
@@ -58,14 +54,13 @@ public class RegistrarHabitacionC implements ActionListener{
     public RegistrarHabitacionC(RegistrarHabitacionV registrarHabitacionV, int idHotel) {
         this.registrarHabitacionV = registrarHabitacionV;
         this.idHotel=idHotel;
-        
+        this.fotosV = new FotosV();
         this.registrarHabitacionV.imagenes = imagenes;
         this.registrarHabitacionV.fotos = fotos;
         this.registrarHabitacionV.bcancelar.addActionListener(this);
         this.registrarHabitacionV.bregistrar.addActionListener(this);
         this.registrarHabitacionV.bfotos.addActionListener(this);
-        this.registrarHabitacionV.bcargar.addActionListener(this);
-        
+        this.fotosV.bcontinuar.addActionListener(this);
         
         this.registrarHabitacionV.setExtendedState(6);
         this.registrarHabitacionV.setVisible(true);
@@ -79,40 +74,45 @@ public class RegistrarHabitacionC implements ActionListener{
         
         
         if(e.getSource()== registrarHabitacionV.bfotos){
-            fotosV = new FotosV();
-            fotosC = new FotosC(fotosV);
+            
+            fotosC = new FotosC(fotosV, fotos, imagenes);
         }
         
-        if(e.getSource()== registrarHabitacionV.bcargar){
-            fotos = fotosC.getFotos();
-            imagenes = fotosC.getImagenes();
-            
-            if(!fotosC.getFotos().isEmpty()){
-               for(int i = 0; i<fotos.size();i++){
-                   JLabel foto = fotos.get(i);
-                   registrarHabitacionV.panelFotos.add(foto);
-                
+        if(e.getSource() == fotosV.bcontinuar){
+            if(fotosC.flag){
+                fotos = fotosC.getFotos();
+                imagenes = fotosC.getImagenes();
+                registrarHabitacionV.migrid = new GridLayout(fotos.size(),4,5,5);
+                registrarHabitacionV.panelFotos.setLayout(registrarHabitacionV.migrid);
+                for(int i=0;i<fotos.size();i++){
+                    registrarHabitacionV.panelFotos.add(fotos.get(i));
                 }
                 registrarHabitacionV.panelFotos.revalidate();
-                registrarHabitacionV.panelFotos.repaint(); 
-            }else{
-                JOptionPane.showMessageDialog(fotosV, "No hay fotos para cargar");
+                registrarHabitacionV.panelFotos.repaint();
+                
+                fotosV.dispose();
+                fotosV = new FotosV();
+                fotosV.bcontinuar.addActionListener(this);
+
             }
         }
         
         if (e.getSource() == registrarHabitacionV.bregistrar) {
 
-            if (!registrarHabitacionV.tdescripcionBreve.getText().toString().isBlank()
-                    && !registrarHabitacionV.tdescripcionDetallada.getText().toString().isBlank()
-                    && !registrarHabitacionV.ttarifa.getText().toString().isBlank()
-                    && !registrarHabitacionV.ttarifa.getText().toString().isBlank()
+            if (!registrarHabitacionV.tdescripcionBreve.getText().isBlank()
+                    && !registrarHabitacionV.tdescripcionDetallada.getText().isBlank()
+                    && !registrarHabitacionV.ttarifa.getText().isBlank()
                     && !registrarHabitacionV.lista.getSelectedItem().toString().isBlank()
                     && !fotos.isEmpty()
                     ) {
 
                 setAdd();
+                
+                
 
                 JOptionPane.showMessageDialog(registrarHabitacionV, "Es bien");
+                
+                
             } else {
 
                 JOptionPane.showMessageDialog(registrarHabitacionV, "Faltan datos por ingresar");
@@ -132,7 +132,7 @@ public class RegistrarHabitacionC implements ActionListener{
 
         try {
 
-            tarifa = Double.parseDouble(registrarHabitacionV.ttarifa.getText().toString());
+            tarifa = Double.parseDouble(registrarHabitacionV.ttarifa.getText());
 
         } catch (NumberFormatException eN) {
             r = 0;
@@ -144,9 +144,9 @@ public class RegistrarHabitacionC implements ActionListener{
         String descripcionDetallada = "";
 
         try {
-            descripcionBreve = registrarHabitacionV.tdescripcionBreve.getText().toString();
-            descripcionDetallada = registrarHabitacionV.tdescripcionDetallada.getText().toString();
-            //falta agrgarle el numero maximo de palabras
+            descripcionBreve = registrarHabitacionV.tdescripcionBreve.getText();
+            descripcionDetallada = registrarHabitacionV.tdescripcionDetallada.getText();
+            //falta agregarle el numero maximo de palabras
             
         } catch (IllegalArgumentException e) {
             r = 0;
@@ -163,8 +163,7 @@ public class RegistrarHabitacionC implements ActionListener{
                 tipoHabitacion.setDescripcion(descripcion);
             }
         }
-        int idHabitacion = habitacionDao.ultimoId()+1;
-        habitacion.setIdHabitacion(idHabitacion);
+        
         habitacion.setEstado(estado);
         habitacion.setTarifa(tarifa);
         habitacion.setDescripcionBreve(descripcionBreve);
@@ -172,25 +171,34 @@ public class RegistrarHabitacionC implements ActionListener{
         habitacion.setTipoHabitacion(tipoHabitacion);
         habitacion.setIdHotel(idHotel);
         habitacion.setImagenes(imagenes);
+        habitacion.setFotos(fotos);
         
 
-
-        
-
-        if (habitacionDao.setAgregar(habitacion)==1) {
-            
-            if(habitacionDao.setAgregarImagenes(habitacion.getIdHabitacion(),habitacion.getImagenes())==1){
-                JOptionPane.showMessageDialog(registrarHabitacionV, "Habitacion registrada");
-
-            }
-            
-        } else {
-            JOptionPane.showMessageDialog(registrarHabitacionV, "no se insertaron las imagenes");
+        if(r==1){
+            flag=true;
+        }else{
+            flag=false;
         }
+
+        
+//        if(r == 1){
+//            if (habitacionDao.setAgregar(habitacion)==1) {
+//                if(habitacionDao.setAgregarImagenes(habitacion.getIdHabitacion(),habitacion.getImagenes())==1){
+//                    JOptionPane.showMessageDialog(registrarHabitacionV, "Habitacion registrada");
+//
+//                }
+//
+//            } else {
+//                JOptionPane.showMessageDialog(registrarHabitacionV, "no se insertaron las imagenes");
+//            }
+//        }
+        
 
     }
     
-    
+    public Habitacion getHabitacion() {
+        return habitacion;
+    }
     
 
 }

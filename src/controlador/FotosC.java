@@ -18,8 +18,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import vista.FotosV;
-import vista.IniciarSesionV;
-import vista.RegistrarHabitacionV;
 
 /**
  *
@@ -33,24 +31,31 @@ public class FotosC implements ActionListener {
     JFileChooser seleccionar = new JFileChooser();
     File archivo;
     
-    public boolean terminar = false;
+    public boolean flag = false;
     int num;
     byte[] imagen;
     FileInputStream entrada;
     FileOutputStream salida;
-    ArrayList<JLabel> fotos = new ArrayList<>();
-    ArrayList<byte[]> imagenes = new ArrayList<>();
+    List<JLabel> fotos = new ArrayList<>();
+    List<byte[]> imagenes = new ArrayList<>();
     
     
 
-    public FotosC(FotosV vista) {
+    public FotosC(FotosV vista, List<JLabel> fotos, List<byte[]> imagenes) {
         this.vista = vista;
+        this.fotos=fotos;
+        this.imagenes=imagenes;
         
+        for(JLabel foto : fotos){
+            this.vista.panelCentro.add(foto);
+
+        }
+        this.vista.panelCentro.revalidate();
+        this.vista.panelCentro.repaint();
         
         this.vista.seleccionar.addActionListener(this);
-        this.vista.bguardar.addActionListener(this);
         this.vista.beliminar.addActionListener(this);
-        this.vista.bcerrar.addActionListener(this);
+        this.vista.bcontinuar.addActionListener(this);
         this.vista.setExtendedState(6);
         this.vista.setVisible(true);
         this.vista.setDefaultCloseOperation(3);
@@ -77,7 +82,7 @@ public class FotosC implements ActionListener {
         if (e.getSource() == vista.beliminar) {
             try{
                  num=Integer.parseInt(JOptionPane.showInputDialog(vista,"Ingrese el numero de la imagen que desea eliminar"));
-                 if(num>0 && num<fotos.size()){
+                 if(num>0 && num<=fotos.size()){
                     eliminar(num);
                 } else {
                     JOptionPane.showMessageDialog(vista, "El numero ingresado no coincide con la cantidad de imagenes seleccionadas");
@@ -88,13 +93,10 @@ public class FotosC implements ActionListener {
             
         }
         
-        if(e.getSource()==vista.bcerrar){
-            vista.setVisible(false);
+        if(e.getSource()==vista.bcontinuar){
+            flag=true;
         }
         
-        if(e.getSource()==vista.bguardar){
-            
-        }
     }
 
     public byte[] abrirArchivo(File archivo) {

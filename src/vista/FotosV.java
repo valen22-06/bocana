@@ -23,16 +23,14 @@ import javax.swing.JPanel;
 public class FotosV extends JFrame{
     public Container contenedor;
     public JLabel titulo, foto;
-    public JButton seleccionar, bguardar, beliminar, bcerrar;
+    public JButton seleccionar, beliminar, bcontinuar;
     public JPanel panel, panelSur, panelNorte, panelCentro;
     public FlowLayout miflow;
     public GridLayout migrid;
-     private GridBagLayout gridbag;
+    private GridBagLayout gridbag;
     private GridBagConstraints gbc;
-    private GridBagConstraints gbcn;
     
-    
-    
+
     
     public FotosV(){
         super("Hoteles Bocana");
@@ -61,9 +59,8 @@ public class FotosV extends JFrame{
         foto= new JLabel();
         
         seleccionar= new JButton("Seleccionar");
-        bguardar =new JButton("Guardar");
         beliminar = new JButton("Eliminar");
-        bcerrar = new JButton("Cerrar");
+        bcontinuar = new JButton("Continuar");
         
         //panel norte
         panelNorte = new JPanel();
@@ -86,9 +83,8 @@ public class FotosV extends JFrame{
         panelSur.setLayout(migrid);
         panelSur.setBackground(fondoColor);
         
-        panelSur.add(bcerrar);
          panelSur.add(beliminar);
-        panelSur.add(bguardar);
+        panelSur.add(bcontinuar);
         
         
          gbc.insets = new Insets(200, 20,  50, 20);

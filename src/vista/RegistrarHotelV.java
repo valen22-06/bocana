@@ -32,14 +32,16 @@ public class RegistrarHotelV extends JFrame{
     public JLabel lnit;
     public JLabel lnombreHotel;
     public JLabel ldireccion;
-    public JLabel lnumeroHabitaciones;
     public JLabel ltiposervicio;
+    public JLabel lagregarHabitacion;
+    public JLabel ltitulo;
     public JTextField tnit;
     public JTextField tnombreHotel;
     public JTextField tdireccion;
-    public JTextField tnumeroHabitaciones;
     public JButton bregistrar;
     public JButton bcancelar;
+    public JButton bagregar;
+    public JButton beliminar;
     public JButton bwifi, bgym, bpiscina, bac, brestaurante, brecepcion24horas, bplaya, bsauna, bbar;
     public JPanel panelBag;
     public JPanel panel;
@@ -47,13 +49,14 @@ public class RegistrarHotelV extends JFrame{
     public JPanel panelCentro;
     public JPanel panelSur;
     public JPanel panelServicios;
+    public JPanel panelAgregarHabitacion;
+    public JPanel panelHabitacion, panelImg, panelNombre,panelHabitaciones;
     private ImageIcon iconwifi, icongym, iconpiscina, iconac, iconrestaurante, iconrecepcion24horas, iconplaya, iconsauna, iconbar;
     private Image imgwifi, imggym, imgpiscina, imgac, imgrestaurante, imgrecepcion24horas, imgplaya, imgsauna, imgbar;
-    private GridLayout migrid;
-    private FlowLayout miflow;
+    public GridLayout migrid;
+    public FlowLayout miflow;
     private GridBagLayout gridbag;
-    private GridBagConstraints gbc;
-    private GridBagConstraints gbcn;
+    public GridBagConstraints gbc;
     
     
     public RegistrarHotelV(){
@@ -93,7 +96,7 @@ public class RegistrarHotelV extends JFrame{
         
         //panelCentro
         panelCentro = new JPanel();
-        migrid = new GridLayout(4, 2, 80, 8);
+        migrid = new GridLayout(3, 2, 80, 8);
         panelCentro.setLayout(migrid);
         
         lnit = new JLabel("NIT");
@@ -102,8 +105,7 @@ public class RegistrarHotelV extends JFrame{
         lnombreHotel.setFont(new Font("Times New Roman", 0, 30));
         ldireccion = new JLabel("Direccion");
         ldireccion.setFont(new Font("Times New Roman", 0, 30));
-        lnumeroHabitaciones = new JLabel("Numero de habitaciones");
-        lnumeroHabitaciones.setFont(new Font("Times New Roman", 0, 30));
+
 
         tnit = new JTextField(10);
         tnit.setFont(new Font("Times New Roman", 0, 25));
@@ -111,8 +113,7 @@ public class RegistrarHotelV extends JFrame{
         tnombreHotel.setFont(new Font("Times New Roman", 0, 25));
         tdireccion = new JTextField(10);
         tdireccion.setFont(new Font("Times New Roman", 0, 25));
-        tnumeroHabitaciones = new JTextField(10);
-        tnumeroHabitaciones.setFont(new Font("Times New Roman", 0, 25));
+
 
         
         panelCentro.add(lnit);
@@ -121,8 +122,7 @@ public class RegistrarHotelV extends JFrame{
         panelCentro.add(tnombreHotel);
         panelCentro.add(ldireccion);
         panelCentro.add(tdireccion);
-        panelCentro.add(lnumeroHabitaciones);
-        panelCentro.add(tnumeroHabitaciones);
+
         
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -262,7 +262,93 @@ public class RegistrarHotelV extends JFrame{
         
         panel.add(panelServicios, gbc);
         
-        //panelSur
+        
+        
+        lagregarHabitacion = new JLabel("Agregar habitacion");
+        lagregarHabitacion.setFont(new Font("Times New Roman", 0, 30));
+        
+
+        bagregar = new JButton("Agregar...");
+        bagregar.setFont(new Font("Times New Roman", 0, 20)); 
+        bagregar.setBackground(Color.white);
+        bagregar.setForeground(Color.BLACK);
+        
+        beliminar = new JButton("Eliminar");
+        beliminar.setFont(new Font("Times New Roman", 0, 20)); 
+        beliminar.setBackground(Color.white);
+        beliminar.setForeground(Color.BLACK);
+        
+        gbc.gridy = 4;
+        gbc.gridwidth = 1;
+        panel.add(lagregarHabitacion, gbc);
+        
+
+        gbc.gridy = 5;
+        panel.add(bagregar, gbc);
+        
+        gbc.gridx = 2;
+        panel.add(beliminar, gbc);
+        
+        
+        panelHabitaciones = new JPanel();
+         
+        
+//        //
+//        panelHabitacion = new JPanel();
+//        miflow = new FlowLayout(FlowLayout.LEFT);
+//        panelHabitacion.setLayout(miflow); 
+//        panelHabitacion.setPreferredSize(new Dimension(400,110));
+//        panelHabitacion.setBackground(Color.red);
+//
+//        gbc = new GridBagConstraints();
+//        gbc.gridx = 0;
+//        gbc.gridy = 0;
+//        gbc.gridwidth = 1;
+//        gbc.gridheight = 1;
+//            
+//            
+//        JLabel foto = new JLabel();
+////        foto = fotos.getFirst();
+//            
+//
+//        panelImg = new JPanel();
+//        miflow = new FlowLayout();
+//        panelImg.setLayout(miflow); 
+//        panelImg.setPreferredSize(new Dimension(100,80));
+//        panelImg.setBackground(Color.blue);
+//            
+////        panelImg.add(foto);
+//
+//
+//        gbc.insets = new Insets(20, 20, 20, 30);
+//        panelHabitacion.add(panelImg,gbc);
+//
+//
+//        panelNombre = new JPanel();
+//        miflow = new FlowLayout();
+//        panelNombre.setLayout(miflow); 
+//        panelNombre.setPreferredSize(new Dimension(200,30));
+//            
+//        ltitulo = new JLabel("Habitacion 1");
+//        ltitulo.setFont(new Font("Times New Roman", Font.BOLD, 18));
+//            
+//        panelNombre.add(ltitulo);
+//
+//        gbc.gridx = 1;
+//        panelHabitacion.add(panelNombre,gbc);
+//
+//        
+        
+        gbc.gridy = 6;
+        gbc.gridx = 0;
+        gbc.gridwidth = 3;
+        panel.add(panelHabitaciones,gbc);
+         
+         
+         
+         
+         
+         //panelSur
         panelSur = new JPanel();
         migrid = new GridLayout(1, 2, 8, 8);
         panelSur.setLayout(migrid);
@@ -282,10 +368,10 @@ public class RegistrarHotelV extends JFrame{
         
         panelSur.add(bcancelar);
         panelSur.add(bregistrar);
-        
+         
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 7;
         gbc.gridwidth = 3;
         gbc.gridheight = 1;
         gbc.insets = new Insets(10, 50, 10, 50);

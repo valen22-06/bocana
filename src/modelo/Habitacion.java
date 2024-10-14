@@ -5,6 +5,7 @@
 package modelo;
 
 import java.util.List;
+import javax.swing.JLabel;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Habitacion {
     public int idHotel;
     public String nombreHotel;
     public List<byte[]> imagenes;
+    public List<JLabel> fotos;
 
     public Habitacion(int idHabitacion, String estado, double tarifa, String descripcionBreve, String descripcionDetallada, TipoHabitacion tipoHabitacion, int idHotel, String nombreHotel) {
         this.idHabitacion = idHabitacion;
@@ -106,6 +108,14 @@ public class Habitacion {
 
     public void setImagenes(List<byte[]> imagenes) {
         this.imagenes = imagenes;
+    }
+
+    public List<JLabel> getFotos() {
+        return fotos;
+    }
+
+    public void setFotos(List<JLabel> fotos) {
+        this.fotos = fotos;
     }
         
     

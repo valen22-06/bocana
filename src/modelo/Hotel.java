@@ -17,17 +17,21 @@ public class Hotel {
     public String nombreHotel;
     public String direccion;
     public int numeroHabitaciones;
-    public String descripcionBreve;
+    public int ofertaEspecial;
+    public int idUsuario;
     public List<TipoServicio> servicios;
+    public List<Habitacion> habitaciones;
 
-    public Hotel(int idHotel, int nit, String nombreHotel, String direccion, int numeroHabitaciones,String descripcionBreve, List<TipoServicio> servicios) {
+    public Hotel(int idHotel, int nit, String nombreHotel, String direccion, int numeroHabitaciones, List<TipoServicio> servicios, int ofertaEspecial, int idUsuario, List<Habitacion> habitaciones) {
         this.idHotel = idHotel;
         this.nit = nit;
         this.nombreHotel = nombreHotel;
         this.direccion = direccion;
         this.numeroHabitaciones = numeroHabitaciones;
         this.servicios = servicios;
-        this.descripcionBreve=descripcionBreve;
+        this.habitaciones=habitaciones;
+        this.ofertaEspecial=ofertaEspecial;
+        this.idUsuario=idUsuario;
     }
     public Hotel(){
         
@@ -73,12 +77,22 @@ public class Hotel {
         this.numeroHabitaciones = numeroHabitaciones;
     }
 
-    public String getDescripcionBreve() {
-        return descripcionBreve;
+    public List<Habitacion> getHabitaciones() {
+        return habitaciones;
     }
 
-    public void setDescripcionBreve(String descripcionBreve) {
-        this.descripcionBreve = descripcionBreve;
+    public void setHabitaciones(List<Habitacion> habitaciones) {
+        this.habitaciones = habitaciones;
+    }
+
+    
+
+    public int getOfertaEspecial() {
+        return ofertaEspecial;
+    }
+
+    public void setOfertaEspecial(int ofertaEspecial) {
+        this.ofertaEspecial = ofertaEspecial;
     }
 
     public List<TipoServicio> getServicios() {
@@ -87,6 +101,14 @@ public class Hotel {
 
     public void setServicios(List<TipoServicio> servicios) {
         this.servicios = servicios;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
     
 }
