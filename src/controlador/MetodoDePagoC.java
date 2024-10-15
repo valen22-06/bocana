@@ -45,8 +45,8 @@ public class MetodoDePagoC implements ActionListener {
 
         if (e.getSource() == metodoDePago.cancelar) {
             
-                        AlojamientosV aloja = new AlojamientosV();
-                        AlojamientosC al = new AlojamientosC(aloja);
+//                        AlojamientosV aloja = new AlojamientosV();
+//                        AlojamientosC al = new AlojamientosC(aloja);
                         
         }
     }

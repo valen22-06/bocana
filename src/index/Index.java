@@ -25,6 +25,7 @@ import vista.AlojamientosV;
 import vista.HotelV;
 import vista.IniciarSesionV;
 import vista.MetodoDePagoV;
+import vista.PagoV;
 import vista.RegistrarHabitacionV;
 import vista.RegistrarHotelV;
 import vista.RegistrarV;
@@ -41,8 +42,8 @@ public class Index {
 //        RegistrarV registrarV = new RegistrarV();
 //        RegistrarC registrarC = new RegistrarC(registrarV);
 
-        IniciarSesionV iniciarSesionV = new IniciarSesionV();
-        IniciarSesionC iniciarSesionC = new IniciarSesionC(iniciarSesionV);
+//        IniciarSesionV iniciarSesionV = new IniciarSesionV();
+//        IniciarSesionC iniciarSesionC = new IniciarSesionC(iniciarSesionV);
 
 //        HotelV hotel = new HotelV();
 //        HotelC hot = new HotelC(hotel);
@@ -70,5 +71,11 @@ public class Index {
 
 //        ResenaV resenaV = new ResenaV();
 //        ResenaC resenaC = new ResenaC(resenaV);
+
+
+        PagoV pV = new PagoV();
+        pV.setVisible(true);
+        pV.setExtendedState(6);
+        pV.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

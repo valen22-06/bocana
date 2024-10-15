@@ -101,12 +101,13 @@ public class UsuarioDao {
        }
    }
    
-   public List buscarTarjeta(int id_usu){
+   public ArrayList buscarTarjeta(int id_usu){
        String tarjeta="", nombre, apellido;
        int id;
        String sql = "SELECT tarjeta.id, tarjeta.nombrePropietario, tarjeta.apellidoPropietario FROM tarjeta JOIN usuarios WHERE tarjeta.id_usuario=usuarios.idUsuario && usuarios.idUsuario="+id_usu;
-       List <String> tarjetas  = new ArrayList<String>();
-            try{
+       ArrayList <String> tarjetas  = new ArrayList<String>();
+       
+       try{
                 con = conectar.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -114,17 +115,17 @@ public class UsuarioDao {
                  while(rs.next()){
            
            id=(rs.getInt(1));
-           nombre=(rs.getString(4));
-           apellido=(rs.getString(5));
+           nombre=(rs.getString(2));
+           apellido=(rs.getString(3));
            
-           tarjeta.concat(id+" - "+nombre+" "+apellido);
+           tarjeta = id + " - " + nombre + " " + apellido;
            
            tarjetas.add(tarjeta);
                  }
 
               
        } catch (SQLException e) {
-           JOptionPane.showMessageDialog(null, e.toString(),"Error de insercion"+e.getMessage(),JOptionPane.ERROR_MESSAGE);
+           JOptionPane.showMessageDialog(null, e.toString(),"Error de busqueda"+e.getMessage(),JOptionPane.ERROR_MESSAGE);
            
        } finally {
            try{
