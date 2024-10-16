@@ -136,7 +136,6 @@ public class UsuarioDao {
         }
     }
    
-
    public ArrayList buscarTarjeta(int id_usu){
        String tarjeta="", nombre, apellido;
        int id;
@@ -145,18 +144,18 @@ public class UsuarioDao {
        
        try{
                 con = conectar.getConnection();
-                ps = con.prepareStatement(sql);
-                rs = ps.executeQuery();
-
-                while(rs.next()){
-
-                    id=(rs.getInt(1));
-                    nombre=(rs.getString(2));
-                    apellido=(rs.getString(3));
-
-                    tarjeta = id + " - " + nombre + " " + apellido;
-
-                    tarjetas.add(tarjeta);
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+                 while(rs.next()){
+           
+           id=(rs.getInt(1));
+           nombre=(rs.getString(2));
+           apellido=(rs.getString(3));
+           
+           tarjeta = id + " - " + nombre + " " + apellido;
+           
+           tarjetas.add(tarjeta);
                  }
 
               
