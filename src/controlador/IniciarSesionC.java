@@ -19,8 +19,7 @@ import vista.HotelV;
 import vista.IniciarSesionV;
 import vista.RegistrarV;
 
-public class IniciarSesionC
-implements ActionListener {
+public class IniciarSesionC implements ActionListener {
     IniciarSesionV iniciarSesionV = new IniciarSesionV();
     UsuarioDao usuarioDao = new UsuarioDao();
     Usuario usuario = new Usuario();
@@ -48,26 +47,33 @@ implements ActionListener {
                 iniciarSesionV.setVisible(false);
             }
         }
+
         
         if(e.getSource()==iniciarSesionV.bregistrarse){
             RegistrarV registrarV = new RegistrarV();
             RegistrarC registrarC = new RegistrarC(registrarV);
             iniciarSesionV.setVisible(false);
-        }
-        
-        if(e.getSource()==iniciarSesionV.bcancelar){
-            usuario.setIdRol(3);
-            AlojamientosV alojamientosV = new AlojamientosV();
-            AlojamientosC alojamientosC = new AlojamientosC(alojamientosV,usuario);
-            iniciarSesionV.setVisible(false);
-        }
-        if(iniciarSesionV.ver.isSelected()){
-            iniciarSesionV.tcontrasena.setEchoChar((char) 0);
-        } else {
-            iniciarSesionV.tcontrasena.setEchoChar ('*');
+
+                if(e.getSource()==iniciarSesionV.bcancelar){
+//            HotelV hotel = new HotelV();
+//            HotelC hot = new HotelC(hotel);
+                usuarioDao.buscarTarjeta(2);
+
+            }
+
+            if(e.getSource()==iniciarSesionV.bcancelar){
+                usuario.setIdRol(3);
+                AlojamientosV alojamientosV = new AlojamientosV();
+                AlojamientosC alojamientosC = new AlojamientosC(alojamientosV,usuario);
+                iniciarSesionV.setVisible(false);
+            }
+            if(iniciarSesionV.ver.isSelected()){
+                iniciarSesionV.tcontrasena.setEchoChar((char) 0);
+            } else {
+                iniciarSesionV.tcontrasena.setEchoChar ('*');
+            }
         }
     }
-
     public int iniciarSesion(String correo, String contrasena) {
     List<Usuario> datosUsuario = usuarioDao.listar();
     

@@ -8,7 +8,7 @@ import controlador.AlojamientosC;
 import controlador.IniciarSesionC;
 import controlador.RegistrarC;
 import controlador.RegistrarHotelC;
-import javax.swing.JFrame;
+
 import vista.FotosV;
 import controlador.FotosC;
 import controlador.HotelC;
@@ -17,15 +17,14 @@ import controlador.RegistrarHabitacionC;
 import controlador.ResenaC;
 import controlador.TarjetaC;
 import controlador.UsuarioC;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JLabel;
+
 import modelo.Usuario;
 import modelo.UsuarioDao;
 import vista.AlojamientosV;
 import vista.HotelV;
 import vista.IniciarSesionV;
 import vista.MetodoDePagoV;
+import vista.PagoV;
 import vista.RegistrarHabitacionV;
 import vista.RegistrarHotelV;
 import vista.RegistrarV;
@@ -61,10 +60,17 @@ public class Index {
         //FotosV fotos = new FotosV();
         //FotosC fotosc = new FotosC(fotos); 
 
+
         Usuario usuario = new Usuario();
         usuario.setIdRol(3);
         AlojamientosV aloja = new AlojamientosV();
         AlojamientosC al = new AlojamientosC(aloja, usuario);
+
+//        Usuario usuario = new Usuario();
+//        UsuarioDao usuarioDao = new UsuarioDao();
+//        usuario = (Usuario) usuarioDao.listar().getFirst();
+//        AlojamientosV aloja = new AlojamientosV();
+//        AlojamientosC al = new AlojamientosC(aloja, usuario);
 
         
 
@@ -73,5 +79,11 @@ public class Index {
 
 //        ResenaV resenaV = new ResenaV();
 //        ResenaC resenaC = new ResenaC(resenaV);
+
+
+        PagoV pV = new PagoV();
+        pV.setVisible(true);
+        pV.setExtendedState(6);
+        pV.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

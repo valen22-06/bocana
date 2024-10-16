@@ -354,7 +354,7 @@ public class RegistrarHotelC implements ActionListener {
             gbc.gridheight = 1;
 
             
-            JLabel foto = habitaciones.get(i).getFotos().getFirst();
+            JLabel foto = habitaciones.get(i).getFotos().get(0);
 
             JPanel panelImg = new JPanel();
             panelImg.setLayout(new FlowLayout());

@@ -39,15 +39,15 @@ public class RegistrarC implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == registrarV.bregistrar) {
 
-            if (!registrarV.tdocumento.getText().toString().isEmpty()
-                    && !registrarV.tnombre1.getText().toString().isEmpty()
-                    && !registrarV.tnombre2.getText().toString().isEmpty()
-                    && !registrarV.tapellido1.getText().toString().isEmpty()
-                    && !registrarV.tapellido2.getText().toString().isEmpty()
-                    && !registrarV.tcorreo.getText().toString().isEmpty()
-                    && !registrarV.ttelefono.getText().toString().isEmpty()
-                    && !registrarV.tdireccion.getText().toString().isEmpty()
-                    && !registrarV.tcontrasena.getText().toString().isEmpty()) {
+            if (!registrarV.tdocumento.getText().toString().isBlank()
+                    && !registrarV.tnombre1.getText().toString().isBlank()
+                    && !registrarV.tnombre2.getText().toString().isBlank()
+                    && !registrarV.tapellido1.getText().toString().isBlank()
+                    && !registrarV.tapellido2.getText().toString().isBlank()
+                    && !registrarV.tcorreo.getText().toString().isBlank()
+                    && !registrarV.ttelefono.getText().toString().isBlank()
+                    && !registrarV.tdireccion.getText().toString().isBlank()
+                    && !registrarV.tcontrasena.getText().toString().isBlank()) {
 
                 setAdd();
 

@@ -74,7 +74,7 @@ public class AlojamientosC implements ActionListener{
             
             
             JLabel foto = new JLabel();
-            foto = fotos.getFirst();
+            foto = fotos.get(0);
             
 
             this.alojamientosV.panelImg = new JPanel();

@@ -53,10 +53,17 @@ public class MetodoDePagoC implements ActionListener {
              
         }
 
+
         if (e.getSource() == metodoDePagoV.cancelar) {
                 ResenaV resenaV = new ResenaV();
                 ResenaC resenaC = new ResenaC(resenaV, usuario, habitacion);
                 metodoDePagoV.setVisible(false);
+
+        if (e.getSource() == metodoDePagoV.cancelar) {
+            
+//                        AlojamientosV aloja = new AlojamientosV();
+//                        AlojamientosC al = new AlojamientosC(aloja);
+
                         
         }
     }
