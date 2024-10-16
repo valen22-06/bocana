@@ -36,6 +36,7 @@ extends JFrame {
     public JTextField tcorreo;
     public JPasswordField tcontrasena;
     public JButton biniciarSesion;
+    public JButton bregistrarse;
     public JButton bcancelar;
     public JPanel panel;
     public JPanel panelNorte;
@@ -123,7 +124,7 @@ extends JFrame {
         
         //panelSur
         panelSur = new JPanel();
-        migrid = new GridLayout(1, 2, 8, 8);
+        migrid = new GridLayout(1, 3, 8, 8);
         panelSur.setLayout(migrid);
         
         
@@ -140,12 +141,20 @@ extends JFrame {
         biniciarSesion.setContentAreaFilled(false);
         biniciarSesion.setForeground(Color.BLACK);
         
+        bregistrarse = new JButton("Registrarse");
+        bregistrarse.setFont(new Font("Times New Roman", 0, 20));
+        
+        bregistrarse.setContentAreaFilled(false);
+        bregistrarse.setForeground(Color.BLACK);
+        
         biniciarSesion.setBackground(Color.LIGHT_GRAY);
         bcancelar.setBackground(Color.LIGHT_GRAY);
+        bregistrarse.setBackground(Color.LIGHT_GRAY);
         
-        
-        panelSur.add(biniciarSesion);
         panelSur.add(bcancelar);
+        panelSur.add(bregistrarse);
+        panelSur.add(biniciarSesion);
+        
         
         gbc = new GridBagConstraints();
         gbc.gridx = 0;

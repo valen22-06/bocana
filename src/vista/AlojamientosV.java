@@ -29,6 +29,7 @@ import javax.swing.JPanel;
 public class AlojamientosV extends JFrame{
     public Container contenedor ;
     public JButton biniciarSesion;
+    public JButton busuario;
     public JPanel panelTop;
     public JPanel panelDown;
     public JPanel panelTitulo;
@@ -100,10 +101,20 @@ public class AlojamientosV extends JFrame{
         biniciarSesion = new JButton("Iniciar Sesion",iconac);
         biniciarSesion.setFont(new Font("Times New Roman", 0, 20));
         biniciarSesion.setBackground(Color.white);
-        biniciarSesion.setForeground(Color.BLACK);
-        biniciarSesion.setContentAreaFilled(false);
+//        biniciarSesion.setContentAreaFilled(false);
         biniciarSesion.setBorderPainted(false);
-            
+        biniciarSesion.putClientProperty("valor", 0);
+        
+        ImageIcon iconu=new ImageIcon("usuario.png");
+        Image imgu = iconu.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        iconu=new ImageIcon(imgu);
+        
+        busuario = new JButton("",iconu);
+        busuario.setFont(new Font("Times New Roman", 0, 20));
+        busuario.setBackground(Color.white);
+//        biniciarSesion.setContentAreaFilled(false);
+//        busuario.setBorderPainted(false);
+        busuario.putClientProperty("valor", -1);
         
         panelBIniciarSesion.add(biniciarSesion);
         

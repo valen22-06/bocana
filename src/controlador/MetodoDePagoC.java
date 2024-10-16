@@ -6,8 +6,11 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import modelo.Habitacion;
+import modelo.Usuario;
 import vista.AlojamientosV;
 import vista.MetodoDePagoV;
+import vista.ResenaV;
 import vista.TarjetaV;
 
 /**
@@ -16,37 +19,44 @@ import vista.TarjetaV;
  */
 public class MetodoDePagoC implements ActionListener {
 
-    MetodoDePagoV metodoDePago = new MetodoDePagoV();
+    MetodoDePagoV metodoDePagoV = new MetodoDePagoV();
     String metodo;
+    
+    Usuario usuario = new Usuario();
+    Habitacion habitacion = new Habitacion();
 
-    public MetodoDePagoC(MetodoDePagoV mePa) {
-        this.metodoDePago = mePa;
-        this.metodoDePago.cancelar.addActionListener(this);
-        this.metodoDePago.continuar.addActionListener(this);
-        this.metodoDePago.setExtendedState(6);
-        this.metodoDePago.setVisible(true);
-        this.metodoDePago.setDefaultCloseOperation(3);
+    public MetodoDePagoC(MetodoDePagoV metodoDePagoV, Usuario usuario, Habitacion habitacion) {
+        this.metodoDePagoV = metodoDePagoV;
+        this.usuario=usuario;
+        this.habitacion=habitacion;
+        
+        this.metodoDePagoV.cancelar.addActionListener(this);
+        this.metodoDePagoV.continuar.addActionListener(this);
+        this.metodoDePagoV.setExtendedState(6);
+        this.metodoDePagoV.setVisible(true);
+        this.metodoDePagoV.setDefaultCloseOperation(3);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (metodoDePago.lista.getSelectedItem().toString() != "") {
-            if (e.getSource() == metodoDePago.continuar) {
+        if (metodoDePagoV.lista.getSelectedItem().toString() != "") {
+            if (e.getSource() == metodoDePagoV.continuar) {
                 
-                    if(metodoDePago.lista.getSelectedItem().toString().equals("Tarjeta")){
+                    if(metodoDePagoV.lista.getSelectedItem().toString().equals("Tarjeta")){
                         TarjetaV tarjetaV = new TarjetaV();
                         TarjetaC tarjetaC = new TarjetaC(tarjetaV);
-                    } else {
-                        metodo = metodoDePago.lista.getSelectedItem().toString();
+                        metodoDePagoV.setVisible(false);
+                    }else if(metodoDePagoV.lista.getSelectedItem().toString().equals("Efectivo")){
+                        //abre la ventana de realizar pago
                     }
             } 
              
         }
 
-        if (e.getSource() == metodoDePago.cancelar) {
-            
-                        AlojamientosV aloja = new AlojamientosV();
-                        AlojamientosC al = new AlojamientosC(aloja);
+        if (e.getSource() == metodoDePagoV.cancelar) {
+                ResenaV resenaV = new ResenaV();
+                ResenaC resenaC = new ResenaC(resenaV, usuario, habitacion);
+                metodoDePagoV.setVisible(false);
                         
         }
     }

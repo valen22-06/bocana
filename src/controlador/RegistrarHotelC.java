@@ -29,8 +29,10 @@ import modelo.HotelDao;
 import modelo.TipoServicio;
 import modelo.TipoServicioDao;
 import modelo.Usuario;
+import modelo.UsuarioDao;
 import vista.RegistrarHabitacionV;
 import vista.RegistrarHotelV;
+import vista.UsuarioV;
 
 /**
  *
@@ -41,6 +43,9 @@ public class RegistrarHotelC implements ActionListener {
     RegistrarHotelV registrarHotelV = new RegistrarHotelV();
     Hotel hotel = new Hotel();
     HotelDao hotelDao = new HotelDao();
+    Usuario usuario = new Usuario();
+    UsuarioDao usuarioDao;
+    
     HabitacionDao habitacionDao =  new HabitacionDao();
     TipoServicioDao tipoServicioDao = new TipoServicioDao();
     List<TipoServicio> datosTipoServicioDao = tipoServicioDao.listar();
@@ -63,8 +68,11 @@ public class RegistrarHotelC implements ActionListener {
     boolean flagsauna = true;
     boolean flagbar = true;
 
-    public RegistrarHotelC(RegistrarHotelV registrarHotelV) {
+    public RegistrarHotelC(RegistrarHotelV registrarHotelV, Usuario usuario) {
         this.registrarHotelV = registrarHotelV;
+        this.usuario = usuario;
+        this.usuarioDao = new UsuarioDao();
+        
         this.registrarHabitacionV= new RegistrarHabitacionV();
         this.registrarHotelV.bwifi.addActionListener(this);
         this.registrarHotelV.bgym.addActionListener(this);
@@ -222,7 +230,9 @@ public class RegistrarHotelC implements ActionListener {
 
                 setAdd();
 
-//                JOptionPane.showMessageDialog(vista, "Es bien");
+                UsuarioV usuarioV = new UsuarioV();
+                UsuarioC usuarioC = new UsuarioC(usuarioV, usuario);
+                registrarHotelV.setVisible(false);
             } else {
 
                 JOptionPane.showMessageDialog(registrarHotelV, "Faltan datos por ingresar");
@@ -297,9 +307,7 @@ public class RegistrarHotelC implements ActionListener {
         hotel.setHabitaciones(habitaciones);
         hotel.setNumeroHabitaciones(hotel.getHabitaciones().size());
         hotel.setServicios(servicios);
-        Usuario u = new Usuario();
-        u.setIdUsuario(2);
-        hotel.setUsuario(u);
+        hotel.setUsuario(usuario);
         
 
 
@@ -315,6 +323,8 @@ public class RegistrarHotelC implements ActionListener {
                 for(TipoServicio servicio : servicios){
                     hotelDao.setAgregarServicios(hotelDao.ultimoId(),servicio.getIdTipoServicio());
                 }
+                usuario.setIdRol(4);
+                usuarioDao.setActualizar(usuario);
             }
             
             

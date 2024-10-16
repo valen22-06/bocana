@@ -28,6 +28,8 @@ import modelo.Resena;
 import modelo.ResenaDao;
 import modelo.TipoServicio;
 import modelo.Usuario;
+import vista.AlojamientosV;
+import vista.MetodoDePagoV;
 import vista.ResenaV;
 
 /**
@@ -159,6 +161,20 @@ public class ResenaC implements ActionListener{
                 JOptionPane.showMessageDialog(resenaV, "Faltan datos por ingresar");
 
             }
+        }
+        
+        if(e.getSource() == resenaV.breservar){
+
+            MetodoDePagoV metodoDePagoV = new MetodoDePagoV();
+            MetodoDePagoC metodoDePagoC = new MetodoDePagoC(metodoDePagoV,usuario,habitacion);
+            resenaV.setVisible(false);
+        }
+        
+        if(e.getSource() == resenaV.bcancelar){
+
+            AlojamientosV alojamientosV = new AlojamientosV();
+            AlojamientosC alojamientosC = new AlojamientosC(alojamientosV,usuario);
+            resenaV.setVisible(false);
         }
     }
     

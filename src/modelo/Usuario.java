@@ -17,12 +17,12 @@ public class Usuario {
     public String apellido1;
     public String apellido2;
     public String correo;
-    public int telefono;
+    public String telefono;
     public String direccion;
     public String contrasena;
     public int idRol;
 
-    public Usuario(int idUsuario, int documento, String nombre1, String nombre2, String apellido1, String apellido2, String correo, int telefono, String direccion, String contrasena, int idRol) {
+    public Usuario(int idUsuario, int documento, String nombre1, String nombre2, String apellido1, String apellido2, String correo, String telefono, String direccion, String contrasena, int idRol) {
         this.idUsuario = idUsuario;
         this.documento = documento;
         this.nombre1 = nombre1;
@@ -95,11 +95,11 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return this.telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import modelo.Usuario;
 import modelo.UsuarioDao;
 import vista.HotelV;
+import vista.IniciarSesionV;
 import vista.RegistrarV;
 
 public class RegistrarC implements ActionListener {
@@ -25,6 +26,8 @@ public class RegistrarC implements ActionListener {
 
     public RegistrarC(RegistrarV registrarV) {
         this.registrarV = registrarV;
+        
+        
         this.registrarV.bregistrar.addActionListener(this);
         this.registrarV.bcancelar.addActionListener(this);
         this.registrarV.setExtendedState(6);
@@ -48,7 +51,9 @@ public class RegistrarC implements ActionListener {
 
                 setAdd();
 
-//                JOptionPane.showMessageDialog(vista, "Es bien");
+                    IniciarSesionV iniciarSesionV = new IniciarSesionV();
+                    IniciarSesionC iniciarSesionC = new IniciarSesionC(iniciarSesionV);
+                    registrarV.setVisible(false);
             } else {
 
                 JOptionPane.showMessageDialog(registrarV, "Faltan datos por ingresar");
@@ -94,19 +99,21 @@ public class RegistrarC implements ActionListener {
         }
 
     }
+    
+    public static boolean contieneSoloNumeros(String cadena) {
+        return cadena.matches("[0-9]+");
+    }
 
-    public void setAdd() {
+     public void setAdd() {
         int resultado = 0;
         int r = 1;
         int documento = 0;
-        int telefono = 0;
+
         int idRol = 2;
 
         try {
 
             documento = Integer.parseInt(registrarV.tdocumento.getText().toString());
-
-            telefono = Integer.parseInt(registrarV.ttelefono.getText().toString());
 
         } catch (NumberFormatException eN) {
             r = 0;
@@ -118,7 +125,7 @@ public class RegistrarC implements ActionListener {
         try {
             validarEmail(registrarV.tcorreo.getText().toString());
             correo = registrarV.tcorreo.getText().toString();
-            JOptionPane.showMessageDialog(registrarV, "El correo electrónico es válido.");
+
         } catch (IllegalArgumentException e) {
             r = 0;
             JOptionPane.showMessageDialog(registrarV, "Error: " + e.getMessage());
@@ -148,11 +155,15 @@ public class RegistrarC implements ActionListener {
         try {
             validarDireccion(registrarV.tdireccion.getText().toString());
             direccion = registrarV.tdireccion.getText().toString();
-            JOptionPane.showMessageDialog(registrarV, "La direccion es valida");
+
         } catch (IllegalArgumentException e) {
             r = 0;
             JOptionPane.showMessageDialog(registrarV, "Error: " + e.getMessage());
         }
+        
+        String telefono ="";
+        telefono=registrarV.ttelefono.getText().toString();
+        contieneSoloNumeros(telefono);
 
         String contrasena = "";
         try {

@@ -51,7 +51,7 @@ public class ResenaDao {
                 u.setApellido1(rs.getString(9));
                 u.setApellido2(rs.getString(10));
                 u.setCorreo(rs.getString(11));
-                u.setTelefono(rs.getInt(12));
+                u.setTelefono(rs.getString(12));
                 u.setDireccion(rs.getString(13));
                 u.setContrasena(rs.getString(14));
                 u.setIdRol(rs.getInt(15));

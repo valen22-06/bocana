@@ -20,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.Border;
@@ -29,7 +30,9 @@ import modelo.Hotel;
 import modelo.HotelDao;
 import modelo.Usuario;
 import vista.AlojamientosV;
+import vista.IniciarSesionV;
 import vista.ResenaV;
+import vista.UsuarioV;
 
 /**
  *
@@ -38,12 +41,22 @@ import vista.ResenaV;
 public class AlojamientosC implements ActionListener{
     AlojamientosV alojamientosV = new AlojamientosV();
     HabitacionDao habitacionDao = new HabitacionDao();
-    List<Habitacion> datosHabitaciones = habitacionDao.listar();
+    List<Habitacion> datosHabitaciones;
     Usuario usuario = new Usuario();
     
     public AlojamientosC(AlojamientosV alojamientosV, Usuario usuario) {
         this.alojamientosV = alojamientosV;
         this.usuario=usuario;
+        this.datosHabitaciones = habitacionDao.listar();
+        
+        if(usuario.getIdRol() != 3){
+            this.alojamientosV.panelBIniciarSesion.remove(this.alojamientosV.biniciarSesion);
+            this.alojamientosV.busuario.setText(usuario.getNombre1());
+            this.alojamientosV.panelBIniciarSesion.add(this.alojamientosV.busuario);
+            
+        }
+        this.alojamientosV.busuario.addActionListener(this);
+        this.alojamientosV.biniciarSesion.addActionListener(this);
         
         for(int i =0;i<datosHabitaciones.size();i++){
             List<JLabel> fotos = habitacionDao.listarImagenes(i+1);
@@ -164,9 +177,10 @@ public class AlojamientosC implements ActionListener{
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setPreferredSize(new Dimension(800, 400));
         
+
         this.alojamientosV.contenedor.add(scrollPane,BorderLayout.CENTER);
         
-
+        
         this.alojamientosV.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.alojamientosV.setVisible(true);
         this.alojamientosV.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -175,21 +189,41 @@ public class AlojamientosC implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         
+        
+        
             if(e.getSource() instanceof JButton) {//verifica si el evento es una instacia de JButton
                 JButton boton = (JButton) e.getSource();
-
-                Integer idHabitacion = (Integer) boton.getClientProperty("valor");
-                Habitacion habitacion = new Habitacion();
                 
-                for(int i = 0; i<datosHabitaciones.size();i++){
-                    if(datosHabitaciones.get(i).getIdHabitacion() == idHabitacion){
-                        habitacion=datosHabitaciones.get(i);
+                if(boton.getClientProperty("valor").equals(0)){
+                    
+                    IniciarSesionV iniciarSesionV = new IniciarSesionV();
+                    IniciarSesionC iniciarSesionC = new IniciarSesionC(iniciarSesionV);
+                    alojamientosV.setVisible(false);
+                }else if(boton.getClientProperty("valor").equals(-1)){
+                    UsuarioV usuarioV = new UsuarioV();
+                    UsuarioC usuarioC = new UsuarioC(usuarioV, usuario);
+                    alojamientosV.setVisible(false);
+                }else{
+                    if(usuario.getIdRol() != 3){
+                        Integer idHabitacion = (Integer) boton.getClientProperty("valor");
+                        Habitacion habitacion = new Habitacion();
+
+                        for(int i = 0; i<datosHabitaciones.size();i++){
+                            if(datosHabitaciones.get(i).getIdHabitacion() == idHabitacion){
+                                habitacion=datosHabitaciones.get(i);
+                            }
+                        }
+
+                        ResenaV resenaV = new ResenaV();
+                        ResenaC resenaC = new ResenaC(resenaV, usuario, habitacion);
+                        alojamientosV.setVisible(false);
+                    }else{
+                        JOptionPane.showMessageDialog(alojamientosV, "Debes iniciar sesion");
                     }
                 }
-                
-                ResenaV resenaV = new ResenaV();
-                ResenaC resenaC = new ResenaC(resenaV, usuario, habitacion);
             }
+        
+        
         
     }
     

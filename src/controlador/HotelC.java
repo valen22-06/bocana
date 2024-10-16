@@ -6,6 +6,7 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import modelo.Usuario;
 import vista.AlojamientosV;
 import vista.HotelV;
 import vista.IniciarSesionV;
@@ -18,6 +19,7 @@ import vista.RegistrarV;
 public class HotelC implements ActionListener {
 
     HotelV hot = new HotelV();
+    
 
     public HotelC(HotelV hotel) {
         this.hot = hotel;
@@ -45,8 +47,8 @@ public class HotelC implements ActionListener {
         }
 
         if (e.getSource() == hot.inicio) {
-            AlojamientosV aloja = new AlojamientosV();
-            AlojamientosC al = new AlojamientosC(aloja);
+//            AlojamientosV aloja = new AlojamientosV();
+//            AlojamientosC al = new AlojamientosC(aloja);
         }
     }
 }

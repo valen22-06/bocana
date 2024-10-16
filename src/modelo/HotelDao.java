@@ -52,7 +52,7 @@ public class HotelDao {
                 u.setApellido1(rs.getString(11));
                 u.setApellido2(rs.getString(12));
                 u.setCorreo(rs.getString(13));
-                u.setTelefono(rs.getInt(14));
+                u.setTelefono(rs.getString(14));
                 u.setDireccion(rs.getString(15));
                 u.setContrasena(rs.getString(16));
                 u.setIdRol(rs.getInt(17));
