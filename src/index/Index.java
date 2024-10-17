@@ -17,6 +17,7 @@ import controlador.RegistrarHabitacionC;
 import controlador.ResenaC;
 import controlador.TarjetaC;
 import controlador.UsuarioC;
+import javax.swing.JFrame;
 
 import modelo.Usuario;
 import modelo.UsuarioDao;
@@ -44,9 +45,9 @@ public class Index {
 
 //        IniciarSesionV iniciarSesionV = new IniciarSesionV();
 //        IniciarSesionC iniciarSesionC = new IniciarSesionC(iniciarSesionV);
-
-//        HotelV hotel = new HotelV();
-//        HotelC hot = new HotelC(hotel);
+    
+        HotelV hotel = new HotelV();
+        HotelC hot = new HotelC(hotel);
 
         //    MetodoDePagoV mp = new MetodoDePagoV();
         //    MetodoDePagoC mep = new MetodoDePagoC(mp);
@@ -61,14 +62,12 @@ public class Index {
         //FotosC fotosc = new FotosC(fotos); 
 
 
-        Usuario usuario = new Usuario();
-        usuario.setIdRol(3);
-        AlojamientosV aloja = new AlojamientosV();
-        AlojamientosC al = new AlojamientosC(aloja, usuario);
-
 //        Usuario usuario = new Usuario();
-//        UsuarioDao usuarioDao = new UsuarioDao();
-//        usuario = (Usuario) usuarioDao.listar().getFirst();
+//        usuario.setIdRol(3);
+//        AlojamientosV aloja = new AlojamientosV();
+//        AlojamientosC al = new AlojamientosC(aloja, usuario);
+
+//    
 //        AlojamientosV aloja = new AlojamientosV();
 //        AlojamientosC al = new AlojamientosC(aloja, usuario);
 
@@ -81,9 +80,9 @@ public class Index {
 //        ResenaC resenaC = new ResenaC(resenaV);
 
 
-        PagoV pV = new PagoV();
-        pV.setVisible(true);
-        pV.setExtendedState(6);
-        pV.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        PagoV pV = new PagoV();
+//        pV.setVisible(true);
+//        pV.setExtendedState(6);
+//        pV.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

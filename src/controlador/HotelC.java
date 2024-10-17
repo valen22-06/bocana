@@ -47,8 +47,11 @@ public class HotelC implements ActionListener {
         }
 
         if (e.getSource() == hot.inicio) {
-//            AlojamientosV aloja = new AlojamientosV();
-//            AlojamientosC al = new AlojamientosC(alo);
+            Usuario usuario = new Usuario();
+             usuario.setIdRol(3);
+            AlojamientosV aloja = new AlojamientosV();
+            AlojamientosC al = new AlojamientosC(aloja, usuario);
+            aloja.dispose();
         }
     }
 }

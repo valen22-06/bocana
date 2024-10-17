@@ -181,7 +181,7 @@ public class RegistrarHotelC implements ActionListener {
 
         if(e.getSource() == registrarHotelV.bagregar){
             
-             registrarHabitacionC = new RegistrarHabitacionC(registrarHabitacionV,hotel);
+             registrarHabitacionC = new RegistrarHabitacionC(registrarHabitacionV,hotel, usuario);
         
         }
         

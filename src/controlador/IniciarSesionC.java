@@ -54,12 +54,7 @@ public class IniciarSesionC implements ActionListener {
             RegistrarC registrarC = new RegistrarC(registrarV);
             iniciarSesionV.setVisible(false);
 
-                if(e.getSource()==iniciarSesionV.bcancelar){
-//            HotelV hotel = new HotelV();
-//            HotelC hot = new HotelC(hotel);
-                usuarioDao.buscarTarjeta(2);
-
-            }
+              
 
             if(e.getSource()==iniciarSesionV.bcancelar){
                 usuario.setIdRol(3);
@@ -67,12 +62,13 @@ public class IniciarSesionC implements ActionListener {
                 AlojamientosC alojamientosC = new AlojamientosC(alojamientosV,usuario);
                 iniciarSesionV.setVisible(false);
             }
-            if(iniciarSesionV.ver.isSelected()){
+            
+        }
+        if(iniciarSesionV.ver.isSelected()){
                 iniciarSesionV.tcontrasena.setEchoChar((char) 0);
             } else {
                 iniciarSesionV.tcontrasena.setEchoChar ('*');
             }
-        }
     }
     public int iniciarSesion(String correo, String contrasena) {
     List<Usuario> datosUsuario = usuarioDao.listar();

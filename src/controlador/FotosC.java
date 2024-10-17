@@ -17,6 +17,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import modelo.Usuario;
 import vista.FotosV;
 
 /**
@@ -38,10 +39,12 @@ public class FotosC implements ActionListener {
     FileOutputStream salida;
     List<JLabel> fotos = new ArrayList<>();
     List<byte[]> imagenes = new ArrayList<>();
+    Usuario usuario = new Usuario();
     
     
 
-    public FotosC(FotosV vista, List<JLabel> fotos, List<byte[]> imagenes) {
+    public FotosC(FotosV vista, List<JLabel> fotos, List<byte[]> imagenes, Usuario usuario) {
+        this.usuario = usuario;
         this.vista = vista;
         this.fotos=fotos;
         this.imagenes=imagenes;

@@ -26,6 +26,7 @@ import modelo.Hotel;
 import modelo.TipoHabitacionDao;
 import modelo.TipoHabitacion;
 import modelo.TipoServicioDao;
+import modelo.Usuario;
 import vista.FotosV;
 import vista.RegistrarHabitacionV;
 
@@ -43,6 +44,8 @@ public class RegistrarHabitacionC implements ActionListener{
     Hotel hotel = new Hotel();
     public boolean flag = false;
     
+    Usuario usuario = new Usuario();
+    
     List<byte[]> imagenes = new ArrayList<>();
     List<JLabel> fotos = new ArrayList<>();
     
@@ -52,7 +55,8 @@ public class RegistrarHabitacionC implements ActionListener{
     List<TipoHabitacion> datosTipoHabitacionDao = tipoHabitacionDao.listar();
     TipoHabitacion tipoHabitacion = new TipoHabitacion();
     
-    public RegistrarHabitacionC(RegistrarHabitacionV registrarHabitacionV, Hotel hotel) {
+    public RegistrarHabitacionC(RegistrarHabitacionV registrarHabitacionV, Hotel hotel, Usuario usuario) {
+        this.usuario = usuario;
         this.registrarHabitacionV = registrarHabitacionV;
         this.hotel=hotel;
         this.fotosV = new FotosV();
@@ -76,7 +80,7 @@ public class RegistrarHabitacionC implements ActionListener{
         
         if(e.getSource()== registrarHabitacionV.bfotos){
             
-            fotosC = new FotosC(fotosV, fotos, imagenes);
+            fotosC = new FotosC(fotosV, fotos, imagenes, usuario);
         }
         
         if(e.getSource() == fotosV.bcontinuar){
