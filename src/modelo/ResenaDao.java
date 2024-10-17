@@ -23,13 +23,13 @@ public class ResenaDao {
     ResultSet rs;
 
     
-    public List listar() {
-        ArrayList<Resena> resenas = new ArrayList<Resena>();
+    public List listar(int idHotel) {
+        ArrayList<Resena> resenas = new ArrayList<>();
         String sql = "SELECT r.idResena, r.calificacion, r.comentario, r.idUsuario, r.idHotel"
                 + ", u.documento, u.nombre1, u.nombre2, u.apellido1 , u.apellido2, u.correo, u.telefono, u.direccion, u.contrasena, u.idRol,"
                 + " h.nit, h.nombreHotel, h.direccion, h.numeroHabitaciones, h.idOfertaEspecial FROM resenas r "
                 + "JOIN usuarios u ON r.idUsuario = u.idUsuario "
-                + "JOIN hoteles h ON r.idHotel = h.idHotel";
+                + "JOIN hoteles h ON r.idHotel = h.idHotel WHERE r.idHotel = " + idHotel;
         try {
             con = conectar.getConnection();
             ps = con.prepareStatement(sql);
@@ -38,6 +38,7 @@ public class ResenaDao {
                 Resena r = new Resena();
                 Usuario u = new Usuario();
                 Hotel h = new Hotel();
+                
                 r.setIdResena(rs.getInt(1));
                 r.setCalificacion(rs.getInt(2));
                 r.setComentario(rs.getString(3));

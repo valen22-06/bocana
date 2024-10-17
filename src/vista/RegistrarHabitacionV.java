@@ -31,8 +31,8 @@ import javax.swing.JTextField;
  */
 public class RegistrarHabitacionV extends JFrame{
     public Container contenedor;
-    public JLabel lregistrar, ldescripcionBreve, ldescripcionDetallada, ltarifa,ltipoHabitacion, lfotos;
-    public JTextField tdescripcionBreve, tdescripcionDetallada, ttarifa;
+    public JLabel lregistrar,lnombreHabitacion, ldescripcionBreve, ldescripcionDetallada, ltarifa,ltipoHabitacion, lfotos;
+    public JTextField tnombreHabitacion,tdescripcionBreve, tdescripcionDetallada, ttarifa;
     public JButton bregistrar;
     public JButton bcancelar;
     public JButton bfotos, bcargar;
@@ -95,9 +95,11 @@ public class RegistrarHabitacionV extends JFrame{
         
         //panelCentro
         panelCentro = new JPanel();
-        migrid = new GridLayout(5, 2, 80, 8);
+        migrid = new GridLayout(6, 2, 80, 8);
         panelCentro.setLayout(migrid);
         
+        lnombreHabitacion = new JLabel("Nombre de habitacion");
+        lnombreHabitacion.setFont(new Font("Times New Roman", 0, 30));
         ldescripcionBreve = new JLabel("Descripcion breve");
         ldescripcionBreve.setFont(new Font("Times New Roman", 0, 30));
         ldescripcionDetallada = new JLabel("Descripcion detallada");
@@ -107,15 +109,16 @@ public class RegistrarHabitacionV extends JFrame{
         ltipoHabitacion = new JLabel("Tipo habitacion");
         ltipoHabitacion.setFont(new Font("Times New Roman", 0, 30));
 
-        tdescripcionBreve = new JTextField(10);
-        tdescripcionBreve.setFont(new Font("Times New Roman", 0, 25));
+        tnombreHabitacion = new JTextField(10);
+        tnombreHabitacion.setFont(new Font("Times New Roman", 0, 25));
         tdescripcionDetallada = new JTextField(10);
         tdescripcionDetallada.setFont(new Font("Times New Roman", 0, 25));
         ttarifa = new JTextField(10);
         ttarifa.setFont(new Font("Times New Roman", 0, 25));
         lista.setFont(new Font("Times New Roman", 0, 25));
 
-        
+        panelCentro.add(lnombreHabitacion);
+        panelCentro.add(tnombreHabitacion);
         panelCentro.add(ldescripcionBreve);
         panelCentro.add(tdescripcionBreve);
         panelCentro.add(ldescripcionDetallada);

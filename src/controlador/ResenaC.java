@@ -45,7 +45,7 @@ public class ResenaC implements ActionListener{
     HabitacionDao habitacionDao = new HabitacionDao();
     Resena resena = new Resena();
     ResenaDao resenaDao = new ResenaDao();
-    List<TipoServicio> servicios = new ArrayList<TipoServicio>();
+    List<TipoServicio> servicios = new ArrayList<>();
     List<JLabel> fotos =  new ArrayList<>();
     List<Resena> resenas = new ArrayList<>();
     
@@ -101,7 +101,7 @@ public class ResenaC implements ActionListener{
             
         }
         
-        mostrarResenas();
+        mostrarResenas(this.habitacion.getHotel().getIdHotel());
         
         
         this.resenaV.bmas.addActionListener(this);
@@ -195,7 +195,7 @@ public class ResenaC implements ActionListener{
         
         if(resenaDao.setAgregar(resena)==1){
             resenaV.panelResenas.removeAll();
-            mostrarResenas();
+            mostrarResenas(habitacion.getHotel().getIdHotel());
 
         }else{
             System.out.println("no agrego");
@@ -204,8 +204,8 @@ public class ResenaC implements ActionListener{
         
     }
 
-    public void mostrarResenas(){
-        resenas=resenaDao.listar();
+    public void mostrarResenas(int idHotel){
+        resenas=resenaDao.listar(idHotel);
         for(int i = 0; i<resenas.size();i++){
             GridLayout grid3 = new GridLayout(i+1,1,20,20);
             resenaV.panelResenas.setLayout(grid3);

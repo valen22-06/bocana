@@ -6,12 +6,14 @@ package controlador;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import modelo.Usuario;
 import vista.AlojamientosV;
+import vista.EditarUsuarioV;
 import vista.RegistrarHotelV;
 import vista.UsuarioV;
 
@@ -36,6 +38,7 @@ public class UsuarioC implements ActionListener{
 
             this.usuariov.gbc.gridy = 7;
             this.usuariov.gbc.gridwidth = 1;
+            this.usuariov.gbc.anchor = GridBagConstraints.WEST;
             this.usuariov.panel.add(this.usuariov.lverAlojamientos, this.usuariov.gbc);
 
             this.usuariov.bverAlojamientos = new JButton("Ver");
@@ -44,6 +47,7 @@ public class UsuarioC implements ActionListener{
 
             this.usuariov.gbc.gridy = 8;
             this.usuariov.gbc.gridwidth = 2;
+            this.usuariov.gbc.anchor = GridBagConstraints.WEST;
             this.usuariov.panel.add(this.usuariov.bverAlojamientos, this.usuariov.gbc);
             this.usuariov.bverAlojamientos.addActionListener(this);
         }
@@ -68,6 +72,13 @@ public class UsuarioC implements ActionListener{
             
             RegistrarHotelV registrarHotelV = new RegistrarHotelV();
             RegistrarHotelC registrarHotelC = new RegistrarHotelC(registrarHotelV,usuario);
+            usuariov.setVisible(false);
+        }
+        
+        if(e.getSource()==usuariov.beditarPerfil){
+            
+            EditarUsuarioV editarUsuarioV = new EditarUsuarioV();
+            EditarUsuarioC editarUsuarioC = new EditarUsuarioC(editarUsuarioV,usuario);
             usuariov.setVisible(false);
         }
         

@@ -13,6 +13,7 @@ import javax.swing.JLabel;
  */
 public class Habitacion {
     public int idHabitacion;
+    public String nombreHabitacion;
     public String estado;
     public double tarifa;
     public String descripcionBreve;
@@ -22,8 +23,9 @@ public class Habitacion {
     public List<byte[]> imagenes;
     public List<JLabel> fotos;
 
-    public Habitacion(int idHabitacion, String estado, double tarifa, String descripcionBreve, String descripcionDetallada, TipoHabitacion tipoHabitacion, Hotel hotel) {
+    public Habitacion(int idHabitacion,String nombreHabitacion, String estado, double tarifa, String descripcionBreve, String descripcionDetallada, TipoHabitacion tipoHabitacion, Hotel hotel) {
         this.idHabitacion = idHabitacion;
+        this.nombreHabitacion=nombreHabitacion;
         this.estado = estado;
         this.tarifa = tarifa;
         this.descripcionBreve = descripcionBreve;
@@ -43,6 +45,14 @@ public class Habitacion {
 
     public void setIdHabitacion(int idHabitacion) {
         this.idHabitacion = idHabitacion;
+    }
+
+    public String getNombreHabitacion() {
+        return nombreHabitacion;
+    }
+
+    public void setNombreHabitacion(String nombreHabitacion) {
+        this.nombreHabitacion = nombreHabitacion;
     }
 
     public String getEstado() {

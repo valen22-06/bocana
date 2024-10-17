@@ -45,23 +45,24 @@ public class HabitacionDao {
                 Habitacion h = new Habitacion();
                 Hotel ho = new Hotel();
                 h.setIdHabitacion(rs.getInt(1));
-                h.setEstado(rs.getString(2));
-                h.setTarifa(rs.getDouble(3));
-                h.setDescripcionBreve(rs.getString(4));
-                h.setDescripcionDetallada(rs.getString(5));
+                h.setNombreHabitacion(rs.getString(1));
+                h.setEstado(rs.getString(3));
+                h.setTarifa(rs.getDouble(4));
+                h.setDescripcionBreve(rs.getString(5));
+                h.setDescripcionDetallada(rs.getString(6));
                 
                 TipoHabitacion tp = new TipoHabitacion();
-                tp.setIdTipoHabitacion(rs.getInt(6));
-                tp.setDescripcion(rs.getString(7));
+                tp.setIdTipoHabitacion(rs.getInt(7));
+                tp.setDescripcion(rs.getString(8));
                 
                 h.setTipoHabitacion(tp);
                 
-                ho.setIdHotel(rs.getInt(8));
-                ho.setNit(rs.getInt(9));
-                ho.setNombreHotel(rs.getString(10));
-                ho.setDireccion(rs.getString(11));
-                ho.setNumeroHabitaciones(rs.getInt(12));
-                ho.setOfertaEspecial(rs.getInt(13));
+                ho.setIdHotel(rs.getInt(9));
+                ho.setNit(rs.getInt(10));
+                ho.setNombreHotel(rs.getString(11));
+                ho.setDireccion(rs.getString(12));
+                ho.setNumeroHabitaciones(rs.getInt(13));
+                ho.setOfertaEspecial(rs.getInt(14));
                 
                 ArrayList<TipoServicio> servicios = new ArrayList<TipoServicio>();
                 
@@ -145,7 +146,7 @@ public class HabitacionDao {
     }
     
     public int setAgregar (Habitacion h){
-       String sql = "INSERT INTO habitaciones VALUES (? ,?, ?, ?, ?, ?, ?)";
+       String sql = "INSERT INTO habitaciones VALUES (? ,?, ?, ?, ?, ?, ?, ?)";
        
        try{
            con=conectar.getConnection();
@@ -153,12 +154,13 @@ public class HabitacionDao {
            
 
            ps.setInt(1, h.getIdHabitacion());
-           ps.setString(2, h.getEstado());
-           ps.setDouble(3,h.getTarifa());
-           ps.setString(4,h.getDescripcionBreve());
-           ps.setString(5, h.getDescripcionDetallada());
-           ps.setInt(6, h.getTipoHabitacion().getIdTipoHabitacion());
-           ps.setInt(7, h.getHotel().getIdHotel());
+           ps.setString(2, h.getNombreHabitacion());
+           ps.setString(3, h.getEstado());
+           ps.setDouble(4,h.getTarifa());
+           ps.setString(5,h.getDescripcionBreve());
+           ps.setString(6, h.getDescripcionDetallada());
+           ps.setInt(7, h.getTipoHabitacion().getIdTipoHabitacion());
+           ps.setInt(8, h.getHotel().getIdHotel());
            
            
            

@@ -199,10 +199,12 @@ public class AlojamientosC implements ActionListener{
                     IniciarSesionV iniciarSesionV = new IniciarSesionV();
                     IniciarSesionC iniciarSesionC = new IniciarSesionC(iniciarSesionV);
                     alojamientosV.setVisible(false);
+                    
                 }else if(boton.getClientProperty("valor").equals(-1)){
                     UsuarioV usuarioV = new UsuarioV();
                     UsuarioC usuarioC = new UsuarioC(usuarioV, usuario);
                     alojamientosV.setVisible(false);
+                    
                 }else{
                     if(usuario.getIdRol() != 3){
                         Integer idHabitacion = (Integer) boton.getClientProperty("valor");

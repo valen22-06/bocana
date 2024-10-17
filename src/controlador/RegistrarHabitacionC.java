@@ -134,7 +134,11 @@ public class RegistrarHabitacionC implements ActionListener{
         int r = 1;
         String estado = "Disponible";
         double tarifa=0;
-
+        
+        
+        
+        
+        
         try {
 
             tarifa = Double.parseDouble(registrarHabitacionV.ttarifa.getText());
@@ -167,6 +171,19 @@ public class RegistrarHabitacionC implements ActionListener{
                 tipoHabitacion.setIdTipoHabitacion(idTipoHabitacion);
                 tipoHabitacion.setDescripcion(descripcion);
             }
+        }
+        
+        String nombreHabitacion = registrarHabitacionV.tnombreHabitacion.getText();
+        
+        if(nombreHabitacion.contains("!")
+                || nombreHabitacion.contains("#")
+                || nombreHabitacion.contains("$")
+                || nombreHabitacion.contains("%")
+                || nombreHabitacion.contains("&")
+                || nombreHabitacion.contains("/")){
+            JOptionPane.showMessageDialog(registrarHabitacionV, "El nombre de la habitacion no puede contener caracteres especiales");
+        }else{
+            habitacion.setNombreHabitacion(nombreHabitacion);
         }
         
         habitacion.setEstado(estado);
