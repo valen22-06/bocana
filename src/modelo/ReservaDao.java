@@ -213,7 +213,7 @@ public class ReservaDao {
                 
                 h.setHotel(ho);
                 
-                r.setUsuario(u);
+                
                 r.setHabitacion(h);
                 
 

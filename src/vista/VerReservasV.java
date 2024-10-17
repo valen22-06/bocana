@@ -35,7 +35,7 @@ public class VerReservasV extends JFrame{
     public JPanel panelDown;
     public JLabel ltitulo;
     public JButton bvolver;
-    
+    public JPanel panelestado;
     public FlowLayout miflow;
     public GridBagLayout gridbag;
     public GridLayout grid;
@@ -54,7 +54,7 @@ public class VerReservasV extends JFrame{
         panelTop = new JPanel();
         miflow = new FlowLayout(FlowLayout.LEFT);
         panelTop.setLayout(miflow);
-        
+        panelestado = new JPanel();
         
         
         gbc = new GridBagConstraints();
