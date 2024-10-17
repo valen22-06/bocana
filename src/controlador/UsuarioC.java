@@ -50,16 +50,17 @@ public class UsuarioC implements ActionListener{
             this.usuariov.gbc.gridwidth = 2;
             this.usuariov.gbc.anchor = GridBagConstraints.WEST;
             this.usuariov.panel.add(this.usuariov.bverAlojamientos, this.usuariov.gbc);
-            this.usuariov.bverAlojamientos.addActionListener(this);
+            
         }
         
-        
+        this.usuariov.bverAlojamientos.addActionListener(this);
         this.usuariov.beditarPerfil.addActionListener(this);
         this.usuariov.bverReservas.addActionListener(this);
         this.usuariov.bagregarAlojamiento.addActionListener(this);
         this.usuariov.beliminarPerfil.addActionListener(this);
         this.usuariov.bvolver.addActionListener(this);
         this.usuariov.bcerrarSesion.addActionListener(this);
+        this.usuariov.bverAlojamientos.addActionListener(this);
 
         this.usuariov.setExtendedState(6);
         this.usuariov.setVisible(true);
@@ -104,5 +105,7 @@ public class UsuarioC implements ActionListener{
             AlojamientosC alojamientosC = new AlojamientosC(alojamientosV,usuario);
             usuariov.setVisible(false);
         }
+        
+        
     }
 }

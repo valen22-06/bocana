@@ -72,7 +72,7 @@ public class RegistrarHotelC implements ActionListener {
         this.registrarHotelV = registrarHotelV;
         this.usuario = usuario;
         this.usuarioDao = new UsuarioDao();
-        System.out.println("hola");
+
         this.registrarHabitacionV= new RegistrarHabitacionV();
         this.registrarHotelV.bwifi.addActionListener(this);
         this.registrarHotelV.bgym.addActionListener(this);
@@ -238,6 +238,11 @@ public class RegistrarHotelC implements ActionListener {
                 JOptionPane.showMessageDialog(registrarHotelV, "Faltan datos por ingresar");
 
             }
+        }
+        if(e.getSource()==registrarHotelV.bcancelar){
+            UsuarioV usuarioV = new UsuarioV();
+            UsuarioC usuarioC = new UsuarioC(usuarioV,usuario);
+            registrarHotelV.setVisible(false);
         }
 
     }

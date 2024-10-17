@@ -34,16 +34,17 @@ public class HotelC implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == hot.registrar) {
-            hot.dispose();
+            
             RegistrarV regisV = new RegistrarV();
             RegistrarC regisC = new RegistrarC(regisV);
+            hot.setVisible(false);
         }
 
         if (e.getSource() == hot.iniciar) {
-            hot.dispose();
+            
             IniciarSesionV iniV = new IniciarSesionV();
             IniciarSesionC iniC = new IniciarSesionC(iniV);
-
+            hot.setVisible(false);
         }
 
         if (e.getSource() == hot.inicio) {
@@ -51,7 +52,7 @@ public class HotelC implements ActionListener {
             usuario.setIdRol(3);
             AlojamientosV aloja = new AlojamientosV();
             AlojamientosC al = new AlojamientosC(aloja, usuario);
-            hot.dispose();
+            hot.setVisible(false);
         }
     }
 }

@@ -60,6 +60,11 @@ public class RegistrarHabitacionC implements ActionListener{
         this.registrarHabitacionV = registrarHabitacionV;
         this.hotel=hotel;
         this.fotosV = new FotosV();
+        
+        if(fotos.size()==6){
+            registrarHabitacionV.bfotos.setEnabled(false);
+        }
+        
         this.registrarHabitacionV.imagenes = imagenes;
         this.registrarHabitacionV.fotos = fotos;
         this.registrarHabitacionV.bcancelar.addActionListener(this);

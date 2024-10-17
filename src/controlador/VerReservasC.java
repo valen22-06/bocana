@@ -4,6 +4,7 @@
  */
 package controlador;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -14,13 +15,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import modelo.Habitacion;
 import modelo.Hotel;
 import modelo.HotelDao;
+import modelo.Resena;
 import modelo.Reserva;
 import modelo.ReservaDao;
 import modelo.Usuario;
+import vista.IniciarSesionV;
+import vista.ResenaV;
 import vista.UsuarioV;
 import vista.VerReservasV;
 
@@ -35,27 +42,35 @@ public class VerReservasC implements ActionListener{
     HotelDao hotelDao = new HotelDao();
     ReservaDao reservaDao = new ReservaDao();
     Reserva reserva;
-    
+    List<Reserva> reservas;
     
     public VerReservasC(VerReservasV verReservasV, Usuario usuario){
-        this.verReservasV=verReservasV;
-        this.usuario=usuario;
-        this.reserva=new Reserva();
-        List<Reserva> reservas = new ArrayList<>();
-        if(usuario.getIdRol()==4){
-            System.out.println("hola");
-            List<Hotel> hoteles = hotelDao.listar();
-            for(int i=0;i<hoteles.size();i++){
-                if(hoteles.get(i).getUsuario().getIdUsuario()==usuario.getIdUsuario()){
-                    reservas = reservaDao.listarPorHotel(hoteles.get(i).getIdHotel());
-                    break;
+        this.verReservasV = verReservasV;
+        this.usuario = usuario;
+        this.reserva = new Reserva();
+        reservas = new ArrayList<>();  // Inicializar la lista
+
+        List<Hotel> hoteles = hotelDao.listar();
+        if(usuario.getIdRol() == 4) {
+            for(int i = 0; i < hoteles.size(); i++) {
+                if(hoteles.get(i).getUsuario().getIdUsuario() == usuario.getIdUsuario()) {
+                    List<Reserva> reservasPorHotel = reservaDao.listarPorHotel(hoteles.get(i).getIdHotel());
+                    if (reservasPorHotel != null && !reservasPorHotel.isEmpty()) {
+                        reservas.addAll(reservasPorHotel);  // Agregar las reservas de cada hotel
+                    }
                 }
             }
-            
-        }else{
+        } else {
             reservas = reservaDao.listarPorUsuario(usuario.getIdUsuario());
         }
-        
+
+        if (reservas != null && !reservas.isEmpty()) {
+            System.out.println("Primer ID de reserva: " + reservas.get(0).getIdReserva());
+        } else {
+            System.out.println("No hay reservas disponibles.");
+        }
+    
+
         
         JPanel panel = new JPanel();
         GridBagLayout gridbag = new GridBagLayout();
@@ -109,18 +124,18 @@ public class VerReservasC implements ActionListener{
         gbc.gridx = 2;
         panel.add(panelfechaFin,gbc);
         
-        JPanel panelestado = new JPanel();
+        this.verReservasV.panelestado = new JPanel();
         flow = new FlowLayout(FlowLayout.LEFT);
-        panelestado.setLayout(flow);
-        panelestado.setPreferredSize(new Dimension(200,100));
+        this.verReservasV.panelestado.setLayout(flow);
+        this.verReservasV.panelestado.setPreferredSize(new Dimension(200,100));
         
         JLabel lestado = new JLabel();
         lestado.setText("Estado");
         lestado.setFont(new Font("Times New Roman", 1, 30));
 
-        panelestado.add(lestado);
+       this.verReservasV. panelestado.add(lestado);
         gbc.gridx = 3;
-        panel.add(panelestado,gbc);
+        panel.add(this.verReservasV.panelestado,gbc);
         
         JPanel panelhabitacion = new JPanel();
         flow = new FlowLayout(FlowLayout.LEFT);
@@ -165,9 +180,20 @@ public class VerReservasC implements ActionListener{
             gbc.gridx = 5;
             panel.add(panelhotel,gbc);
         }
+        JPanel panelBoton = new JPanel();
+        flow = new FlowLayout(FlowLayout.LEFT);
+        panelBoton.setLayout(flow);
+        panelBoton.setPreferredSize(new Dimension(200,100));
+        
+        JLabel lboton = new JLabel();
+        lboton.setText("Cancelar");
+        lboton.setFont(new Font("Times New Roman", 1, 30));
         
         
+        panelBoton.add(lboton);
         
+        gbc.gridx = 6;
+        panel.add(panelBoton,gbc);
         gbc.gridy = 0;
         gbc.gridx = 0;
         this.verReservasV.panelReservas.add(panel,gbc);
@@ -231,20 +257,20 @@ public class VerReservasC implements ActionListener{
             gbc.gridy = p;
             panel.add(panelfechaFin,gbc);
             
-            panelestado  = new JPanel();
+            this.verReservasV.panelestado  = new JPanel();
             flow = new FlowLayout(FlowLayout.LEFT);
-            panelestado.setLayout(flow);
-            panelestado.setPreferredSize(new Dimension(200,100));
+            this.verReservasV.panelestado.setLayout(flow);
+            this.verReservasV.panelestado.setPreferredSize(new Dimension(200,100));
             
             lestado = new JLabel();
             lestado.setText(reservas.get(i).getEstado());
             lestado.setFont(new Font("Times New Roman", 0, 25));
             
-            panelestado.add(lestado);
+            this.verReservasV.panelestado.add(lestado);
             
             gbc.gridx = 3;
             gbc.gridy = p;
-            panel.add(panelestado,gbc);
+            panel.add(this.verReservasV.panelestado,gbc);
             
             panelhabitacion  = new JPanel();
             flow = new FlowLayout(FlowLayout.LEFT);
@@ -293,14 +319,35 @@ public class VerReservasC implements ActionListener{
                 panel.add(panelhotel,gbc);
             }
             
-            gbc.gridx = 0;
-            gbc.gridy = p;
-            gbc.insets = new Insets(2, 10, 2, 10);
-            this.verReservasV.panelReservas.add(panel,gbc);
-        }
+            panelBoton = new JPanel();
+            flow = new FlowLayout(FlowLayout.LEFT);
+            panelBoton.setLayout(flow);
+            panelBoton.setPreferredSize(new Dimension(200,100));
+
+            JButton boton = new JButton("Cancelar");
+            boton.setFont(new Font("Times New Roman", 0, 20));
+            boton.addActionListener(this);
+            boton.setContentAreaFilled(false);
+            boton.setForeground(Color.BLACK);
+            boton.putClientProperty("valor", reservas.get(i).getIdReserva());
+
+            panelBoton.add(boton);
+
+            if(reservas.get(i).getEstado().equals("Cancelada")){
+                boton.setEnabled(false);
+            }
+            
+            gbc.gridx = 6;
+            panel.add(panelBoton,gbc);
+
+                gbc.gridx = 0;
+                gbc.gridy = p;
+                gbc.insets = new Insets(2, 10, 2, 10);
+                this.verReservasV.panelReservas.add(panel,gbc);
+            }
         
         
-        
+        this.verReservasV.bvolver.putClientProperty("valor", 0);
         this.verReservasV.bvolver.addActionListener(this);
         this.verReservasV.setExtendedState(6);
         this.verReservasV.setVisible(true);
@@ -310,10 +357,201 @@ public class VerReservasC implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==verReservasV.bvolver){
-            UsuarioV usuarioV = new UsuarioV();
-            UsuarioC usuarioC = new UsuarioC(usuarioV, usuario);
+        if (e.getSource() instanceof JButton) { // Verifica si el evento es una instancia de JButton
+            JButton boton = (JButton) e.getSource();
+
+            if (boton.getClientProperty("valor").equals(0)) {
+                UsuarioV usuarioV = new UsuarioV();
+                UsuarioC usuarioC = new UsuarioC(usuarioV, usuario);
+                verReservasV.setVisible(false);
+            } else {
+                Integer idReserva = (Integer) boton.getClientProperty("valor");
+                for (Reserva r : reservas) {
+                    if (r.getIdReserva()==idReserva) {
+                        r.setEstado("Cancelada");
+                        reservaDao.setActualizar(r);
+                        boton.setEnabled(false);
+                        break;
+                    }
+                }
+
+                actualizarPanelReservas();
+            }
         }
-        
     }
+
+    private void actualizarPanelReservas() {
+       
+        verReservasV.panelReservas.removeAll();
+
+        
+        GridBagLayout gridbag = new GridBagLayout();
+        verReservasV.panelReservas.setLayout(gridbag);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(2, 10, 2, 10);
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.anchor = GridBagConstraints.WEST;
+
+        
+        JPanel panelPosicion = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelPosicion.setPreferredSize(new Dimension(200, 100));
+        JLabel lposicion = new JLabel("Posición");
+        lposicion.setFont(new Font("Times New Roman", 1, 30));
+        panelPosicion.add(lposicion);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        verReservasV.panelReservas.add(panelPosicion, gbc);
+
+        JPanel panelfechaInicio = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelfechaInicio.setPreferredSize(new Dimension(200, 100));
+        JLabel lfechaInicio = new JLabel("Fecha Inicio");
+        lfechaInicio.setFont(new Font("Times New Roman", 1, 30));
+        panelfechaInicio.add(lfechaInicio);
+        gbc.gridx = 1;
+        verReservasV.panelReservas.add(panelfechaInicio, gbc);
+
+        JPanel panelfechaFin = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelfechaFin.setPreferredSize(new Dimension(200, 100));
+        JLabel lfechaFin = new JLabel("Fecha Fin");
+        lfechaFin.setFont(new Font("Times New Roman", 1, 30));
+        panelfechaFin.add(lfechaFin);
+        gbc.gridx = 2;
+        verReservasV.panelReservas.add(panelfechaFin, gbc);
+
+        JPanel panelEstado = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelEstado.setPreferredSize(new Dimension(200, 100));
+        JLabel lestado = new JLabel("Estado");
+        lestado.setFont(new Font("Times New Roman", 1, 30));
+        panelEstado.add(lestado);
+        gbc.gridx = 3;
+        verReservasV.panelReservas.add(panelEstado, gbc);
+
+        JPanel panelHabitacion = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelHabitacion.setPreferredSize(new Dimension(200, 100));
+        JLabel lhabitacion = new JLabel("Habitación");
+        lhabitacion.setFont(new Font("Times New Roman", 1, 30));
+        panelHabitacion.add(lhabitacion);
+        gbc.gridx = 4;
+        verReservasV.panelReservas.add(panelHabitacion, gbc);
+
+        if (usuario.getIdRol() == 4) {
+            JPanel panelUsuario = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            panelUsuario.setPreferredSize(new Dimension(200, 100));
+            JLabel lusuario = new JLabel("Usuario");
+            lusuario.setFont(new Font("Times New Roman", 1, 30));
+            panelUsuario.add(lusuario);
+            gbc.gridx = 5;
+            verReservasV.panelReservas.add(panelUsuario, gbc);
+        } else {
+            JPanel panelHotel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            panelHotel.setPreferredSize(new Dimension(200, 100));
+            JLabel lhotel = new JLabel("Hotel");
+            lhotel.setFont(new Font("Times New Roman", 1, 30));
+            panelHotel.add(lhotel);
+            gbc.gridx = 5;
+            verReservasV.panelReservas.add(panelHotel, gbc);
+        }
+
+        JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelBoton.setPreferredSize(new Dimension(200, 100));
+        JLabel lboton = new JLabel("Cancelar");
+        lboton.setFont(new Font("Times New Roman", 1, 30));
+        panelBoton.add(lboton);
+        gbc.gridx = 6;
+        verReservasV.panelReservas.add(panelBoton, gbc);
+
+        
+        for (int i = 0; i < reservas.size(); i++) {
+            gbc.gridy = i + 1; // Desplazar hacia abajo para las filas de datos
+
+            
+            panelPosicion = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            panelPosicion.setPreferredSize(new Dimension(200, 100));
+            lposicion = new JLabel(String.valueOf(i + 1));
+            lposicion.setFont(new Font("Times New Roman", 0, 25));
+            panelPosicion.add(lposicion);
+            gbc.gridx = 0;
+            verReservasV.panelReservas.add(panelPosicion, gbc);
+
+            
+            panelfechaInicio = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            panelfechaInicio.setPreferredSize(new Dimension(200, 100));
+            lfechaInicio = new JLabel(reservas.get(i).getFechaInicio());
+            lfechaInicio.setFont(new Font("Times New Roman", 0, 25));
+            panelfechaInicio.add(lfechaInicio);
+            gbc.gridx = 1;
+            verReservasV.panelReservas.add(panelfechaInicio, gbc);
+
+            
+            panelfechaFin = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            panelfechaFin.setPreferredSize(new Dimension(200, 100));
+            lfechaFin = new JLabel(reservas.get(i).getFechaFin());
+            lfechaFin.setFont(new Font("Times New Roman", 0, 25));
+            panelfechaFin.add(lfechaFin);
+            gbc.gridx = 2;
+            verReservasV.panelReservas.add(panelfechaFin, gbc);
+
+            panelEstado = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            panelEstado.setPreferredSize(new Dimension(200, 100));
+            lestado = new JLabel(reservas.get(i).getEstado());
+            lestado.setFont(new Font("Times New Roman", 0, 25));
+            panelEstado.add(lestado);
+            gbc.gridx = 3;
+            verReservasV.panelReservas.add(panelEstado, gbc);
+
+            
+            panelHabitacion = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            panelHabitacion.setPreferredSize(new Dimension(200, 100));
+            lhabitacion = new JLabel(reservas.get(i).getHabitacion().getNombreHabitacion());
+            lhabitacion.setFont(new Font("Times New Roman", 0, 25));
+            panelHabitacion.add(lhabitacion);
+            gbc.gridx = 4;
+            verReservasV.panelReservas.add(panelHabitacion, gbc);
+
+            
+            if (usuario.getIdRol() == 4) {
+                JPanel panelUsuario = new JPanel(new FlowLayout(FlowLayout.LEFT));
+                panelUsuario.setPreferredSize(new Dimension(200, 100));
+                JLabel lusuario = new JLabel(reservas.get(i).getUsuario().getNombre1() + " " + reservas.get(i).getUsuario().getApellido1());
+                lusuario.setFont(new Font("Times New Roman", 0, 25));
+                panelUsuario.add(lusuario);
+                gbc.gridx = 5;
+                verReservasV.panelReservas.add(panelUsuario, gbc);
+            } else {
+                JPanel panelHotel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+                panelHotel.setPreferredSize(new Dimension(200, 100));
+                JLabel lhotel = new JLabel(reservas.get(i).getHabitacion().getHotel().getNombreHotel());
+                lhotel.setFont(new Font("Times New Roman", 0, 25));
+                panelHotel.add(lhotel);
+                gbc.gridx = 5;
+                verReservasV.panelReservas.add(panelHotel, gbc);
+            }
+
+            
+            panelBoton = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            panelBoton.setPreferredSize(new Dimension(200, 100));
+            JButton boton = new JButton("Cancelar");
+            boton.setFont(new Font("Times New Roman", 0, 20));
+            boton.addActionListener(this);
+            boton.setContentAreaFilled(false);
+            boton.setForeground(Color.BLACK);
+            boton.putClientProperty("valor", reservas.get(i).getIdReserva());
+            panelBoton.add(boton);
+            if (reservas.get(i).getEstado().equals("Cancelada")) {
+                boton.setEnabled(false);
+            }
+            gbc.gridx = 6;
+            verReservasV.panelReservas.add(panelBoton, gbc);
+        }
+
+        
+        verReservasV.panelReservas.revalidate();
+        verReservasV.panelReservas.repaint();
+    }
+
+
+
+
 }

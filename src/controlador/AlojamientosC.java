@@ -49,6 +49,8 @@ public class AlojamientosC implements ActionListener{
         this.usuario=usuario;
         this.datosHabitaciones = habitacionDao.listar();
         
+        
+        
         if(usuario.getIdRol() != 3){
             this.alojamientosV.panelBIniciarSesion.remove(this.alojamientosV.biniciarSesion);
             this.alojamientosV.busuario.setText(usuario.getNombre1());
