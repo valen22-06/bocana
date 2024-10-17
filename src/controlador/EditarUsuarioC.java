@@ -77,8 +77,8 @@ public class EditarUsuarioC implements ActionListener{
         }
         
         if(e.getSource()==editarUsuarioV.bcancelar){
-            HotelV hotel = new HotelV();
-            HotelC hot = new HotelC(hotel);
+            UsuarioV usuarioV = new UsuarioV();
+            UsuarioC usuarioC = new UsuarioC(usuarioV, usuario);
         }
     }
     

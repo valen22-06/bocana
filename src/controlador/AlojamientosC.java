@@ -190,40 +190,40 @@ public class AlojamientosC implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         
         
-        
-            if(e.getSource() instanceof JButton) {//verifica si el evento es una instacia de JButton
-                JButton boton = (JButton) e.getSource();
-                
-                if(boton.getClientProperty("valor").equals(0)){
-                    
-                    IniciarSesionV iniciarSesionV = new IniciarSesionV();
-                    IniciarSesionC iniciarSesionC = new IniciarSesionC(iniciarSesionV);
-                    alojamientosV.setVisible(false);
-                    
-                }else if(boton.getClientProperty("valor").equals(-1)){
-                    UsuarioV usuarioV = new UsuarioV();
-                    UsuarioC usuarioC = new UsuarioC(usuarioV, usuario);
-                    alojamientosV.setVisible(false);
-                    
-                }else{
-                    if(usuario.getIdRol() != 3){
-                        Integer idHabitacion = (Integer) boton.getClientProperty("valor");
-                        Habitacion habitacion = new Habitacion();
 
-                        for(int i = 0; i<datosHabitaciones.size();i++){
-                            if(datosHabitaciones.get(i).getIdHabitacion() == idHabitacion){
-                                habitacion=datosHabitaciones.get(i);
-                            }
+        if(e.getSource() instanceof JButton) {//verifica si el evento es una instacia de JButton
+            JButton boton = (JButton) e.getSource();
+
+            if(boton.getClientProperty("valor").equals(0)){
+
+                IniciarSesionV iniciarSesionV = new IniciarSesionV();
+                IniciarSesionC iniciarSesionC = new IniciarSesionC(iniciarSesionV);
+                alojamientosV.setVisible(false);
+
+            }else if(boton.getClientProperty("valor").equals(-1)){
+                UsuarioV usuarioV = new UsuarioV();
+                UsuarioC usuarioC = new UsuarioC(usuarioV, usuario);
+                alojamientosV.setVisible(false);
+
+            }else{
+                if(usuario.getIdRol() != 3){
+                    Integer idHabitacion = (Integer) boton.getClientProperty("valor");
+                    Habitacion habitacion = new Habitacion();
+
+                    for(int i = 0; i<datosHabitaciones.size();i++){
+                        if(datosHabitaciones.get(i).getIdHabitacion() == idHabitacion){
+                            habitacion=datosHabitaciones.get(i);
                         }
-
-                        ResenaV resenaV = new ResenaV();
-                        ResenaC resenaC = new ResenaC(resenaV, usuario, habitacion);
-                        alojamientosV.setVisible(false);
-                    }else{
-                        JOptionPane.showMessageDialog(alojamientosV, "Debes iniciar sesion");
                     }
+
+                    ResenaV resenaV = new ResenaV();
+                    ResenaC resenaC = new ResenaC(resenaV, usuario, habitacion);
+                    alojamientosV.setVisible(false);
+                }else{
+                    JOptionPane.showMessageDialog(alojamientosV, "Debes iniciar sesion");
                 }
             }
+        }
         
         
         

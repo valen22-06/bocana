@@ -111,6 +111,8 @@ public class RegistrarHabitacionV extends JFrame{
 
         tnombreHabitacion = new JTextField(10);
         tnombreHabitacion.setFont(new Font("Times New Roman", 0, 25));
+        tdescripcionBreve = new JTextField(10);
+        tdescripcionBreve.setFont(new Font("Times New Roman", 0, 25));
         tdescripcionDetallada = new JTextField(10);
         tdescripcionDetallada.setFont(new Font("Times New Roman", 0, 25));
         ttarifa = new JTextField(10);

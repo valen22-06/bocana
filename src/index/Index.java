@@ -17,6 +17,7 @@ import controlador.RegistrarHabitacionC;
 import controlador.ResenaC;
 import controlador.TarjetaC;
 import controlador.UsuarioC;
+import controlador.VerReservasC;
 import javax.swing.JFrame;
 
 import modelo.Usuario;
@@ -32,6 +33,7 @@ import vista.RegistrarV;
 import vista.ResenaV;
 import vista.TarjetaV;
 import vista.UsuarioV;
+import vista.VerReservasV;
 
 /**
  *
@@ -84,5 +86,7 @@ public class Index {
 //        pV.setVisible(true);
 //        pV.setExtendedState(6);
 //        pV.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
     }
 }

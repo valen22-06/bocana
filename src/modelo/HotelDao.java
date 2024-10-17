@@ -25,9 +25,10 @@ public class HotelDao {
     
     public List listar() {
         ArrayList<Hotel> datosHotel = new ArrayList<Hotel>();
-        String sql = "SELECT h.idHotel, h.nit, h.nombreHotel, h.direccion, h.numeroHabitaciones, h.idOfertaEspecial, h.idUsuario "
-                + "u.documento, u.nombre1, u.nombre2, u.apellido1 , u.apellido2, u.correo, u.telefono, u.direccion, u.contrasena, u.idRol FROM hoteles h"
-                + " JOIN usuarios u ON h.idUsuario = u.idUsuario";
+        String sql = "SELECT h.idHotel, h.nit, h.nombreHotel, h.direccion, h.numeroHabitaciones, h.idOfertaEspecial, h.idUsuario, "
+           + "u.documento, u.nombre1, u.nombre2, u.apellido1, u.apellido2, u.correo, u.telefono, u.direccion, u.contrasena, u.idRol "
+           + "FROM hoteles h JOIN usuarios u ON h.idUsuario = u.idUsuario";
+
 
         try {
             con = conectar.getConnection();

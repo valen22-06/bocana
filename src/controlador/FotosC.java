@@ -151,6 +151,11 @@ public class FotosC implements ActionListener {
                 vista.panelCentro.add(foto);
                 vista.panelCentro.revalidate();
                 vista.panelCentro.repaint();
+                
+                if(fotos.size()==6){
+                    vista.seleccionar.setEnabled(false);
+                }
+                
             }else{
                 System.out.println("error en la validacion de la imagen");
             }
@@ -173,6 +178,9 @@ public class FotosC implements ActionListener {
         }
         vista.panelCentro.revalidate();
         vista.panelCentro.repaint();
+        if(fotos.size()==6){
+            vista.seleccionar.setEnabled(false);
+        }
 
     }
     

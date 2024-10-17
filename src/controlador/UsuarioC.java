@@ -16,6 +16,7 @@ import vista.AlojamientosV;
 import vista.EditarUsuarioV;
 import vista.RegistrarHotelV;
 import vista.UsuarioV;
+import vista.VerReservasV;
 
 /**
  *
@@ -67,6 +68,13 @@ public class UsuarioC implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        if(e.getSource()==usuariov.bverReservas){
+            
+            VerReservasV verReservasV = new VerReservasV();
+            VerReservasC verReservasC = new VerReservasC(verReservasV,usuario);
+            usuariov.setVisible(false);
+        }
         
         if(e.getSource()==usuariov.bagregarAlojamiento){
             
