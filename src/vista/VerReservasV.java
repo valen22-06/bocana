@@ -12,6 +12,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import javax.swing.BoxLayout;
@@ -20,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -28,111 +30,77 @@ import javax.swing.JPanel;
 public class VerReservasV extends JFrame{
     public Container contenedor ;
     public JPanel panelTop;
-
-    public JPanel panelCentro;
-    public JPanel panelSur;
-    
-    
+    public JPanel panel;
     public JPanel panelReservas;
     public JPanel panelDown;
     public JLabel ltitulo;
-    public JButton batras;
+    public JButton bvolver;
     
     public FlowLayout miflow;
     public GridBagLayout gridbag;
-    public BoxLayout box;
+    public GridLayout grid;
     public GridBagConstraints gbc;
 
     public VerReservasV() {
        super("Reservas");
         
         contenedor = getContentPane();
-        
-         contenedor.setLayout(new BorderLayout());
+        contenedor.setLayout(new BorderLayout());
 
+        panel = new JPanel();
+        gridbag = new GridBagLayout();
+        panel.setLayout(gridbag);
         
         panelTop = new JPanel();
-        miflow = new FlowLayout();
+        miflow = new FlowLayout(FlowLayout.LEFT);
         panelTop.setLayout(miflow);
-        panelTop.setBackground(Color.LIGHT_GRAY);
         
-        panelDown = new JPanel();
-        gridbag = new GridBagLayout();
-        panelDown.setLayout(gridbag);
+        
         
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.anchor = GridBagConstraints.WEST;
+        
+        ltitulo = new JLabel("Reservas");
+        ltitulo.setFont(new Font("Times New Roman", 0, 30));
+ 
+        panelTop.add(ltitulo);
+        panel.add(panelTop,gbc);
+        
+        panelReservas = new JPanel();
+        gridbag = new GridBagLayout();
+        panelReservas.setLayout(gridbag);
+        gbc.gridy = 1;
+        panel.add(panelReservas, gbc);
+
+        panelDown = new JPanel();
+        miflow = new FlowLayout(FlowLayout.CENTER);
+        panelDown.setLayout(miflow);
+
+        bvolver = new JButton("Volver");
+        bvolver.setFont(new Font("Times New Roman", 0, 20));
+        
+        bvolver.setContentAreaFilled(false);
+        bvolver.setForeground(Color.BLACK);
+        
+
+        panelDown.add(bvolver, gbc);
+        
+        gbc.gridy = 2;
+        panel.add(panelDown, gbc);
+        JScrollPane scrollPane = new JScrollPane(panel);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setPreferredSize(new Dimension(1000, 680));
+        
+        contenedor.add(scrollPane);
         
         
-        //panelNorte
-//        panelNorte = new JPanel();
-//        gridbag = new GridBagLayout();
-//        panelNorte.setLayout(gridbag);
-//        panelNorte.setPreferredSize(new Dimension(1500,100));
-//        panelNorte.setBackground(new Color(99, 124, 119));
-//        
-//        
-//        panelBIniciarSesion = new JPanel();
-//        miflow = new FlowLayout();
-//        panelBIniciarSesion.setLayout(miflow); 
-//        panelBIniciarSesion.setBackground(new Color(99, 124, 119));
-//        
-//        
-//        ImageIcon iconac=new ImageIcon("iniciar_sesion.png");
-//        Image imgac = iconac.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-//        iconac=new ImageIcon(imgac);
-//        
-//        biniciarSesion = new JButton("Iniciar Sesion",iconac);
-//        biniciarSesion.setFont(new Font("Times New Roman", 0, 20));
-//        biniciarSesion.setBackground(Color.white);
-////        biniciarSesion.setContentAreaFilled(false);
-//        biniciarSesion.setBorderPainted(false);
-//        biniciarSesion.putClientProperty("valor", 0);
-//        
-//        ImageIcon iconu=new ImageIcon("usuario.png");
-//        Image imgu = iconu.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-//        iconu=new ImageIcon(imgu);
-//        
-//        busuario = new JButton("",iconu);
-//        busuario.setFont(new Font("Times New Roman", 0, 20));
-//        busuario.setBackground(Color.white);
-////        biniciarSesion.setContentAreaFilled(false);
-////        busuario.setBorderPainted(false);
-//        busuario.putClientProperty("valor", -1);
-//        
-//        panelBIniciarSesion.add(biniciarSesion);
-//        
-//        panelTitulo = new JPanel();
-//        miflow = new FlowLayout();
-//        panelTitulo.setLayout(miflow);
-//        panelTitulo.setBackground(new Color(99, 124, 119));
-//        
-//        ImageIcon logoIcon = new ImageIcon("logoDos.PNG");
-//        Image scaledImage0 = logoIcon.getImage().getScaledInstance(150, 100, Image.SCALE_SMOOTH);
-//        llogo = new JLabel(new ImageIcon(scaledImage0));
-//        
-//        panelTitulo.add(llogo);
-//        
-//        gbc.insets = new Insets(10, 10, 10, 10);
-//        panelNorte.add(panelTitulo, gbc);
-//        
-//        gbc.gridx = 1;
-//        gbc.insets = new Insets(10, 950, 10, 10);
-//        
-//        panelNorte.add(panelBIniciarSesion, gbc);
-//        
-//        
-//        
-//        panelTop.add(panelNorte);
-//        
-//        contenedor.add(panelTop,BorderLayout.NORTH);
-//        
-//        
-//        
-//        
-//    
+        
+        
+    
     }
 }

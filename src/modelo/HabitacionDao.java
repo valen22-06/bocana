@@ -31,7 +31,7 @@ public class HabitacionDao {
     
     public List listar() {
         ArrayList<Habitacion> datosHabitaciones = new ArrayList<Habitacion>();
-        String sql = "SELECT h.idHabitacion, h.estado, h.tarifa, h.descripcionBreve, h.descripcionDetallada, h.idTipoHabitacion, tp.descripcion , h.idHotel,"
+        String sql = "SELECT h.idHabitacion, h.nombreHabitacion, h.estado, h.tarifa, h.descripcionBreve, h.descripcionDetallada, h.idTipoHabitacion, tp.descripcion , h.idHotel,"
                 + " ho.nit, ho.nombreHotel, ho.direccion, ho.numeroHabitaciones, ho.idOfertaEspecial"
                 + " FROM habitaciones h "
                 + "JOIN tipos_habitaciones tp ON tp.idTipoHabitacion = h.idTipoHabitacion "
@@ -45,7 +45,7 @@ public class HabitacionDao {
                 Habitacion h = new Habitacion();
                 Hotel ho = new Hotel();
                 h.setIdHabitacion(rs.getInt(1));
-                h.setNombreHabitacion(rs.getString(1));
+                h.setNombreHabitacion(rs.getString(2));
                 h.setEstado(rs.getString(3));
                 h.setTarifa(rs.getDouble(4));
                 h.setDescripcionBreve(rs.getString(5));
