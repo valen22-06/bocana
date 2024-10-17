@@ -6,6 +6,8 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import modelo.Reserva;
+import modelo.ReservaDao;
 import modelo.Usuario;
 import vista.VerReservasV;
 
@@ -16,9 +18,15 @@ import vista.VerReservasV;
 public class VerReservasC implements ActionListener{
     VerReservasV verReservasV = new VerReservasV();
     Usuario usuario = new Usuario();
+    ReservaDao reservaDao = new ReservaDao();
+    Reserva reserva;
+    
     public VerReservasC(VerReservasV verReservasV, Usuario usuario){
         this.verReservasV=verReservasV;
         this.usuario=usuario;
+        this.reserva=new Reserva();
+        
+        
         
         
         
